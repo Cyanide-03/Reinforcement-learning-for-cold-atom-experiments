@@ -1,2 +1,9 @@
+<<<<<<< HEAD
 venv/
 data/
+=======
+venv/
+data/
+.vscode/
+images/
+>>>>>>> 74e9fd03a7e2b8bd2067f57c7350128ecaa572ea

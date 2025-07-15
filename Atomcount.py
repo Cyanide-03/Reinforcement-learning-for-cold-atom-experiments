@@ -1,20 +1,10 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Oct 21 02:23:44 2024
-
-@author: IK
-"""
-
-
 from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
 import os
+import pandas as pd
 
-w = []
-u = []
-count_atom =[]
-count = []
+# Function to calculate the number of atoms based on the count, power, detuning, and exposure
 def atom_number(count, power, detuning, exposure):
     beam_radius = 0.4
     intensity = power / (np.pi * beam_radius * beam_radius)
@@ -28,51 +18,53 @@ def atom_number(count, power, detuning, exposure):
     atom_number_calc = count / (quantum * exposure * 0.001 * scattering_rate * solid_angle)
     return atom_number_calc
 
-# Load the reference image
+# Function to process images and calculate atom numbers
+def process_image_and_get_N(image_path):
+    k=1 # Counter for image naming
+    df=[]
+    Δ=15
 
+    for dir in os.listdir(image_path):
+        print(f"Processing directory: {dir}")
 
-for i in range(2, 20): # Avg mean photon no
-    number = i
-    directory_path = r'C:\Users\poona\OneDrive\Desktop\python\mot charcterization\27_OCT'
-    filename = str(number) + " .bmp"
-    sname = "DT" + str(number) + " .jpg"
-    image_path = os.path.join(directory_path, filename)
+        folder_path = os.path.join(image_path, dir)
+        
+        if not os.path.isdir(folder_path): # Check if it's a directory
+            continue
 
-    # Open the current image
-    image_array = Image.open(image_path)
-    image_array = np.array(image_array) # Convert to 2D NumPy array
+        for file in os.listdir(folder_path):
+            img_path = os.path.join(folder_path, file)
+            
+            if not img_path.lower().endswith(('.bmp')): # Check if the file is a BMP image
+                continue
 
+            sname = "DT" + str(k) + " .jpg"
+            k+=1
+            
+            image_array = Image.open(img_path)
+            image_array = np.array(image_array)
 
-    image_array = image_array[0:400,0:600]
-    # image_array = image_array[70:150,230:270]
+            image_array = image_array[250:400,250:325] # Crop the image to the region of interest
 
-    # Ensure no negative values after subtraction
-    # image_array[image_array < 5] = 0
+            # Ensure no negative values after subtraction
+            # image_array[image_array < 5] = 0
 
-    # image_new = image_array_subtracted+image_new
-    # Display the subtracted image
-    plt.imshow(image_array, cmap='viridis')
-    count = np.sum(image_array)
-    abc = atom_number(count,5,15,2)
-    u.append(count)
-    count_atom.append(abc)
-    # Save the subtracted image as a file
-    plt.savefig(sname)
-    plt.close()
+            # image_new = image_array_subtracted+image_new
 
+            os.makedirs("images", exist_ok=True)
+            plt.imshow(image_array, cmap='viridis')
 
-count_mean = np.average(count_atom)
-count_std = np.std(count_atom)
-photon_count = np.average(u)
-photon_count_std = np.std(u)
-print("atom mean:", count_mean)
-print("atom std:",count_std)
-print("photon counts:" ,photon_count)
-print("photon counts error:" ,photon_count_std)
-plt.show()
-# print(u)
+            count = np.sum(image_array)
+            N = atom_number(count,5,15,2)
 
-# print(count_atom)
+            df.append({"atom_number": N,"detuning (MHz)": Δ,"image": img_path})
+            
+            plt.savefig("images/" + sname, bbox_inches='tight', pad_inches=0)
+            plt.close()
 
+    df=pd.DataFrame(df)
+    df.to_csv("cnn_data.csv", index=False)
+    print("Data saved to cnn_data.csv")
+    return df
 
-
+# df=process_image_and_get_N("data")
