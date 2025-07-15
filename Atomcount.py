@@ -2,6 +2,7 @@ from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
 import os
+import pandas as pd
 
 # Function to calculate the number of atoms based on the count, power, detuning, and exposure
 def atom_number(count, power, detuning, exposure):
@@ -20,6 +21,8 @@ def atom_number(count, power, detuning, exposure):
 # Function to process images and calculate atom numbers
 def process_image_and_get_N(image_path):
     k=1 # Counter for image naming
+    df=[]
+    Δ=15
 
     for dir in os.listdir(image_path):
         print(f"Processing directory: {dir}")
@@ -50,13 +53,18 @@ def process_image_and_get_N(image_path):
 
             os.makedirs("images", exist_ok=True)
             plt.imshow(image_array, cmap='viridis')
-            
+
             count = np.sum(image_array)
             N = atom_number(count,5,15,2)
-            print(f"{img_path} ➝ Atom number: {N:.2f}")
+
+            df.append({"atom_number": N,"detuning (MHz)": Δ,"image": img_path})
             
             plt.savefig("images/" + sname, bbox_inches='tight', pad_inches=0)
             plt.close()
 
+    df=pd.DataFrame(df)
+    df.to_csv("cnn_data.csv", index=False)
+    print("Data saved to cnn_data.csv")
+    return df
 
-process_image_and_get_N("data")
+# df=process_image_and_get_N("data")
