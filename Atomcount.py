@@ -22,7 +22,7 @@ def atom_number(count, power, detuning, exposure):
 def process_image_and_get_N(image_path):
     k=1 # Counter for image naming
     df=[]
-    Δ=1
+    Δ=15
 
     for dir in os.listdir(image_path):
         print(f"Processing directory: {dir}")
@@ -57,9 +57,11 @@ def process_image_and_get_N(image_path):
             count = np.sum(image_array)
             N = atom_number(count,5,15,2)
 
-            df.append({"atom_number": N,"detuning (MHz)": Δ,"image": img_path})
+            processed_img_path= os.path.join("images", sname)
+
+            df.append({"atom_number": N,"detuning (MHz)": Δ,"image": processed_img_path})
             
-            plt.savefig("images/" + sname, bbox_inches='tight', pad_inches=0)
+            plt.savefig(processed_img_path, bbox_inches='tight', pad_inches=0)
             plt.close()
 
     df=pd.DataFrame(df)
