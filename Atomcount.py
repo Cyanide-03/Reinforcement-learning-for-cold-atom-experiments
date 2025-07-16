@@ -22,7 +22,7 @@ def atom_number(count, power, detuning, exposure):
 def process_image_and_get_N(image_path):
     k=1 # Counter for image naming
     df=[]
-    Δ=15
+    Δ=1
 
     for dir in os.listdir(image_path):
         print(f"Processing directory: {dir}")
