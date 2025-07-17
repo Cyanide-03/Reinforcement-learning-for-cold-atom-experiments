@@ -45,9 +45,9 @@ y = np.stack([load_image(p) for p in df['image']], axis=0)
 print("Output shape: ",y.shape)  # (406, 50, 50, 1) - 50x50 grayscale images
 
 # Training the model
-epoch = 10 #to be decided
-batch_size = 32 # to be decided
+epoch = 100 #to be decided
+batch_size = 16 # to be decided
 model.fit(X, y, epochs = epoch, batch_size = batch_size, validation_split = 0.2, verbose = 1)
 
 # Save the model
-model.save("MOT_fluo_img_generator_trained.h5")
+model.save("MOT_fluo_img_generator_trained2.h5")
