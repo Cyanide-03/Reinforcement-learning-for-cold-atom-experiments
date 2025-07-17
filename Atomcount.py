@@ -53,6 +53,7 @@ def process_image_and_get_N(image_path):
 
             os.makedirs("images", exist_ok=True)
             plt.imshow(image_array, cmap='viridis')
+            plt.axis('off')
 
             count = np.sum(image_array)
             N = atom_number(count,5,15,2)
