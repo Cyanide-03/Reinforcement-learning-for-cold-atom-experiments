@@ -4,70 +4,72 @@ import matplotlib.pyplot as plt
 import os
 import pandas as pd
 
-# Function to calculate the number of atoms based on the count, power, detuning, and exposure
+# Function to calculate the number of atoms based on count, power, detuning, and exposure
 def atom_number(count, power, detuning, exposure):
     beam_radius = 0.4
-    intensity = power / (np.pi * beam_radius * beam_radius)
+    intensity = power / (np.pi * beam_radius ** 2)
     I_sat = 1.1
     s = 6 * intensity / I_sat
     gamma = 5.2
     aperture = 2.54
-    scattering_rate = ((gamma / 2) * (10**6) * s) / (1 + s + 4 * (detuning / gamma)**2)
-    solid_angle = (aperture / (4 * 10))**2
+    scattering_rate = ((gamma / 2) * 1e6 * s) / (1 + s + 4 * (detuning / gamma) ** 2)
+    solid_angle = (aperture / (4 * 10)) ** 2
     quantum = 0.20
     atom_number_calc = count / (quantum * exposure * 0.001 * scattering_rate * solid_angle)
     return atom_number_calc
 
 # Function to process images and calculate atom numbers
 def process_image_and_get_N(image_path):
-    k=1 # Counter for image naming
-    df=[]
-    Δ=15
+    k = 1
+    data = []
+    Δ = 15
 
     for dir in os.listdir(image_path):
         print(f"Processing directory: {dir}")
-
         folder_path = os.path.join(image_path, dir)
-        
-        if not os.path.isdir(folder_path): # Check if it's a directory
+        if not os.path.isdir(folder_path):
             continue
 
         for file in os.listdir(folder_path):
             img_path = os.path.join(folder_path, file)
-            
-            if not img_path.lower().endswith(('.bmp')): # Check if the file is a BMP image
+            if not img_path.lower().endswith('.bmp'):
                 continue
 
-            sname = "DT" + str(k) + " .jpg"
-            k+=1
-            
-            image_array = Image.open(img_path)
-            image_array = np.array(image_array)
+            image = Image.open(img_path)
+            image_array = np.array(image)
 
-            image_array = image_array[250:400,250:325] # Crop the image to the region of interest
+            # Crop the region of interest
+            cropped = image_array[250:400, 250:325]
 
-            # Ensure no negative values after subtraction
-            # image_array[image_array < 5] = 0
+            # Calculate atom count
+            count = np.sum(cropped)
+            N = atom_number(count, power=5, detuning=15, exposure=2)
 
-            # image_new = image_array_subtracted+image_new
+            # Prepare filename and save cropped image without axes
+            sname = f"DT{k}.jpg"
+            k += 1
 
             os.makedirs("images", exist_ok=True)
-            plt.imshow(image_array, cmap='viridis')
-            plt.axis('off')
+            fig = plt.figure(frameon=False)
+            ax = plt.Axes(fig, [0., 0., 1., 1.])
+            ax.set_axis_off()
+            fig.add_axes(ax)
+            ax.imshow(cropped, cmap='viridis')
 
-            count = np.sum(image_array)
-            N = atom_number(count,5,15,2)
+            save_path = os.path.join("images", sname)
+            fig.savefig(save_path, dpi=300, bbox_inches='tight', pad_inches=0)
+            plt.close(fig)
 
-            processed_img_path= os.path.join("images", sname)
+            data.append({
+                "atom_number": N,
+                "detuning (MHz)": Δ,
+                "image": save_path
+            })
 
-            df.append({"atom_number": N,"detuning (MHz)": Δ,"image": processed_img_path})
-            
-            plt.savefig(processed_img_path, bbox_inches='tight', pad_inches=0)
-            plt.close()
-
-    df=pd.DataFrame(df)
+    # Save DataFrame to CSV
+    df = pd.DataFrame(data)
     df.to_csv("cnn_data.csv", index=False)
     print("Data saved to cnn_data.csv")
     return df
 
-# df=process_image_and_get_N("data")
+# df = process_image_and_get_N("data")

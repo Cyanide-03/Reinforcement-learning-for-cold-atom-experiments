@@ -9,7 +9,7 @@ from PIL import Image
 from tensorflow.keras.models import load_model
 
 # Load model
-model = load_model("MOT_fluo_img_generator_trained.h5")
+model = load_model("MOT_fluo_img_generator_trained2.h5")
 
 # Load and preprocess csv data
 df = pd.read_csv("cnn_data.csv")  # Previously saved from process_image_and_get_N()
@@ -27,8 +27,14 @@ predicted_images = model.predict(X)
 print("Predicted images shape:", predicted_images.shape)
 
 # Visualize first few predictions
-plt.imshow(predicted_images[0].squeeze(), cmap='gray')
-plt.title(f"Generated Image")
-plt.axis('off')
-plt.savefig(f"gen.png", bbox_inches='tight', pad_inches=0)
-plt.close()
+# plt.imshow(predicted_images.squeeze(), cmap='gray')
+# plt.title(f"Generated Image")
+# plt.axis('off')
+# plt.savefig(f"gen2.png", bbox_inches='tight', pad_inches=0)
+# plt.close()
+
+predicted_images = predicted_images[0].squeeze()
+predicted_images = (predicted_images * 255).astype(np.uint8)
+img = Image.fromarray(predicted_images, 'L' )
+img_resized = img.resize((720, 1440), Image.BILINEAR)
+img_resized.save("gen2_resized.png")
