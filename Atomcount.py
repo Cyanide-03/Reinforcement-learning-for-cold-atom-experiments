@@ -1,6 +1,5 @@
 from PIL import Image
 import numpy as np
-import matplotlib.pyplot as plt
 import os
 import pandas as pd
 
@@ -22,49 +21,46 @@ def atom_number(count, power, detuning, exposure):
 def process_image_and_get_N(image_path):
     k = 1
     data = []
-    Δ = 15
 
     for dir in os.listdir(image_path):
         print(f"Processing directory: {dir}")
         folder_path = os.path.join(image_path, dir)
         if not os.path.isdir(folder_path):
             continue
+        #get the folder name
+        Δ = int(os.path.basename(folder_path))
+        print(f"Detuing value: {Δ}") 
 
         for file in os.listdir(folder_path):
+
             img_path = os.path.join(folder_path, file)
             if not img_path.lower().endswith('.bmp'):
                 continue
-
-            image = Image.open(img_path)
+            print(f"Processing image: {img_path}")
+            image = Image.open(img_path)  # Keep original mode (grayscale or RGB)
             image_array = np.array(image)
 
             # Crop the region of interest
-            cropped = image_array[250:400, 250:325]
+            cropped = image_array[0:400, 90:400]
 
             # Calculate atom count
             count = np.sum(cropped)
             N = atom_number(count, power=5, detuning=15, exposure=2)
 
-            # Prepare filename and save cropped image without axes
+            # Prepare filename and save cropped image without changing colors
             sname = f"DT{k}.jpg"
             k += 1
 
             os.makedirs("images", exist_ok=True)
-            fig = plt.figure(frameon=False)
-            ax = plt.Axes(fig, [0., 0., 1., 1.])
-            ax.set_axis_off()
-            fig.add_axes(ax)
-            ax.imshow(cropped, cmap='viridis')
-
-            save_path = os.path.join("images", sname)
-            fig.savefig(save_path, dpi=300, bbox_inches='tight', pad_inches=0)
-            plt.close(fig)
+            cropped_img = Image.fromarray(cropped)
+            cropped_img.save(os.path.join("images", sname))
 
             data.append({
                 "atom_number": N,
                 "detuning (MHz)": Δ,
-                "image": save_path
+                "image": os.path.join("images", sname)
             })
+
 
     # Save DataFrame to CSV
     df = pd.DataFrame(data)
@@ -72,4 +68,6 @@ def process_image_and_get_N(image_path):
     print("Data saved to cnn_data.csv")
     return df
 
-# df = process_image_and_get_N("data")
+# Run the function
+df = process_image_and_get_N("data")
+print(df.head()) # Display the first few rows of the DataFrame
