@@ -23,20 +23,20 @@ def process_image_and_get_N(image_path):
     data = []
 
     for dir in os.listdir(image_path):
-        print(f"Processing directory: {dir}")
+        # print(f"Processing directory: {dir}")
         folder_path = os.path.join(image_path, dir)
         if not os.path.isdir(folder_path):
             continue
         #get the folder name
         Δ = int(os.path.basename(folder_path))
-        print(f"Detuing value: {Δ}") 
+        # print(f"Detuning value: {Δ}") 
 
         for file in os.listdir(folder_path):
 
             img_path = os.path.join(folder_path, file)
             if not img_path.lower().endswith('.bmp'):
                 continue
-            print(f"Processing image: {img_path}")
+            # print(f"Processing image: {img_path}")
             image = Image.open(img_path)  # Keep original mode (grayscale or RGB)
             image_array = np.array(image)
 
@@ -69,5 +69,9 @@ def process_image_and_get_N(image_path):
     return df
 
 # # Run the function
+# df = process_image_and_get_N("data")
+# print(df.head()) # Display the first few rows of the DataFrame
+
+# Run the function
 # df = process_image_and_get_N("data")
 # print(df.head()) # Display the first few rows of the DataFrame
