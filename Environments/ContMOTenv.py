@@ -6,7 +6,7 @@ class MOTEnvironmentWrapper:
     """Wrapper for your MOT simulation environment"""
     
     def __init__(self, Simulation_Model, image_size: int = 50, 
-                 detuning_range: Tuple[float, float] = (0.0, 8.25)):
+                 detuning_range: Tuple[float, float] = (0.0, 8.25)): # ! issue in detuning range
         """
         Args:
             Simulation_Model: Your trained simulation model
@@ -35,7 +35,6 @@ class MOTEnvironmentWrapper:
         simulate the temperature of the MOT
         """
         pass
-
 
     def draw_MOT_img(self):
         """
@@ -66,12 +65,12 @@ class MOTEnvironmentWrapper:
     def step(self, action: np.ndarray) -> Tuple[Dict, float, bool, Dict]:
         """Execute one time step"""
         # Convert normalized action to actual detuning
-        detuning_control = action[0]  # Action from agent
-        actual_detuning = self._convert_action_to_detuning(detuning_control)
+        detuning_control = action[0]  # Action from agent # [-1,1]
+        actual_detuning = self._convert_action_to_detuning(detuning_control) # [min, max]
         
         # Apply perturbation (unknown to agent)
-        physical_detuning = actual_detuning - self.perturbation_offset
-        physical_detuning = np.clip(physical_detuning, self.detuning_min, self.detuning_max)
+        physical_detuning = actual_detuning - self.perturbation_offset # [min-offset,max-offset]
+        physical_detuning = np.clip(physical_detuning, self.detuning_min, self.detuning_max) # [min,max]
         
         # Update MOT state using your simulation model
         new_atoms, new_temperature, fluorescence_image = self._simulate_mot_step(physical_detuning)

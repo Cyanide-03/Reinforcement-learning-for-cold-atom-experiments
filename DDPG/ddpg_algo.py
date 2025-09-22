@@ -7,6 +7,7 @@ import random
 from typing import Tuple, List, Optional, Dict
 import cv2
 from Environments.ContMOTenv import MOTEnvironmentWrapper
+from Simulation_Model.Simulation import Simulation
 
 # Ensure TensorFlow uses GPU if available
 physical_devices = tf.config.experimental.list_physical_devices('GPU')
@@ -44,7 +45,7 @@ class ReplayBuffer:
     def __len__(self):
         return len(self.buffer)
 
-class Actor(keras.Model):
+class Actor(keras.Model): # !
     """Actor network for DDPG - outputs continuous actions"""
     
     def __init__(self, action_dim: int = 1, max_action: float = 1.0):
@@ -139,8 +140,7 @@ class OUNoise:
         self.state += dx
         return self.state
 
-
-class DDPGAgent:
+class DDPGAgent: # !
     """DDPG Agent for MOT control using TensorFlow"""
     
     def __init__(self, action_dim: int = 1, lr_actor: float = 1e-4, 
@@ -200,11 +200,12 @@ class DDPGAgent:
         action = self.actor([images_tensor, additional_tensor], training=False)
         action = action.numpy()[0]
         
+        # OU Noise for perturbation
         if add_noise:
             action += self.noise.sample()
-            action = np.clip(action, -1.0, 1.0)
+            action = np.clip(action, -1.0, 1.0)   # ! 
         
-        return action
+        return action # Clipped action in [-1,1]
     
     @tf.function
     def _train_step(self, images, additional, actions, rewards, 
@@ -307,7 +308,8 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
     
     # Initialize environment and agent
     # Replace 'your_simulation_model' with your actual simulation
-    env = MOTEnvironmentWrapper(your_simulation_model=None)  # Replace None
+    sim_model=Simulation()
+    env = MOTEnvironmentWrapper(Simulation_model=sim_model)  # Replace None
     agent = DDPGAgent()
     
     # TensorBoard logging
