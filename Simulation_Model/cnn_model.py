@@ -25,7 +25,7 @@ model = load_model(model_path)
 
 
 #Load dataset
-from utilitis.Atomcount import process_image_and_get_N
+from utils.Atomcount import process_image_and_get_N
 image_path = ["Dataset/data"]
 
 for i in range(len(image_path)):

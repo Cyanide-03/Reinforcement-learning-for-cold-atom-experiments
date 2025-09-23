@@ -86,14 +86,19 @@ Restoring model weights from the end of the best epoch: 9.
 Epoch 19: early stopping
 Model trained and saved for dataset data
 Loss plot saved as loss_plot_data.png
+
 Test MSE: 0.42478251457214355
 
-1/8 [==>...........................] - ETA: 1s
-3/8 [==========>...................] - ETA: 0s
-5/8 [=================>............] - ETA: 0s
-7/8 [=========================>....] - ETA: 0s
+1/8 [==>...........................] - ETA: 1s
+3/8 [==========>...................] - ETA: 0s
+5/8 [=================>............] - ETA: 0s
+7/8 [=========================>....] - ETA: 0s
 8/8 [==============================] - 0s 35ms/step
 
 Average SSIM: 0.9483234965520521
 Average PSNR: 35.67051940950987
 Saved sample_pred_data.png
+
+# Test MSE → how close predicted pixels are
+# SSIM (0–1) → how structurally similar generated images are to ground truth
+# PSNR (higher = better, usually 20–40 dB is decent)
