@@ -1,7 +1,7 @@
 import numpy as np
 import tensorflow as tf
 from tensorflow import keras
-from tensorflow.keras import layers
+from tensorflow.keras import layers # type: ignore
 import collections
 import random
 from typing import Tuple, List, Optional, Dict
@@ -83,7 +83,7 @@ class Actor(keras.Model): # !
         action = self.output_layer(x)
         
         # Scale to action space
-        return self.max_action * action
+        return action
 
 class Critic(keras.Model):
     """Critic network for DDPG - estimates Q-values"""
@@ -330,7 +330,7 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
             observation = env.reset()
             total_reward = 0
             
-            for step in range(env.episode_length):
+            for _ in range(env.episode_length):
                 action = np.random.uniform(-1, 1, size=(1,))
                 next_observation, reward, done, info = env.step(action)
                 
@@ -346,7 +346,7 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
             agent.noise.reset()
             total_reward = 0
             
-            for step in range(env.episode_length):
+            for _ in range(env.episode_length):
                 action = agent.select_action(observation, add_noise=True)
                 next_observation, reward, done, info = env.step(action)
                 

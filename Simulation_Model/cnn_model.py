@@ -25,12 +25,12 @@ model = load_model(model_path)
 
 
 #Load dataset
-from utils.Atomcount import process_image_and_get_N
+from utils.Atomcount import process_image_and_get_N, atom_number
 image_path = ["Dataset/data"]
 
 for i in range(len(image_path)):
     # df = process_image_and_get_N(image_path[i])
-    df=pd.read_csv("cnn_data.csv")
+    df=pd.read_csv("Dataset/cnn_data.csv")
 
     # Shuffle the DataFrame
     df = df.sample(frac=1, random_state=42)
@@ -55,17 +55,11 @@ for i in range(len(image_path)):
         img_array = img_array[..., np.newaxis] 
         return img_array
 
-    y = np.stack([load_image(p) for p in df['image']], axis=0)
+    y = np.stack([load_image(os.path.join("Dataset/",p)) for p in df['image']], axis=0)
     print("Output shape: ",y.shape)  # (406, 50, 50, 1) - 50x50 grayscale images
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42);
 
-    # Visualize some images
-    # plt.imshow(y[0].squeeze(), cmap='gray')
-    # plt.title(f"Actual Image")
-    # plt.axis('off')
-    # plt.savefig(f"k.png", bbox_inches='tight', pad_inches=0)
-    # plt.close()
 
     # Training the model
     epoch = 100 #to be decided
@@ -88,7 +82,7 @@ for i in range(len(image_path)):
     plt.title(f"Loss vs Epoch for {image_path[i]}")
     plt.legend()
     plt.grid(True)
-    plot_filename = f"loss_plot_{image_path[i]}.png"
+    plot_filename = f"loss_plot.png"
     plt.savefig(plot_filename, bbox_inches='tight')
     plt.close()
     print(f"Loss plot saved as {plot_filename}")
@@ -124,11 +118,35 @@ for i in range(len(image_path)):
     n_show = min(6, len(y_test))
     fig, axes = plt.subplots(n_show, 2, figsize=(6, 3*n_show))
     for idx in range(n_show):
-        axes[idx, 0].imshow(y_test[idx].squeeze(), cmap='gray')
-        axes[idx, 0].set_title('GT'); axes[idx, 0].axis('off')
-        axes[idx, 1].imshow(y_pred[idx].squeeze(), cmap='gray')
-        axes[idx, 1].set_title('Pred'); axes[idx, 1].axis('off')
+        # Get ground truth image
+        true_img = y_test[idx].squeeze()*255
+        true_img = np.clip(true_img, 0, 255).astype(np.uint8)
+        
+        # Original atom number from X_test (normalized), un-normalize
+        true_atom_number = X_test[idx][0] * N_max 
+
+        # Predicted image
+        pred_img = y_pred[idx].squeeze()*255
+        pred_img = np.clip(pred_img, 0, 255).astype(np.uint8)
+
+        # Calculate atom number for predicted image
+        orig_height, orig_width = 400, 310
+        pred_height, pred_width = pred_img.shape
+        scale_factor = (orig_height * orig_width) / (pred_height * pred_width)
+        count = np.sum(pred_img) * scale_factor
+        detuning = X_test[idx][1] * 50  # un-normalize detuning
+        pred_atom_number = atom_number(count, power=5, detuning=detuning, exposure=2)
+
+        # Plot ground truth
+        axes[idx, 0].imshow(true_img, cmap='gray')
+        axes[idx, 0].set_title(f'GT\nAtoms: {true_atom_number:.0f}')
+        axes[idx, 0].axis('off')
+
+        # Plot predicted image
+        axes[idx, 1].imshow(pred_img, cmap='gray')
+        axes[idx, 1].set_title(f'Pred\nAtoms: {pred_atom_number:.0f}')
+        axes[idx, 1].axis('off')
     plt.tight_layout()
-    plt.savefig(f"sample_pred_{image_path[i]}.png", bbox_inches='tight')
+    plt.savefig(f"sample_pred.png", bbox_inches='tight')
     plt.close()
-    print(f"Saved sample_pred_{image_path[i]}.png")
+    print(f"Saved sample_pred.png")

@@ -4,7 +4,7 @@ import os
 import pandas as pd
 
 # Function to calculate the number of atoms based on count, power, detuning, and exposure
-def atom_number(count, power, detuning, exposure):
+def atom_number(count, power=5, detuning=15, exposure=2):
     beam_radius = 0.4
     intensity = power / (np.pi * beam_radius ** 2)
     I_sat = 1.1
@@ -45,7 +45,7 @@ def process_image_and_get_N(image_path):
 
             # Calculate atom count
             count = np.sum(cropped)
-            N = atom_number(count, power=5, detuning=15, exposure=2)
+            N = atom_number(count, power=5, detuning=Δ, exposure=2)
 
             # Prepare filename and save cropped image without changing colors
             sname = f"DT{k}.jpg"
@@ -53,7 +53,7 @@ def process_image_and_get_N(image_path):
 
             os.makedirs("Dataset/images", exist_ok=True)
             cropped_img = Image.fromarray(cropped)
-            cropped_img.save(os.path.join("images", sname))
+            cropped_img.save(os.path.join("Dataset/images", sname))
 
             data.append({
                 "atom_number": N,
@@ -67,10 +67,6 @@ def process_image_and_get_N(image_path):
     df.to_csv("Dataset/cnn_data.csv", index=False)
     print("Data saved to cnn_data.csv")
     return df
-
-# # Run the function
-# df = process_image_and_get_N("data")
-# print(df.head()) # Display the first few rows of the DataFrame
 
 # Run the function
 # df = process_image_and_get_N("data")

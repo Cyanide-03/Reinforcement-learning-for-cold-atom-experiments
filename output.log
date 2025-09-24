@@ -1,103 +1,88 @@
+Data saved to cnn_data.csv
        atom_number  detuning (MHz)              image
-694   2.008532e+06               4   images/DT695.jpg
-1117  1.950172e+06               6  images/DT1118.jpg
-58    1.768046e+06              14    images/DT59.jpg
-70    1.768926e+06              14    images/DT71.jpg
-1030  1.992020e+06               6  images/DT1031.jpg
-Input Shape:  (1169, 2)
-Output shape:  (1169, 50, 50, 1)
+76    1.689146e+06              14    images/DT77.jpg
+1026  1.167417e+06               2  images/DT1027.jpg
+43    1.686681e+06              14    images/DT44.jpg
+666   1.360424e+06               8   images/DT667.jpg
+529   1.519387e+06              10   images/DT530.jpg
+Input Shape:  (1260, 2)
+Output shape:  (1260, 50, 50, 1)
 Epoch 1/100
 
-Epoch 1: val_loss improved from inf to 0.43349, saving model to MOT_best.h5
-24/24 - 5s - loss: 0.5179 - val_loss: 0.4335 - lr: 0.0010 - 5s/epoch - 198ms/step
+Epoch 1: val_loss improved from inf to 0.43561, saving model to MOT_best.h5
+
+26/26 - 7s - loss: 0.5134 - val_loss: 0.4356 - lr: 0.0010 - 7s/epoch - 255ms/step
 Epoch 2/100
 
-Epoch 2: val_loss improved from 0.43349 to 0.42764, saving model to MOT_best.h5
-24/24 - 4s - loss: 0.4288 - val_loss: 0.4276 - lr: 0.0010 - 4s/epoch - 151ms/step
+Epoch 2: val_loss improved from 0.43561 to 0.42846, saving model to MOT_best.h5
+26/26 - 5s - loss: 0.4292 - val_loss: 0.4285 - lr: 0.0010 - 5s/epoch - 208ms/step
 Epoch 3/100
-
-Epoch 3: val_loss improved from 0.42764 to 0.42709, saving model to MOT_best.h5
-24/24 - 3s - loss: 0.4260 - val_loss: 0.4271 - lr: 0.0010 - 3s/epoch - 137ms/step
+Epoch 3: val_loss improved from 0.42846 to 0.42740, saving model to MOT_best.h5
 Epoch 4/100
-
-Epoch 4: val_loss improved from 0.42709 to 0.42694, saving model to MOT_best.h5
-24/24 - 4s - loss: 0.4257 - val_loss: 0.4269 - lr: 0.0010 - 4s/epoch - 158ms/step
+Epoch 4: val_loss improved from 0.42740 to 0.42667, saving model to MOT_best.h5
+26/26 - 8s - loss: 0.4262 - val_loss: 0.4267 - lr: 0.0010 - 8s/epoch - 308ms/step
 Epoch 5/100
-
-Epoch 5: val_loss improved from 0.42694 to 0.42682, saving model to MOT_best.h5
-24/24 - 3s - loss: 0.4255 - val_loss: 0.4268 - lr: 0.0010 - 3s/epoch - 136ms/step
+ 
+Epoch 5: val_loss did not improve from 0.42667
+26/26 - 6s - loss: 0.4259 - val_loss: 0.4268 - lr: 0.0010 - 6s/epoch - 216ms/step
 Epoch 6/100
 
-Epoch 6: val_loss improved from 0.42682 to 0.42674, saving model to MOT_best.h5
-24/24 - 4s - loss: 0.4255 - val_loss: 0.4267 - lr: 0.0010 - 4s/epoch - 164ms/step
+Epoch 6: val_loss improved from 0.42667 to 0.42646, saving model to MOT_best.h5
+26/26 - 5s - loss: 0.4258 - val_loss: 0.4265 - lr: 0.0010 - 5s/epoch - 205ms/step
 Epoch 7/100
 
-Epoch 7: val_loss improved from 0.42674 to 0.42670, saving model to MOT_best.h5
-24/24 - 5s - loss: 0.4254 - val_loss: 0.4267 - lr: 0.0010 - 5s/epoch - 197ms/step
+Epoch 7: val_loss improved from 0.42646 to 0.42637, saving model to MOT_best.h5
+26/26 - 6s - loss: 0.4257 - val_loss: 0.4264 - lr: 0.0010 - 6s/epoch - 222ms/step
 Epoch 8/100
 
-Epoch 8: val_loss did not improve from 0.42670
-24/24 - 4s - loss: 0.4253 - val_loss: 0.4270 - lr: 0.0010 - 4s/epoch - 171ms/step
+Epoch 8: val_loss improved from 0.42637 to 0.42621, saving model to MOT_best.h5
+26/26 - 6s - loss: 0.4255 - val_loss: 0.4262 - lr: 0.0010 - 6s/epoch - 219ms/step
 Epoch 9/100
 
-Epoch 9: val_loss improved from 0.42670 to 0.42655, saving model to MOT_best.h5
-24/24 - 4s - loss: 0.4253 - val_loss: 0.4266 - lr: 0.0010 - 4s/epoch - 148ms/step
+Epoch 9: val_loss improved from 0.42621 to 0.42608, saving model to MOT_best.h5
+26/26 - 5s - loss: 0.4254 - val_loss: 0.4261 - lr: 0.0010 - 5s/epoch - 188ms/step
 Epoch 10/100
 
-Epoch 10: val_loss improved from 0.42655 to 0.42648, saving model to MOT_best.h5
-24/24 - 4s - loss: 0.4252 - val_loss: 0.4265 - lr: 0.0010 - 4s/epoch - 187ms/step
+Epoch 10: val_loss did not improve from 0.42608
+26/26 - 5s - loss: 0.4253 - val_loss: 0.4262 - lr: 0.0010 - 5s/epoch - 197ms/step
 Epoch 11/100
 
-Epoch 11: val_loss improved from 0.42648 to 0.42645, saving model to MOT_best.h5
-24/24 - 4s - loss: 0.4251 - val_loss: 0.4264 - lr: 0.0010 - 4s/epoch - 178ms/step
+Epoch 11: val_loss improved from 0.42608 to 0.42599, saving model to MOT_best.h5
+26/26 - 5s - loss: 0.4253 - val_loss: 0.4260 - lr: 0.0010 - 5s/epoch - 199ms/step
 Epoch 12/100
 
-Epoch 12: val_loss did not improve from 0.42645
-24/24 - 4s - loss: 0.4251 - val_loss: 0.4265 - lr: 0.0010 - 4s/epoch - 150ms/step
+Epoch 12: val_loss improved from 0.42599 to 0.42582, saving model to MOT_best.h5
+26/26 - 5s - loss: 0.4252 - val_loss: 0.4258 - lr: 0.0010 - 5s/epoch - 191ms/step
 Epoch 13/100
 
-Epoch 13: val_loss improved from 0.42645 to 0.42640, saving model to MOT_best.h5
-24/24 - 4s - loss: 0.4251 - val_loss: 0.4264 - lr: 0.0010 - 4s/epoch - 153ms/step
+Epoch 13: val_loss improved from 0.42582 to 0.42580, saving model to MOT_best.h5
+26/26 - 6s - loss: 0.4252 - val_loss: 0.4258 - lr: 0.0010 - 6s/epoch - 225ms/step
 Epoch 14/100
 
-Epoch 14: val_loss improved from 0.42640 to 0.42634, saving model to MOT_best.h5
-24/24 - 4s - loss: 0.4250 - val_loss: 0.4263 - lr: 0.0010 - 4s/epoch - 169ms/step
+Epoch 14: val_loss improved from 0.42580 to 0.42571, saving model to MOT_best.h5
+26/26 - 6s - loss: 0.4251 - val_loss: 0.4257 - lr: 0.0010 - 6s/epoch - 228ms/step
 Epoch 15/100
 
-Epoch 15: val_loss improved from 0.42634 to 0.42629, saving model to MOT_best.h5
-24/24 - 5s - loss: 0.4250 - val_loss: 0.4263 - lr: 0.0010 - 5s/epoch - 214ms/step
+Epoch 15: val_loss did not improve from 0.42571
+26/26 - 6s - loss: 0.4250 - val_loss: 0.4258 - lr: 0.0010 - 6s/epoch - 231ms/step
 Epoch 16/100
 
-Epoch 16: val_loss did not improve from 0.42629
-24/24 - 4s - loss: 0.4250 - val_loss: 0.4267 - lr: 0.0010 - 4s/epoch - 157ms/step
+Epoch 16: val_loss improved from 0.42571 to 0.42563, saving model to MOT_best.h5
+26/26 - 6s - loss: 0.4250 - val_loss: 0.4256 - lr: 0.0010 - 6s/epoch - 212ms/step
 Epoch 17/100
 
-Epoch 17: val_loss improved from 0.42629 to 0.42629, saving model to MOT_best.h5
-24/24 - 4s - loss: 0.4252 - val_loss: 0.4263 - lr: 0.0010 - 4s/epoch - 172ms/step
-Epoch 18/100
+Epoch 17: val_loss improved from 0.42563 to 0.42562, saving model to MOT_best.h5
+Restoring model weights from the end of the best epoch: 7.
+26/26 - 6s - loss: 0.4249 - val_loss: 0.4256 - lr: 0.0010 - 6s/epoch - 237ms/step
+Epoch 17: early stopping
+Model trained and saved for Dataset/data
+Loss plot saved as loss_plot.png
+Test MSE: 0.42659249901771545
+8/8 - 1s - 789ms/epoch - 99ms/step
 
-Epoch 18: val_loss did not improve from 0.42629
-24/24 - 3s - loss: 0.4250 - val_loss: 0.4264 - lr: 0.0010 - 3s/epoch - 140ms/step
-Epoch 19/100
-
-Epoch 19: val_loss improved from 0.42629 to 0.42622, saving model to MOT_best.h5
-Restoring model weights from the end of the best epoch: 9.
-24/24 - 3s - loss: 0.4250 - val_loss: 0.4262 - lr: 0.0010 - 3s/epoch - 137ms/step
-Epoch 19: early stopping
-Model trained and saved for dataset data
-Loss plot saved as loss_plot_data.png
-
-Test MSE: 0.42478251457214355
-
-1/8 [==>...........................] - ETA: 1s
-3/8 [==========>...................] - ETA: 0s
-5/8 [=================>............] - ETA: 0s
-7/8 [=========================>....] - ETA: 0s
-8/8 [==============================] - 0s 35ms/step
-
-Average SSIM: 0.9483234965520521
-Average PSNR: 35.67051940950987
-Saved sample_pred_data.png
+Average SSIM: 0.9396023826967635
+Average PSNR: 34.068246960757136
+Saved sample_pred.png
 
 # Test MSE → how close predicted pixels are
 # SSIM (0–1) → how structurally similar generated images are to ground truth
