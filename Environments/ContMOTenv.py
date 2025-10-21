@@ -21,38 +21,49 @@ class MOTEnvironmentWrapper:
         # Episode parameters from paper
         self.episode_length = 25  # 25 time steps
         self.time_step_duration = 0.06  # 60ms per step
-        
+
+        #!!
+        # Add evaluation tracking like reference 
+        self.NEv = 10  # Number of evaluations
+        self.evalshot_idx = 1
+
         self.reset()
-    
+
     def loading(self,det):
         """
         simulate the loading of the MOT
         """
-        pass
+        return self.sim_model.predict_loading_rate(det)
 
     def temperature(self,det):
         """
         simulate the temperature of the MOT
         """
-        pass
+        return self.sim_model.predict_temperature(det)
 
     def draw_MOT_img(self):
         """
         generate the fluorescence image using the CNN model
         """
-        pass
+        return self.sim_model.generate_image(self.atom_number, self.current_detuning)
+
     
     def reset(self, perturbation_offset: Optional[float] = None) -> Dict:
         """Reset environment for new episode"""
         self.current_step = 0
         self.atom_number = 0
-        self.temperature = 100e-6  # 100 μK initial temperature
+        #!!
+        self.temperature = 1.0 # Normalized initial temperature 
         
         # Training perturbation as described in paper
         if perturbation_offset is None:
-            self.perturbation_offset = np.random.uniform(-1.0, 1.0)
+            self.perturbation_offset = np.random.uniform(-0.1, 0.2) # !!
         else:
             self.perturbation_offset = perturbation_offset
+        
+        # !!
+        #Initialize current detuning
+        self.current_detuning = -20  # Initial value like reference
         
         # Initialize image history (4 most recent images)
         self.image_history = collections.deque(maxlen=4)
@@ -66,19 +77,34 @@ class MOTEnvironmentWrapper:
         """Execute one time step"""
         # Convert normalized action to actual detuning
         detuning_control = action[0]  # Action from agent # [-1,1]
-        actual_detuning = self._convert_action_to_detuning(detuning_control) # [min, max]
+
+        #!!
+        actual_detuning = -self._convert_action_to_detuning(detuning_control) # [min, max]
         
         # Apply perturbation (unknown to agent)
-        physical_detuning = actual_detuning - self.perturbation_offset # [min-offset,max-offset]
+        physical_detuning = actual_detuning + self.perturbation_offset # [min-offset,max-offset]
         physical_detuning = np.clip(physical_detuning, self.detuning_min, self.detuning_max) # [min,max]
         
-        # Update MOT state using your simulation model
-        new_atoms, new_temperature, fluorescence_image = self._simulate_mot_step(physical_detuning)
+        self.current_detuning = physical_detuning
         
-        self.atom_number += new_atoms
-        self.temperature = new_temperature
+        # Update MOT state using your simulation model
+        # new_atoms, new_temperature, fluorescence_image = self._simulate_mot_step(physical_detuning)
+        
+        # !!
+        # Update MOT state
+        if physical_detuning < -2.5:  # Match reference threshold
+            new_atoms = self.loading(physical_detuning)
+            self.atom_number += new_atoms
+            self.temperature = self.temperature(physical_detuning)
+        else:
+            # Too close to resonance - atoms lost (match reference behavior)
+            self.atom_number = 0
+            self.temperature = 5
+
         self.current_step += 1
         
+        fluorescence_image = self.draw_MOT_img()
+
         # Update image history
         self.image_history.append(fluorescence_image)
         
@@ -96,24 +122,21 @@ class MOTEnvironmentWrapper:
         
         return self._get_observation(), reward, done, info
     
-    def _simulate_mot_step(self, detuning: float) -> Tuple[float, float, np.ndarray]:
-        """Interface to your simulation model - adapt this to your implementation"""
-        # This is where you call your trained simulation model
-        # Replace this with calls to your actual simulation
+    # def _simulate_mot_step(self, detuning: float) -> Tuple[float, float, np.ndarray]:
+    #     """Interface to your simulation model - adapt this to your implementation"""
+    #     # This is where you call your trained simulation model
+    #     # Replace this with calls to your actual simulation
         
-        # Example interface (adapt to your model):
-        new_atoms = self.sim_model.predict_loading_rate(detuning) * self.time_step_duration
-        temperature = self.sim_model.predict_temperature(detuning)  
-        fluorescence_image = self.sim_model.generate_image(
-            self.atom_number + new_atoms, detuning
-        )
+    #     # Example interface (adapt to your model):
+    #     # new_atoms = self.sim_model.predict_loading_rate(detuning)
+    #     # temperature = self.sim_model.predict_temperature(detuning)  
+    #     # fluorescence_image = self.sim_model.generate_image(
+    #     #     self.atom_number + new_atoms, detuning
+    #     # )
         
-        # Placeholder - replace with your simulation calls
-        # new_atoms = max(0, 1e6 * np.exp(-(detuning - 2.0)**2) * self.time_step_duration)
-        # temperature = 50e-6 + 20e-6 * np.exp(-detuning)
-        # fluorescence_image = np.random.random((self.image_size, self.image_size)).astype(np.float32)
-        
-        return new_atoms, temperature, fluorescence_image
+    #     # return new_atoms, temperature, fluorescence_image
+
+    #     pass
     
     def _convert_action_to_detuning(self, action: float) -> float:
         """Convert normalized action [-1, 1] to detuning value"""

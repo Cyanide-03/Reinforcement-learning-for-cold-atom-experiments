@@ -6,6 +6,15 @@ import collections
 import random
 from typing import Tuple, List, Optional, Dict
 import cv2
+import os
+import sys
+
+# Ensure project root is on PYTHONPATH so imports like
+# `from Environments.ContMOTenv import MOTEnvironmentWrapper` work
+PROJECT_ROOT = os.path.dirname(os.path.dirname(__file__))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
 from Environments.ContMOTenv import MOTEnvironmentWrapper
 from Simulation_Model.Simulation import Simulation
 
@@ -293,13 +302,15 @@ class DDPGAgent: # !
     
     def save_model(self, filepath: str):
         """Save trained models"""
-        self.actor.save_weights(f"{filepath}_actor")
-        self.critic.save_weights(f"{filepath}_critic")
+        # Add required .weights.h5 extension
+        self.actor.save_weights(f"{filepath}_actor.weights.h5")
+        self.critic.save_weights(f"{filepath}_critic.weights.h5")
     
     def load_model(self, filepath: str):
         """Load trained models"""
-        self.actor.load_weights(f"{filepath}_actor")
-        self.critic.load_weights(f"{filepath}_critic")
+        # Add required .weights.h5 extension
+        self.actor.load_weights(f"{filepath}_actor.weights.h5")
+        self.critic.load_weights(f"{filepath}_critic.weights.h5")
         # Update target networks
         self._update_target_networks(tau=1.0)
 
@@ -309,7 +320,7 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
     # Initialize environment and agent
     # Replace 'your_simulation_model' with your actual simulation
     sim_model=Simulation()
-    env = MOTEnvironmentWrapper(Simulation_model=sim_model)  # Replace None
+    env = MOTEnvironmentWrapper(Simulation_Model=sim_model)  # Replace None
     agent = DDPGAgent()
     
     # TensorBoard logging
@@ -371,7 +382,12 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
         
         episode_rewards.append(total_reward)
         
-        # Periodic evaluation
+        # Print every episode (new code)
+        print(f"Episode {episode}: Train Reward: {total_reward:.4f}, "
+              f"Atoms: {info['atom_number']:.2e}, "
+              f"Temperature: {info['temperature']*1e6:.2f} μK")
+        
+        # Periodic evaluation (every evaluation_frequency episodes)
         if episode > 0 and episode % evaluation_frequency == 0:
             eval_rewards = []
             eval_atom_numbers = []
@@ -398,9 +414,11 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
                 tf.summary.scalar('atom_number', np.mean(eval_atom_numbers), step=episode)
                 tf.summary.scalar('temperature', np.mean(eval_temperatures)*1e6, step=episode)
             
-            print(f"Episode {episode}: Avg Train Reward: {np.mean(episode_rewards[-100:]):.4f}, "
-                  f"Avg Eval Reward: {np.mean(eval_rewards):.4f}, "
-                  f"Avg Atoms: {np.mean(eval_atom_numbers):.2e}")
+            print(f"\n=== Evaluation at Episode {episode} ===")
+            print(f"Avg Train Reward (last 100): {np.mean(episode_rewards[-100:]):.4f}")
+            print(f"Avg Eval Reward: {np.mean(eval_rewards):.4f}")
+            print(f"Avg Atoms: {np.mean(eval_atom_numbers):.2e}")
+            print(f"Avg Temperature: {np.mean(eval_temperatures)*1e6:.2f} μK\n")
         
         # Save model periodically
         if episode > 0 and episode % 1000 == 0:
