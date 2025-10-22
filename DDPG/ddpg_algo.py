@@ -1,3 +1,6 @@
+import matplotlib.pyplot as plt
+from matplotlib.figure import Figure
+import datetime
 import numpy as np
 import tensorflow as tf
 from tensorflow import keras
@@ -148,6 +151,114 @@ class OUNoise:
         dx = self.theta * (self.mu - self.state) + self.sigma * np.random.standard_normal(self.state.shape)
         self.state += dx
         return self.state
+    
+#For Plots
+def plot_training_rewards(episode_rewards: List[float], save_path: str = None):
+    """
+    Plot reward vs episode graph
+    """
+    plt.figure(figsize=(12, 6))
+    
+    episodes = range(len(episode_rewards))
+    
+    # Plot raw rewards
+    plt.subplot(1, 2, 1)
+    plt.plot(episodes, episode_rewards, alpha=0.3, color='blue', label='Raw Reward')
+    
+    # Plot moving average (smoothed)
+    window_size = min(100, len(episode_rewards) // 10)
+    if len(episode_rewards) > window_size:
+        moving_avg = np.convolve(episode_rewards, 
+                                  np.ones(window_size)/window_size, 
+                                  mode='valid')
+        plt.plot(range(window_size-1, len(episode_rewards)), 
+                moving_avg, 
+                color='red', 
+                linewidth=2, 
+                label=f'Moving Avg (window={window_size})')
+    
+    plt.xlabel('Episode', fontsize=12)
+    plt.ylabel('Reward', fontsize=12)
+    plt.title('Training Progress: Reward vs Episode', fontsize=14)
+    plt.legend()
+    plt.grid(True, alpha=0.3)
+    
+    # Plot log scale (useful if rewards vary a lot)
+    plt.subplot(1, 2, 2)
+    plt.plot(episodes, episode_rewards, alpha=0.5, color='green')
+    plt.xlabel('Episode', fontsize=12)
+    plt.ylabel('Reward (log scale)', fontsize=12)
+    plt.title('Training Progress (Log Scale)', fontsize=14)
+    plt.yscale('log')
+    plt.grid(True, alpha=0.3, which='both')
+    
+    plt.tight_layout()
+    
+    if save_path:
+        plt.savefig(save_path, dpi=150, bbox_inches='tight')
+        print(f"Reward plot saved to: {save_path}")
+    
+    plt.show()
+
+
+def plot_control_sequence(detuning_sequence: np.ndarray, 
+                          time_step_duration: float = 0.06,
+                          detuning_min: float = 0.0,
+                          detuning_max: float = 8.25,
+                          save_path: str = None):
+    """
+    Plot actual detuning vs time steps for last episode
+    """
+    n_steps = len(detuning_sequence)
+    time_steps = np.arange(n_steps)
+    time_seconds = time_steps * time_step_duration
+    
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 8))
+    
+    # Plot 1: Detuning vs Time Step
+    ax1.plot(time_steps, detuning_sequence, 
+             marker='o', markersize=4, linewidth=2, 
+             color='blue', label='Actual Detuning')
+    
+    # Mark optimal loading point
+    ax1.axhline(y=1.9, color='red', linestyle='--', 
+                linewidth=2, label='Optimal Loading (1.9Γ)', alpha=0.7)
+    
+    # Highlight different phases
+    mid_point = n_steps // 2
+    ax1.axvspan(0, mid_point, alpha=0.1, color='green', label='Loading Phase')
+    ax1.axvspan(mid_point, n_steps, alpha=0.1, color='orange', label='Cooling Phase')
+    
+    ax1.set_xlabel('Time Step', fontsize=12)
+    ax1.set_ylabel('Detuning (Γ)', fontsize=12)
+    ax1.set_title('Control Sequence: Detuning vs Time Steps', fontsize=14)
+    ax1.set_ylim([detuning_min - 0.5, detuning_max + 0.5])
+    ax1.legend(loc='best')
+    ax1.grid(True, alpha=0.3)
+    
+    # Plot 2: Detuning vs Real Time (seconds)
+    ax2.plot(time_seconds, detuning_sequence, 
+             marker='s', markersize=4, linewidth=2, 
+             color='purple', label='Actual Detuning')
+    
+    ax2.axhline(y=1.9, color='red', linestyle='--', 
+                linewidth=2, label='Optimal Loading (1.9Γ)', alpha=0.7)
+    
+    ax2.set_xlabel('Time (seconds)', fontsize=12)
+    ax2.set_ylabel('Detuning (Γ)', fontsize=12)
+    ax2.set_title(f'Control Sequence: Detuning vs Real Time (Total: {time_seconds[-1]:.2f}s)', 
+                  fontsize=14)
+    ax2.set_ylim([detuning_min - 0.5, detuning_max + 0.5])
+    ax2.legend(loc='best')
+    ax2.grid(True, alpha=0.3)
+    
+    plt.tight_layout()
+    
+    if save_path:
+        plt.savefig(save_path, dpi=150, bbox_inches='tight')
+        print(f"Control sequence plot saved to: {save_path}")
+    
+    plt.show()
 
 class DDPGAgent: # !
     """DDPG Agent for MOT control using TensorFlow"""
@@ -328,17 +439,21 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
     eval_summary_writer = tf.summary.create_file_writer(log_dir + '/eval')
     
     # Training parameters
-    warmup_episodes = 400
-    evaluation_frequency = 200
+    warmup_episodes = 1
+    evaluation_frequency = 100
     batch_size = 64
     
     episode_rewards = []
+    episode_total_rewards = []
+    last_episode_detuning = []  
     
-    for episode in range(5):
+    for episode in range(episodes):
         
         if episode < warmup_episodes:
             # Warmup phase with random exploration
             observation = env.reset()
+            episode_reward = 0
+            episode_detuning = []
             total_reward = 0
             
             for _ in range(env.episode_length):
@@ -347,32 +462,39 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
                 
                 agent.store_experience(observation, action, reward, next_observation, done)
                 observation = next_observation
+                episode_detuning.append(info['detuning']);
                 total_reward += reward
 
                 tf.print(f"observation shape: {observation['images'].shape}, action: {action}, reward: {reward}",output_stream=sys.stdout)
                 
                 if done:
+                    episode_reward = reward;
                     break
-
-            return
-
+                if episode == warmup_episodes - 1:
+                    last_episode_detuning = episode_detuning
         else:
             # Normal training episode
             observation = env.reset()
             agent.noise.reset()
             total_reward = 0
+            episode_reward = 0
+            episode_detuning = []
             
             for _ in range(env.episode_length):
                 action = agent.select_action(observation, add_noise=True)
                 next_observation, reward, done, info = env.step(action)
+
+                episode_detuning.append(info['detuning']);
                 
                 agent.store_experience(observation, action, reward, next_observation, done)
                 observation = next_observation
                 total_reward += reward
                 
                 if done:
+                    episode_reward = reward;
                     break
             
+            last_episode_detuning = episode_detuning
             # Train agent
             losses = agent.train(batch_size)
             
@@ -385,51 +507,81 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
                     tf.summary.scalar('critic_loss', losses[0], step=episode)
                     tf.summary.scalar('actor_loss', losses[1], step=episode)
         
-        episode_rewards.append(total_reward)
+        episode_total_rewards.append(total_reward)
+        episode_rewards.append(episode_reward)
         
         # Print every episode (new code)
         print(f"Episode {episode}: Train Reward: {total_reward:.4f}, "
               f"Atoms: {info['atom_number']:.2e}, "
               f"Temperature: {info['temperature']*1e6:.2f} μK")
         
-        # Periodic evaluation (every evaluation_frequency episodes)
+        # Periodic evaluation
         if episode > 0 and episode % evaluation_frequency == 0:
-            eval_rewards = []
-            eval_atom_numbers = []
-            eval_temperatures = []
+            perturbation_offsets = [0.0, 0.2]  # Test robustness
             
-            for eval_ep in range(10):
-                obs = env.reset(perturbation_offset=0.0)  # No perturbation for evaluation
-                eval_reward = 0
+            
+            for offset in perturbation_offsets:
+                offset_rewards = []
+                offset_atoms = []
+                offset_temps = []
                 
-                for step in range(env.episode_length):
-                    action = agent.select_action(obs, add_noise=False)
-                    obs, reward, done, info = env.step(action)
-                    eval_reward += reward
-                    if done:
-                        eval_atom_numbers.append(info['atom_number'])
-                        eval_temperatures.append(info['temperature'])
-                        break
+                # Run multiple episodes per offset for statistics
+                for eval_ep in range(env.NEv):
+                    obs = env.reset(perturbation_offset=offset)
+                    eval_reward = 0  # Will only be set at the end
+                    
+                    for step in range(env.episode_length):
+                        action = agent.select_action(obs, add_noise=False)
+                        obs, reward, done, info = env.step(action)
+                        
+                        if done:
+                            eval_reward = reward
+                            offset_atoms.append(info['atom_number'])
+                            offset_temps.append(info['temperature'])
+                            break
+                    
+                    offset_rewards.append(eval_reward)
+                # Log evaluation metrics
+                with eval_summary_writer.as_default():
+                    tf.summary.scalar('episode_reward', np.mean(offset_rewards), step=episode)
+                    tf.summary.scalar('atom_number', np.mean(offset_atoms), step=episode)
+                    tf.summary.scalar('temperature', np.mean(offset_temps)*1e6, step=episode)
                 
-                eval_rewards.append(eval_reward)
-            
-            # Log evaluation metrics
-            with eval_summary_writer.as_default():
-                tf.summary.scalar('episode_reward', np.mean(eval_rewards), step=episode)
-                tf.summary.scalar('atom_number', np.mean(eval_atom_numbers), step=episode)
-                tf.summary.scalar('temperature', np.mean(eval_temperatures)*1e6, step=episode)
-            
-            print(f"\n=== Evaluation at Episode {episode} ===")
-            print(f"Avg Train Reward (last 100): {np.mean(episode_rewards[-100:]):.4f}")
-            print(f"Avg Eval Reward: {np.mean(eval_rewards):.4f}")
-            print(f"Avg Atoms: {np.mean(eval_atom_numbers):.2e}")
-            print(f"Avg Temperature: {np.mean(eval_temperatures)*1e6:.2f} μK\n")
+                print(f"\n=== Evaluation at Episode {episode} ===")
+                print(f"Avg Train Reward (last 100): {np.mean(episode_rewards[-100:]):.4f}")
+                print(f"  Offset {offset:+.1f}Γ: ")
+                print(f"Avg Eval Reward: {np.mean(offset_rewards):.4f}")
+                print(f"Avg Atoms: {np.mean(offset_atoms):.2e}")
+                print(f"Avg Temperature: {np.mean(offset_temps)*1e6:.2f} μK\n")
         
         # Save model periodically
         if episode > 0 and episode % 1000 == 0:
             agent.save_model(f"model_checkpoint_{episode}")
+
+    #Plot results after training completes
+    print("\n" + "="*60)
+    print("Training completed! Generating plots...")
+    print("="*60)
+
+    # Plot 1: Reward vs Episode
+    reward_plot_path = log_dir + '/reward_vs_episode.png'
+    plot_training_rewards(episode_rewards, save_path=reward_plot_path)
+
+    # Plot 2: Control Sequence (Last Episode)
+    if len(last_episode_detuning) > 0:
+        control_plot_path = log_dir + '/last_episode_control_sequence.png'
+        plot_control_sequence(
+            np.array(last_episode_detuning),
+            time_step_duration=0.06,  
+            detuning_min=-50,
+            detuning_max=0, 
+            save_path=control_plot_path
+        )
+    else:
+        print("No detuning data recorded for last episode")
+
     
-    return agent, episode_rewards
+    return agent, episode_total_rewards
 
 # Usage example
 if __name__ == "__main__":
@@ -443,8 +595,8 @@ if __name__ == "__main__":
     print(f"Logging to: {log_dir}")
     print("Run 'tensorboard --logdir logs' to monitor training")
     
-    train_mot_agent(episodes=5000, log_dir=log_dir)
-    # trained_agent, rewards = train_mot_agent(episodes=5000, log_dir=log_dir)\
+    # train_mot_agent(episodes=5000, log_dir=log_dir)
+    trained_agent, rewards = train_mot_agent(episodes=101, log_dir=log_dir)
     
     # Save final model
     # trained_agent.save_model("final_mot_rl_model")

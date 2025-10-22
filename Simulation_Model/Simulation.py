@@ -35,27 +35,25 @@ class Simulation:
 
     def predict_loading_rate(self, det):
         # ! multiplied by N max to return unnormalized atom number
-        return max(0, self.N_intrp(det) * random.gauss(1, 0.2))*self.N_max 
+        return max(0, self.N_intrp(det) * random.gauss(1, 0.2))
         
     def predict_temperature(self, det):
-        # # ! multiplied by T[-1]*0.1 to get the original unnormalized temp in K
+        # # ! multiplied by T[-1]/0.1 to get the original unnormalized temp in K
         if det >= max(self.det_T):
             return self.T_exp[0]
         elif det <= np.min(self.det_T):
             return self.T_exp[-1]
         else:
-            return (10**self.logT_intrp(det))*0.1*self.T_exp[-1]
+            return (10**self.logT_intrp(det))
 
-    def generate_image(self, atom_number, detuning):
+    def generate_image(self, norm_atom_number, norm_detuning):
 
         if self.MOT_img_gen is None:
             # Return blank image if model not loaded
             return np.zeros((50, 50), dtype=np.float32)
         
-        normalized_atoms = atom_number / 25
-        normalized_detuning = -detuning / 50
         
-        input_data = np.expand_dims([normalized_atoms, normalized_detuning], axis=0)
+        input_data = np.expand_dims([norm_atom_number, norm_detuning], axis=0)
         img = self.MOT_img_gen.predict(input_data, verbose=0)
         
         # Squeeze and ensure proper shape
@@ -65,7 +63,8 @@ class Simulation:
         
         # Clip to valid range and handle very low atom numbers
         img = np.clip(img, 0.0, 1.0)
-        if atom_number < 0.02:
+        if norm_atom_number < 0.02:
             img = img * 0  # Zero out image for very low atom counts
             
         return img.astype(np.float32)
+    

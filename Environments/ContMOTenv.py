@@ -8,7 +8,7 @@ class MOTEnvironmentWrapper:
     """Wrapper for your MOT simulation environment"""
     
     def __init__(self, Simulation_Model, image_size: int = 50, 
-                 detuning_range: Tuple[float, float] = (0.0, 8.25)): # ! issue in detuning range
+                 detuning_range: Tuple[float, float] = (0.0, 50)): # ! issue in detuning range
         """
         Args:
             Simulation_Model: Your trained simulation model
@@ -29,43 +29,54 @@ class MOTEnvironmentWrapper:
         self.NEv = 10  # Number of evaluations
         self.evalshot_idx = 1
 
+        # Track detuning history for logging
+        self.det_hist = []
+
         self.reset()
 
     def loading(self,det):
         """
         simulate the loading of the MOT
+        Returns NORMALIZED atom loading rate
         """
-        return self.sim_model.predict_loading_rate(det) # ! Returns unnormalized atom number
+        return self.sim_model.predict_loading_rate(det) # ! Returns normalized atom number
 
     def compute_temperature(self,det):
         """
         simulate the temperature of the MOT
+        Returns NORMALIZED temperature
         """
-        return self.sim_model.predict_temperature(det) # ! Returns unnormalized Temperature
+        return self.sim_model.predict_temperature(det) # ! Returns normalized Temperature
 
-    def draw_MOT_img(self):
+    def draw_MOT_img(self, det): 
         """
         generate the fluorescence image using the CNN model
         """
-        return self.sim_model.generate_image(self.atom_number, self.current_detuning)
+        norm_atoms = self.atom_number / self.episode_length
+        norm_det = -(self.current_detuning + self.perturbation_offset) / self.detuning_range_size
+        return self.sim_model.generate_image(norm_atoms, norm_det)
 
-    
-    def reset(self, perturbation_offset: Optional[float] = None) -> Dict:
+    #!! changes made and evaluation mode added    
+    def reset(self, perturbation_offset: Optional[float] = None, evaluation_mode: bool = False) -> Dict:
         """Reset environment for new episode"""
         self.current_step = 0
-        self.atom_number = 0
-        #!!
+        self.atom_number = 0  # Normalized initial atom number
         self.temperature = 1.0 # Normalized initial temperature 
         
         # Training perturbation as described in paper
         if perturbation_offset is None:
-            self.perturbation_offset = np.random.uniform(-0.1, 0.2) # !!
+            self.perturbation_offset = np.random.uniform(-5.0, 10.0) #unnormalized offset
         else:
             self.perturbation_offset = perturbation_offset
         
-        # !!
         #Initialize current detuning
         self.current_detuning = -20  # Initial value like reference
+
+        # Track evaluation mode for mid-episode perturbation change
+        self.evaluation_mode = evaluation_mode
+
+        # Clear detuning history
+        self.det_hist = []
         
         # Initialize image history (4 most recent images)
         self.image_history = collections.deque(maxlen=4)
@@ -83,35 +94,45 @@ class MOTEnvironmentWrapper:
         #!!
         actual_detuning = self._convert_action_to_detuning(detuning_control) # [min, max]
         # tf.print(f"actual detuning: {actual_detuning}",output_stream=sys.stdout)
+        self.current_detuning = -actual_detuning #[-max,-min]
         
         # Apply perturbation (unknown to agent)
-        physical_detuning = actual_detuning + self.perturbation_offset # [min-offset,max-offset]
+        physical_detuning = self.current_detuning + self.perturbation_offset # [-max+perturb, -min+perturb]
         # tf.print(f"perturbed physical detuning: {physical_detuning}",output_stream=sys.stdout)
-        physical_detuning = tf.clip_by_value(physical_detuning, self.detuning_min, self.detuning_max) # [min,max]
+        # physical_detuning = tf.clip_by_value(physical_detuning, self.detuning_min, self.detuning_max) # [min,max]
         # tf.print(f"clipped physical detuning: {physical_detuning}",output_stream=sys.stdout)
         
-        self.current_detuning = -physical_detuning
+        
 
         tf.print(f"\ndetuning: {self.current_detuning}",output_stream=sys.stdout)
-        
-        # !!
-        # Update MOT state
-        if self.current_detuning < -2.5:  # Match reference threshold
-            new_atoms = self.loading(self.current_detuning)
-            self.atom_number += new_atoms
-            self.temperature = self.compute_temperature(self.current_detuning)
 
-            tf.print(f"new atoms: {new_atoms}, total atoms: {self.atom_number}, temperature: {self.temperature}",output_stream=sys.stdout)
+        # Implement mid-episode perturbation change during evaluation
+        # Reference: changes offset at timestep 15 for second half of eval episodes
+        if (self.evaluation_mode and self.evalshot_idx > self.NEv / 2 and self.current_step == int(np.round(self.episode_length * 3 / 5))):
+            self.perturbation_offset += np.random.choice([-1, 1]) * 5.0
+            self.current_detuning = self.current_detuning + self.perturbation_offset
+        
+        
+        # Update MOT state
+        if physical_detuning < -2.5:  # Match reference threshold
+            new_atoms = self.loading(physical_detuning)
+            self.atom_number += new_atoms
+            self.temperature = self.compute_temperature(physical_detuning)
+
         else:
             # Too close to resonance - atoms lost (match reference behavior)
 
             # ! We can add a decay rate here instead of total loss 
             self.atom_number = 0
-            self.temperature = 5
+            self.temperature = 5.0
 
         self.current_step += 1
+        tf.print(f"total atoms: {self.atom_number}, temperature: {self.temperature}",output_stream=sys.stdout)
+
+        # Track detuning history
+        self.det_hist.append(self.current_detuning)
         
-        fluorescence_image = self.draw_MOT_img()
+        fluorescence_image = self.draw_MOT_img(physical_detuning)
 
         # Update image history
         self.image_history.append(fluorescence_image)
@@ -121,18 +142,29 @@ class MOTEnvironmentWrapper:
         reward = self._calculate_reward() if done else 0.0
         
         # Prepare info
+        atoms = self.atom_number * self.sim_model.N_max*self.episode_length   # Unnormalize atom number
+        temperature = self.temperature * (self.sim_model.T_exp[-1]/0.1)
         info = {
-            'atom_number': self.atom_number,
-            'temperature': self.temperature,
-            'physical_detuning': self.current_detuning,
-            'perturbation_offset': self.perturbation_offset
+            'atom_number': atoms,
+            'temperature': temperature,
+            'physical_detuning': physical_detuning,
+            'detuning': self.current_detuning,
+            'perturbation_offset': self.perturbation_offset,
+            'detuning_history': self.det_hist.copy()
         }
         
         return self._get_observation(), reward, done, info
     
     def _convert_action_to_detuning(self, action: float) -> float:
         """Convert normalized action [-1, 1] to detuning value"""
-        return self.detuning_min + (action + 1) * 0.5 * self.detuning_range_size
+        # Convert action [-1, 1] to detuning [detuning_min, detuning_max]
+
+        # First convert [-1, 1] to [0, 1]
+        detuning_control = np.clip(action, -1.0, 1.0)  # Ensure [-1, 1]
+        detuning_control = (detuning_control + 1.0) / 2.0  # Convert to [0, 1]
+        
+        # Then scale to [detuning_min, detuning_max]
+        return self.detuning_min + detuning_control* self.detuning_range_size
     
     def _get_observation(self) -> Dict:
         """Get current observation for agent"""
@@ -143,7 +175,8 @@ class MOTEnvironmentWrapper:
         
         # Additional inputs: normalized time step and placeholder for current control
         normalized_time = self.current_step / self.episode_length
-        normalized_detuning = 0.5  # Placeholder - agent learns from images
+        # Convert detuning back to [-1, 1] range for consistency with action space
+        normalized_detuning = ((-self.current_detuning / self.detuning_range_size) * 2.0) - 1.0  # Back to [-1, 1]
         additional_inputs = np.array([normalized_time, normalized_detuning], dtype=np.float32)
         
         return {
@@ -151,20 +184,33 @@ class MOTEnvironmentWrapper:
             'additional': additional_inputs
         }
     
-    def _calculate_reward(self) -> float: # ! changes made
+    def _calculate_reward(self) -> float: # ! changes made problem here
         """Calculate reward R ∝ N/T as in paper"""
-        if self.temperature <= 0:
+        if self.atom_number <= 0.1:
             return 0.0
 
         # Normalize atom number (0–1)
-        norm_N = self.atom_number / self.sim_model.N_max
+        # norm_N = self.atom_number / self.sim_model.N_max
         
-        # Normalize temperature relative to experimental range
-        T_ref = np.mean(self.sim_model.T_exp)  # or self.sim_model.T_exp[-1]
-        norm_T = self.temperature / T_ref
+        # # Normalize temperature relative to experimental range
+        # T_ref = np.mean(self.sim_model.T_exp)  # or self.sim_model.T_exp[-1]
+        # norm_T = self.temperature / T_ref
         
-        # Reward ∝ N/T
-        reward = norm_N / (norm_T /1e6)
-        # reward = (self.atom_number/self.sim_model.N_max) / (self.temperature * 1e6)  # Normalize temperature to μK
+        # # Reward ∝ N/T
+        # reward = norm_N / (norm_T /1e6)
+        # # reward = (self.atom_number/self.sim_model.N_max) / (self.temperature * 1e6)  # Normalize temperature to μK
 
-        return reward / 1e8  # Normalize reward scale
+        # return reward / 1e8  # Normalize reward scale
+        reward = self.atom_number / self.temperature / self.episode_length
+        
+        return reward
+    
+    def set_evaluation_mode(self, mode: bool):
+        """Set evaluation mode for mid-episode perturbations"""
+        self.evaluation_mode = mode
+    
+    def increment_eval_shot(self):
+        """Increment evaluation shot counter"""
+        self.evalshot_idx += 1
+        if self.evalshot_idx > self.NEv:
+            self.evalshot_idx = 1
