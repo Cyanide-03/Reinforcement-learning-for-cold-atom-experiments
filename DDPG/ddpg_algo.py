@@ -334,7 +334,7 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
     
     episode_rewards = []
     
-    for episode in range(episodes):
+    for episode in range(5):
         
         if episode < warmup_episodes:
             # Warmup phase with random exploration
@@ -348,9 +348,14 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
                 agent.store_experience(observation, action, reward, next_observation, done)
                 observation = next_observation
                 total_reward += reward
+
+                tf.print(f"observation shape: {observation['images'].shape}, action: {action}, reward: {reward}",output_stream=sys.stdout)
                 
                 if done:
                     break
+
+            return
+
         else:
             # Normal training episode
             observation = env.reset()
@@ -438,8 +443,9 @@ if __name__ == "__main__":
     print(f"Logging to: {log_dir}")
     print("Run 'tensorboard --logdir logs' to monitor training")
     
-    trained_agent, rewards = train_mot_agent(episodes=5000, log_dir=log_dir)
+    train_mot_agent(episodes=5000, log_dir=log_dir)
+    # trained_agent, rewards = train_mot_agent(episodes=5000, log_dir=log_dir)\
     
     # Save final model
-    trained_agent.save_model("final_mot_rl_model")
-    print("Training completed. Model saved as 'final_mot_rl_model'")
+    # trained_agent.save_model("final_mot_rl_model")
+    # print("Training completed. Model saved as 'final_mot_rl_model'")

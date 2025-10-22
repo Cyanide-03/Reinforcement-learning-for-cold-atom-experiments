@@ -1,89 +1,99 @@
-Data saved to cnn_data.csv
-       atom_number  detuning (MHz)              image
-76    1.689146e+06              14    images/DT77.jpg
-1026  1.167417e+06               2  images/DT1027.jpg
-43    1.686681e+06              14    images/DT44.jpg
-666   1.360424e+06               8   images/DT667.jpg
-529   1.519387e+06              10   images/DT530.jpg
-Input Shape:  (1260, 2)
-Output shape:  (1260, 50, 50, 1)
-Epoch 1/100
+Starting MOT RL training with TensorFlow...
+Logging to: logs/mot_rl_20251022-064705
+Run 'tensorboard --logdir logs' to monitor training
 
-Epoch 1: val_loss improved from inf to 0.43561, saving model to MOT_best.h5
+detuning: -3.6648122272527988
+new atoms: 0.0, total atoms: 0.0, temperature: 1.628750037528541
+observation shape: (50, 50, 4), action: [-0.11981404], reward: 0.0
 
-26/26 - 7s - loss: 0.5134 - val_loss: 0.4356 - lr: 0.0010 - 7s/epoch - 255ms/step
-Epoch 2/100
+detuning: -4.61828334248318
+new atoms: 0.0, total atoms: 0.0, temperature: 1.628750037528541
+observation shape: (50, 50, 4), action: [0.11133047], reward: 0.0
 
-Epoch 2: val_loss improved from 0.43561 to 0.42846, saving model to MOT_best.h5
-26/26 - 5s - loss: 0.4292 - val_loss: 0.4285 - lr: 0.0010 - 5s/epoch - 208ms/step
-Epoch 3/100
-Epoch 3: val_loss improved from 0.42846 to 0.42740, saving model to MOT_best.h5
-Epoch 4/100
-Epoch 4: val_loss improved from 0.42740 to 0.42667, saving model to MOT_best.h5
-26/26 - 8s - loss: 0.4262 - val_loss: 0.4267 - lr: 0.0010 - 8s/epoch - 308ms/step
-Epoch 5/100
- 
-Epoch 5: val_loss did not improve from 0.42667
-26/26 - 6s - loss: 0.4259 - val_loss: 0.4268 - lr: 0.0010 - 6s/epoch - 216ms/step
-Epoch 6/100
+detuning: -6.7456522394876695
+new atoms: 0.0, total atoms: 0.0, temperature: 1.628750037528541
+observation shape: (50, 50, 4), action: [0.62705627], reward: 0.0
 
-Epoch 6: val_loss improved from 0.42667 to 0.42646, saving model to MOT_best.h5
-26/26 - 5s - loss: 0.4258 - val_loss: 0.4265 - lr: 0.0010 - 5s/epoch - 205ms/step
-Epoch 7/100
+detuning: -0.9691813073226877
+observation shape: (50, 50, 4), action: [-0.77330032], reward: 0.0
 
-Epoch 7: val_loss improved from 0.42646 to 0.42637, saving model to MOT_best.h5
-26/26 - 6s - loss: 0.4257 - val_loss: 0.4264 - lr: 0.0010 - 6s/epoch - 222ms/step
-Epoch 8/100
+detuning: -4.028177424644862
+new atoms: 0.0, total atoms: 0.0, temperature: 1.628750037528541
+observation shape: (50, 50, 4), action: [-0.03172551], reward: 0.0
 
-Epoch 8: val_loss improved from 0.42637 to 0.42621, saving model to MOT_best.h5
-26/26 - 6s - loss: 0.4255 - val_loss: 0.4262 - lr: 0.0010 - 6s/epoch - 219ms/step
-Epoch 9/100
+detuning: -8.048741540475582
+new atoms: 20843035.59437449, total atoms: 20843035.59437449, temperature: 1.628750037528541
+observation shape: (50, 50, 4), action: [0.9429567], reward: 0.00019713666404478893
 
-Epoch 9: val_loss improved from 0.42621 to 0.42608, saving model to MOT_best.h5
-26/26 - 5s - loss: 0.4254 - val_loss: 0.4261 - lr: 0.0010 - 5s/epoch - 188ms/step
-Epoch 10/100
+detuning: -2.9865395729957034
+new atoms: 0.0, total atoms: 20843035.59437449, temperature: 1.628750037528541
+observation shape: (50, 50, 4), action: [-0.28424377], reward: 0.00019713666404478893
 
-Epoch 10: val_loss did not improve from 0.42608
-26/26 - 5s - loss: 0.4253 - val_loss: 0.4262 - lr: 0.0010 - 5s/epoch - 197ms/step
-Epoch 11/100
+detuning: -6.012499361538676
+new atoms: 0.0, total atoms: 20843035.59437449, temperature: 1.628750037528541
+observation shape: (50, 50, 4), action: [0.44932224], reward: 0.00019713666404478893
 
-Epoch 11: val_loss improved from 0.42608 to 0.42599, saving model to MOT_best.h5
-26/26 - 5s - loss: 0.4253 - val_loss: 0.4260 - lr: 0.0010 - 5s/epoch - 199ms/step
-Epoch 12/100
+detuning: -6.773857049704874
+new atoms: 0.0, total atoms: 20843035.59437449, temperature: 1.628750037528541
+observation shape: (50, 50, 4), action: [0.6338938], reward: 0.00019713666404478893
 
-Epoch 12: val_loss improved from 0.42599 to 0.42582, saving model to MOT_best.h5
-26/26 - 5s - loss: 0.4252 - val_loss: 0.4258 - lr: 0.0010 - 5s/epoch - 191ms/step
-Epoch 13/100
+detuning: -8.051665430988017
+new atoms: 24201219.273400992, total atoms: 45044254.867775485, temperature: 1.628750037528541
+observation shape: (50, 50, 4), action: [0.94366553], reward: 0.0004260355502829525
 
-Epoch 13: val_loss improved from 0.42582 to 0.42580, saving model to MOT_best.h5
-26/26 - 6s - loss: 0.4252 - val_loss: 0.4258 - lr: 0.0010 - 6s/epoch - 225ms/step
-Epoch 14/100
+detuning: -2.399394838002643
+observation shape: (50, 50, 4), action: [-0.42658189], reward: 0.0
 
-Epoch 14: val_loss improved from 0.42580 to 0.42571, saving model to MOT_best.h5
-26/26 - 6s - loss: 0.4251 - val_loss: 0.4257 - lr: 0.0010 - 6s/epoch - 228ms/step
-Epoch 15/100
+detuning: -2.515197328107604
+new atoms: 0.0, total atoms: 0.0, temperature: 1.628750037528541
+observation shape: (50, 50, 4), action: [-0.39850856], reward: 0.0
 
-Epoch 15: val_loss did not improve from 0.42571
-26/26 - 6s - loss: 0.4250 - val_loss: 0.4258 - lr: 0.0010 - 6s/epoch - 231ms/step
-Epoch 16/100
+detuning: -2.952063193715833
+new atoms: 0.0, total atoms: 0.0, temperature: 1.628750037528541
+observation shape: (50, 50, 4), action: [-0.29260168], reward: 0.0
 
-Epoch 16: val_loss improved from 0.42571 to 0.42563, saving model to MOT_best.h5
-26/26 - 6s - loss: 0.4250 - val_loss: 0.4256 - lr: 0.0010 - 6s/epoch - 212ms/step
-Epoch 17/100
+detuning: -1.1647588131533966
+observation shape: (50, 50, 4), action: [-0.72588759], reward: 0.0
 
-Epoch 17: val_loss improved from 0.42563 to 0.42562, saving model to MOT_best.h5
-Restoring model weights from the end of the best epoch: 7.
-26/26 - 6s - loss: 0.4249 - val_loss: 0.4256 - lr: 0.0010 - 6s/epoch - 237ms/step
-Epoch 17: early stopping
-Model trained and saved for Dataset/data
-Loss plot saved as loss_plot.png
-Test MSE: 0.42659249901771545
-8/8 - 1s - 789ms/epoch - 99ms/step
+detuning: -3.5922706421539106
+new atoms: 0.0, total atoms: 0.0, temperature: 1.628750037528541
+observation shape: (50, 50, 4), action: [-0.13739988], reward: 0.0
 
-Average SSIM: 0.9396023826967635
-Average PSNR: 34.068246960757136
-Saved sample_pred.png
+detuning: -7.906849192437873
+new atoms: 19375009.278532386, total atoms: 19375009.278532386, temperature: 1.628750037528541
+observation shape: (50, 50, 4), action: [0.90855856], reward: 0.00018325184341371042
 
-# Test MSE → how close predicted pixels are
-# SSIM (0–1) → how structurally similar generated images are to ground truth
-# PSNR (higher = better, usually 20–40 dB is decent)
+detuning: -7.46795459697725
+new atoms: 11381338.515683938, total atoms: 30756347.794216324, temperature: 1.628750037528541
+observation shape: (50, 50, 4), action: [0.80215987], reward: 0.00029089830868923714
+
+detuning: -5.325610878284096
+new atoms: 0.0, total atoms: 30756347.794216324, temperature: 1.628750037528541
+observation shape: (50, 50, 4), action: [0.28280382], reward: 0.00029089830868923714
+
+detuning: -6.281888779229863
+new atoms: 0.0, total atoms: 30756347.794216324, temperature: 1.628750037528541
+observation shape: (50, 50, 4), action: [0.51462876], reward: 0.00029089830868923714
+
+detuning: -1.6886359051240953
+observation shape: (50, 50, 4), action: [-0.59888709], reward: 0.0
+
+detuning: -6.511477355026798
+new atoms: 0.0, total atoms: 0.0, temperature: 1.628750037528541
+observation shape: (50, 50, 4), action: [0.5702866], reward: 0.0
+
+detuning: -5.416638734860166
+new atoms: 0.0, total atoms: 0.0, temperature: 1.628750037528541
+observation shape: (50, 50, 4), action: [0.30487118], reward: 0.0
+
+detuning: -4.766076860066448
+new atoms: 0.0, total atoms: 0.0, temperature: 1.628750037528541
+observation shape: (50, 50, 4), action: [0.14715921], reward: 0.0
+
+detuning: -5.467768379056684
+new atoms: 0.0, total atoms: 0.0, temperature: 1.628750037528541
+observation shape: (50, 50, 4), action: [0.31726624], reward: 0.0
+
+detuning: -6.420095080574401
+new atoms: 0.0, total atoms: 0.0, temperature: 1.628750037528541
+observation shape: (50, 50, 4), action: [0.54813332], reward: 0.0

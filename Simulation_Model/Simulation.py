@@ -34,17 +34,17 @@ class Simulation:
             print("Warning: Could not load CNN model for image generation")
 
     def predict_loading_rate(self, det):
-
-        return max(0, self.N_intrp(det) * random.gauss(1, 0.2))
+        # ! multiplied by N max to return unnormalized atom number
+        return max(0, self.N_intrp(det) * random.gauss(1, 0.2))*self.N_max 
         
     def predict_temperature(self, det):
-
+        # # ! multiplied by T[-1]*0.1 to get the original unnormalized temp in K
         if det >= max(self.det_T):
             return self.T_exp[0]
         elif det <= np.min(self.det_T):
             return self.T_exp[-1]
         else:
-            return 10**self.logT_intrp(det)
+            return (10**self.logT_intrp(det))*0.1*self.T_exp[-1]
 
     def generate_image(self, atom_number, detuning):
 

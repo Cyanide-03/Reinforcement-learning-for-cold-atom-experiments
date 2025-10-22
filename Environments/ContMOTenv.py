@@ -1,6 +1,8 @@
 import numpy as np
 import collections
 from typing import Tuple, Dict, Optional
+import tensorflow as tf
+import sys
 
 class MOTEnvironmentWrapper:
     """Wrapper for your MOT simulation environment"""
@@ -33,13 +35,13 @@ class MOTEnvironmentWrapper:
         """
         simulate the loading of the MOT
         """
-        return self.sim_model.predict_loading_rate(det)
+        return self.sim_model.predict_loading_rate(det) # ! Returns unnormalized atom number
 
-    def temperature(self,det):
+    def compute_temperature(self,det):
         """
         simulate the temperature of the MOT
         """
-        return self.sim_model.predict_temperature(det)
+        return self.sim_model.predict_temperature(det) # ! Returns unnormalized Temperature
 
     def draw_MOT_img(self):
         """
@@ -79,25 +81,31 @@ class MOTEnvironmentWrapper:
         detuning_control = action[0]  # Action from agent # [-1,1]
 
         #!!
-        actual_detuning = -self._convert_action_to_detuning(detuning_control) # [min, max]
+        actual_detuning = self._convert_action_to_detuning(detuning_control) # [min, max]
+        # tf.print(f"actual detuning: {actual_detuning}",output_stream=sys.stdout)
         
         # Apply perturbation (unknown to agent)
         physical_detuning = actual_detuning + self.perturbation_offset # [min-offset,max-offset]
-        physical_detuning = np.clip(physical_detuning, self.detuning_min, self.detuning_max) # [min,max]
+        # tf.print(f"perturbed physical detuning: {physical_detuning}",output_stream=sys.stdout)
+        physical_detuning = tf.clip_by_value(physical_detuning, self.detuning_min, self.detuning_max) # [min,max]
+        # tf.print(f"clipped physical detuning: {physical_detuning}",output_stream=sys.stdout)
         
-        self.current_detuning = physical_detuning
-        
-        # Update MOT state using your simulation model
-        # new_atoms, new_temperature, fluorescence_image = self._simulate_mot_step(physical_detuning)
+        self.current_detuning = -physical_detuning
+
+        tf.print(f"\ndetuning: {self.current_detuning}",output_stream=sys.stdout)
         
         # !!
         # Update MOT state
-        if physical_detuning < -2.5:  # Match reference threshold
-            new_atoms = self.loading(physical_detuning)
+        if self.current_detuning < -2.5:  # Match reference threshold
+            new_atoms = self.loading(self.current_detuning)
             self.atom_number += new_atoms
-            self.temperature = self.temperature(physical_detuning)
+            self.temperature = self.compute_temperature(self.current_detuning)
+
+            tf.print(f"new atoms: {new_atoms}, total atoms: {self.atom_number}, temperature: {self.temperature}",output_stream=sys.stdout)
         else:
             # Too close to resonance - atoms lost (match reference behavior)
+
+            # ! We can add a decay rate here instead of total loss 
             self.atom_number = 0
             self.temperature = 5
 
@@ -109,34 +117,18 @@ class MOTEnvironmentWrapper:
         self.image_history.append(fluorescence_image)
         
         # Calculate reward (only at end of episode as in paper)
-        done = self.current_step >= self.episode_length
+        done = self.current_step>=self.episode_length
         reward = self._calculate_reward() if done else 0.0
         
         # Prepare info
         info = {
             'atom_number': self.atom_number,
             'temperature': self.temperature,
-            'physical_detuning': physical_detuning,
+            'physical_detuning': self.current_detuning,
             'perturbation_offset': self.perturbation_offset
         }
         
         return self._get_observation(), reward, done, info
-    
-    # def _simulate_mot_step(self, detuning: float) -> Tuple[float, float, np.ndarray]:
-    #     """Interface to your simulation model - adapt this to your implementation"""
-    #     # This is where you call your trained simulation model
-    #     # Replace this with calls to your actual simulation
-        
-    #     # Example interface (adapt to your model):
-    #     # new_atoms = self.sim_model.predict_loading_rate(detuning)
-    #     # temperature = self.sim_model.predict_temperature(detuning)  
-    #     # fluorescence_image = self.sim_model.generate_image(
-    #     #     self.atom_number + new_atoms, detuning
-    #     # )
-        
-    #     # return new_atoms, temperature, fluorescence_image
-
-    #     pass
     
     def _convert_action_to_detuning(self, action: float) -> float:
         """Convert normalized action [-1, 1] to detuning value"""
@@ -159,10 +151,20 @@ class MOTEnvironmentWrapper:
             'additional': additional_inputs
         }
     
-    def _calculate_reward(self) -> float:
+    def _calculate_reward(self) -> float: # ! changes made
         """Calculate reward R ∝ N/T as in paper"""
-        if self.temperature > 0:
-            reward = self.atom_number / (self.temperature * 1e6)  # Normalize temperature to μK
-        else:
-            reward = 0.0
+        if self.temperature <= 0:
+            return 0.0
+
+        # Normalize atom number (0–1)
+        norm_N = self.atom_number / self.sim_model.N_max
+        
+        # Normalize temperature relative to experimental range
+        T_ref = np.mean(self.sim_model.T_exp)  # or self.sim_model.T_exp[-1]
+        norm_T = self.temperature / T_ref
+        
+        # Reward ∝ N/T
+        reward = norm_N / (norm_T /1e6)
+        # reward = (self.atom_number/self.sim_model.N_max) / (self.temperature * 1e6)  # Normalize temperature to μK
+
         return reward / 1e8  # Normalize reward scale
