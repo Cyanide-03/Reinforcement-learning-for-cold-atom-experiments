@@ -221,7 +221,7 @@ def plot_control_sequence(detuning_sequence: np.ndarray,
              color='blue', label='Actual Detuning')
     
     # Mark optimal loading point
-    ax1.axhline(y=1.9, color='red', linestyle='--', 
+    ax1.axhline(y=11.9, color='red', linestyle='--', 
                 linewidth=2, label='Optimal Loading (1.9Γ)', alpha=0.7)
     
     # Highlight different phases
@@ -439,9 +439,9 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
     eval_summary_writer = tf.summary.create_file_writer(log_dir + '/eval')
     
     # Training parameters
-    warmup_episodes = 1
+    warmup_episodes = 20
     evaluation_frequency = 100
-    batch_size = 64
+    batch_size = 8
     
     episode_rewards = []
     episode_total_rewards = []
@@ -519,40 +519,39 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
         if episode > 0 and episode % evaluation_frequency == 0:
             perturbation_offsets = [0.0, 0.2]  # Test robustness
             
+            offset_rewards = []
+            offset_atoms = []
+            offset_temps = []
             
-            for offset in perturbation_offsets:
-                offset_rewards = []
-                offset_atoms = []
-                offset_temps = []
+            # Run multiple episodes per offset for statistics
+            # for eval_ep in range(env.NEv):
+            for eval_ep in range(2):
+                obs = env.reset(perturbation_offset=perturbation_offsets[eval_ep])
+                eval_reward = 0  # Will only be set at the end
                 
-                # Run multiple episodes per offset for statistics
-                for eval_ep in range(env.NEv):
-                    obs = env.reset(perturbation_offset=offset)
-                    eval_reward = 0  # Will only be set at the end
+                for step in range(env.episode_length):
+                    action = agent.select_action(obs, add_noise=False)
+                    obs, reward, done, info = env.step(action)
                     
-                    for step in range(env.episode_length):
-                        action = agent.select_action(obs, add_noise=False)
-                        obs, reward, done, info = env.step(action)
-                        
-                        if done:
-                            eval_reward = reward
-                            offset_atoms.append(info['atom_number'])
-                            offset_temps.append(info['temperature'])
-                            break
-                    
-                    offset_rewards.append(eval_reward)
-                # Log evaluation metrics
-                with eval_summary_writer.as_default():
-                    tf.summary.scalar('episode_reward', np.mean(offset_rewards), step=episode)
-                    tf.summary.scalar('atom_number', np.mean(offset_atoms), step=episode)
-                    tf.summary.scalar('temperature', np.mean(offset_temps)*1e6, step=episode)
+                    if done:
+                        eval_reward = reward
+                        offset_atoms.append(info['atom_number'])
+                        offset_temps.append(info['temperature'])
+                        break
                 
-                print(f"\n=== Evaluation at Episode {episode} ===")
-                print(f"Avg Train Reward (last 100): {np.mean(episode_rewards[-100:]):.4f}")
-                print(f"  Offset {offset:+.1f}Γ: ")
-                print(f"Avg Eval Reward: {np.mean(offset_rewards):.4f}")
-                print(f"Avg Atoms: {np.mean(offset_atoms):.2e}")
-                print(f"Avg Temperature: {np.mean(offset_temps)*1e6:.2f} μK\n")
+                offset_rewards.append(eval_reward)
+            # Log evaluation metrics
+            with eval_summary_writer.as_default():
+                tf.summary.scalar('episode_reward', np.mean(offset_rewards), step=episode)
+                tf.summary.scalar('atom_number', np.mean(offset_atoms), step=episode)
+                tf.summary.scalar('temperature', np.mean(offset_temps)*1e6, step=episode)
+            
+            print(f"\n=== Evaluation at Episode {episode} ===")
+            print(f"Avg Train Reward (last 100): {np.mean(episode_rewards[-100:]):.4f}")
+            print(f"  Offset {perturbation_offsets[eval_ep]:+.1f}Γ: ")
+            print(f"Avg Eval Reward: {np.mean(offset_rewards):.4f}")
+            print(f"Avg Atoms: {np.mean(offset_atoms):.2e}")
+            print(f"Avg Temperature: {np.mean(offset_temps)*1e6:.2f} μK\n")
         
         # Save model periodically
         if episode > 0 and episode % 1000 == 0:
@@ -566,6 +565,8 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
     # Plot 1: Reward vs Episode
     reward_plot_path = log_dir + '/reward_vs_episode.png'
     plot_training_rewards(episode_rewards, save_path=reward_plot_path)
+    total_reward_plot_path = log_dir + '/total_reward_vs_episode.png'
+    plot_training_rewards(episode_total_rewards, save_path=total_reward_plot_path)
 
     # Plot 2: Control Sequence (Last Episode)
     if len(last_episode_detuning) > 0:
@@ -587,7 +588,7 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
 if __name__ == "__main__":
     # Set up TensorBoard logging
     import datetime
-    current_time = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+    current_time = datetime.datetime.now().strftime("Date""%Y-%m-%d"+"_Time"+ "%H-%M-%S")
     log_dir = f"logs/mot_rl_{current_time}"
     
     # Train agent
