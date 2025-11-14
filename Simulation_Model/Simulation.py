@@ -27,6 +27,8 @@ class Simulation:
         
         self.logT_intrp = interp1d(self.det_T, np.log10(self.T_exp))
 
+        self.det_max = max(self.det_N[-1], self.det_T[-1])
+
         self.MOT_img_gen = None
         try:
             self.MOT_img_gen = load_model(os.path.join(BASE_DIR, "MOT_fluo_img_generator.h5"))
@@ -35,7 +37,7 @@ class Simulation:
 
     def predict_loading_rate(self, det):
         # ! multiplied by N max to return unnormalized atom number
-        return max(0, self.N_intrp(det) * random.gauss(1, 0.2))
+        return max(0.0, self.N_intrp(det) * random.gauss(1, 0.2))
         
     def predict_temperature(self, det):
         # # ! multiplied by T[-1]/0.1 to get the original unnormalized temp in K

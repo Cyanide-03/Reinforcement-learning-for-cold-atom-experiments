@@ -53,7 +53,7 @@ class MOTEnvironmentWrapper:
         generate the fluorescence image using the CNN model
         """
         norm_atoms = self.atom_number / self.episode_length
-        norm_det = -(self.current_detuning + self.perturbation_offset) / self.detuning_range_size
+        norm_det = -(det) / self.sim_model.det_max  # Normalize detuning to [0, 1]
         return self.sim_model.generate_image(norm_atoms, norm_det)
 
     #!! changes made and evaluation mode added    
@@ -142,7 +142,7 @@ class MOTEnvironmentWrapper:
         reward = self._calculate_reward() if done else 0.0
         
         # Prepare info
-        atoms = self.atom_number * self.sim_model.N_max*self.episode_length   # Unnormalize atom number
+        atoms = self.atom_number * self.sim_model.N_max   # Unnormalize atom number
         temperature = self.temperature * (self.sim_model.T_exp[-1]/0.1)
         info = {
             'atom_number': atoms,

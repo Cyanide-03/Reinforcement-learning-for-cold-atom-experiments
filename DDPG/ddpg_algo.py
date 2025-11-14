@@ -221,7 +221,7 @@ def plot_control_sequence(detuning_sequence: np.ndarray,
              color='blue', label='Actual Detuning')
     
     # Mark optimal loading point
-    ax1.axhline(y=11.9, color='red', linestyle='--', 
+    ax1.axhline(y=1.9, color='red', linestyle='--', 
                 linewidth=2, label='Optimal Loading (1.9Γ)', alpha=0.7)
     
     # Highlight different phases
@@ -439,9 +439,9 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
     eval_summary_writer = tf.summary.create_file_writer(log_dir + '/eval')
     
     # Training parameters
-    warmup_episodes = 20
-    evaluation_frequency = 100
-    batch_size = 8
+    warmup_episodes = 500
+    evaluation_frequency = 200
+    batch_size = 64
     
     episode_rewards = []
     episode_total_rewards = []
@@ -462,7 +462,7 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
                 
                 agent.store_experience(observation, action, reward, next_observation, done)
                 observation = next_observation
-                episode_detuning.append(info['detuning']);
+                episode_detuning.append(-info['detuning']);
                 total_reward += reward
 
                 tf.print(f"observation shape: {observation['images'].shape}, action: {action}, reward: {reward}",output_stream=sys.stdout)
@@ -484,7 +484,7 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
                 action = agent.select_action(observation, add_noise=True)
                 next_observation, reward, done, info = env.step(action)
 
-                episode_detuning.append(info['detuning']);
+                episode_detuning.append(-info['detuning']);
                 
                 agent.store_experience(observation, action, reward, next_observation, done)
                 observation = next_observation
@@ -517,7 +517,7 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
         
         # Periodic evaluation
         if episode > 0 and episode % evaluation_frequency == 0:
-            perturbation_offsets = [0.0, 0.2]  # Test robustness
+            perturbation_offsets = [-0.7, -0.2, 0.0, 0.2, 0.7]  # Test robustness
             
             offset_rewards = []
             offset_atoms = []
@@ -574,8 +574,8 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
         plot_control_sequence(
             np.array(last_episode_detuning),
             time_step_duration=0.06,  
-            detuning_min=-50,
-            detuning_max=0, 
+            detuning_min=0,
+            detuning_max=50, 
             save_path=control_plot_path
         )
     else:
@@ -597,7 +597,7 @@ if __name__ == "__main__":
     print("Run 'tensorboard --logdir logs' to monitor training")
     
     # train_mot_agent(episodes=5000, log_dir=log_dir)
-    trained_agent, rewards = train_mot_agent(episodes=101, log_dir=log_dir)
+    trained_agent, rewards = train_mot_agent(episodes=100000, log_dir=log_dir)
     
     # Save final model
     # trained_agent.save_model("final_mot_rl_model")
