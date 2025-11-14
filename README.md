@@ -1,4 +1,4 @@
-# Reinforcement-learning-for-cold-atom-experiments
+# Reinforcement-learning-for-cold-atom-Experiment
 
 # Tasks-
 1) Complete simulation.py file for getting N and T from delta from lookup table
