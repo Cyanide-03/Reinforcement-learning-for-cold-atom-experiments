@@ -11,6 +11,7 @@ from typing import Tuple, List, Optional, Dict
 import cv2
 import os
 import sys
+import tqdm
 
 # Ensure project root is on PYTHONPATH so imports like
 # `from Environments.ContMOTenv import MOTEnvironmentWrapper` work
@@ -503,7 +504,9 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
     episode_total_rewards = []
     last_episode_detuning = []  
     
-    for episode in range(episodes):
+    tqdm_loop = tqdm.trange(episodes, desc="DDPG Training")
+    
+    for episode in tqdm_loop:
         
         # --- Warmup Phase ---
         if episode < warmup_episodes:
@@ -519,16 +522,21 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
                 
                 agent.store_experience(observation, action, reward, next_observation, done)
                 observation = next_observation
-                episode_detuning.append(-info['detuning']);
+                episode_detuning.append(-info['detuning'])
                 total_reward += reward
 
-                tf.print(f"observation shape: {observation['images'].shape}, action: {action}, reward: {reward}",output_stream=sys.stdout)
+                # tf.print(f"observation shape: {observation['images'].shape}, action: {action}, reward: {reward}",output_stream=sys.stdout)
                 
                 if done:
-                    episode_reward = reward;
+                    episode_reward = reward
                     break
-                if episode == warmup_episodes - 1:
-                    last_episode_detuning = episode_detuning
+
+            # Update the progress bar description for the warmup phase
+            tqdm_loop.set_description(f"Warmup (Buffer: {len(agent.replay_buffer)})")
+
+            if episode == warmup_episodes - 1:
+                last_episode_detuning = episode_detuning
+
         else:
             # --- Training Phase ---
             observation = env.reset()
@@ -550,7 +558,7 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
                 total_reward += reward
                 
                 if done:
-                    episode_reward = reward;
+                    episode_reward = reward
                     break
             
             last_episode_detuning = episode_detuning
@@ -565,13 +573,21 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
                 if losses:
                     tf.summary.scalar('critic_loss', losses[0], step=episode)
                     tf.summary.scalar('actor_loss', losses[1], step=episode)
+
+            # Use tqdm.set_postfix to display real-time training metrics
+            tqdm_loop.set_postfix(
+                Rew=f"{total_reward:.2f}",
+                Atoms=f"{info['atom_number']:.1e}",
+                Temp=f"{info['temperature']*1e6:.1f}uK",
+                L_C=f"{losses[0]:.3e}" if losses else "N/A"
+            )
         
         episode_total_rewards.append(total_reward)
         episode_rewards.append(episode_reward)
 
-        print(f"Episode {episode}: Train Reward: {total_reward:.4f}, "
-              f"Atoms: {info['atom_number']:.2e}, "
-              f"Temperature: {info['temperature']*1e6:.2f} μK")
+        # print(f"Episode {episode}: Train Reward: {total_reward:.4f}, "
+        #       f"Atoms: {info['atom_number']:.2e}, "
+        #       f"Temperature: {info['temperature']*1e6:.2f} μK")
 
         # --- Evaluation Phase ---
         # Periodic evaluation

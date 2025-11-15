@@ -120,7 +120,7 @@ class MOTEnvironmentWrapper:
         # physical_detuning = tf.clip_by_value(physical_detuning, self.detuning_min, self.detuning_max) # [min,max]
         # tf.print(f"clipped physical detuning: {physical_detuning}",output_stream=sys.stdout)
 
-        tf.print(f"\ndetuning: {self.current_detuning}",output_stream=sys.stdout)
+        # tf.print(f"\ndetuning: {self.current_detuning}",output_stream=sys.stdout)
 
         # Implement mid-episode perturbation change during evaluation
         # Reference: changes offset at timestep 15 for second half of eval episodes
@@ -142,7 +142,7 @@ class MOTEnvironmentWrapper:
 
         # Increment the step counter
         self.current_step += 1
-        tf.print(f"total atoms: {self.atom_number}, temperature: {self.temperature}",output_stream=sys.stdout)
+        # tf.print(f"total atoms: {self.atom_number}, temperature: {self.temperature}",output_stream=sys.stdout)
 
         # Track detuning history
         self.det_hist.append(self.current_detuning)
