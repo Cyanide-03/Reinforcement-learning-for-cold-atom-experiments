@@ -3,6 +3,7 @@ from scipy.interpolate import interp1d
 import random
 from tensorflow.keras.models import load_model
 import os
+import tensorflow as tf
 
 class Simulation:
     """
@@ -85,7 +86,10 @@ class Simulation:
             return np.zeros((50, 50), dtype=np.float32)
         
         # Prepare input for the model (requires a batch dimension)
-        input_data = np.expand_dims([norm_atom_number, norm_detuning], axis=0)
+        input_data = tf.expand_dims(
+            tf.stack([norm_atom_number, norm_detuning]), 
+            axis=0
+        )
         img = self.MOT_img_gen.predict(input_data, verbose=0)
         
         # Squeeze and ensure proper shape
