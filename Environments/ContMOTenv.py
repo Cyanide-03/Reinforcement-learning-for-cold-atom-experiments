@@ -142,7 +142,6 @@ class MOTEnvironmentWrapper:
 
         # Increment the step counter
         self.current_step += 1
-        tf.print(f"total atoms: {self.atom_number}, temperature: {self.temperature}",output_stream=sys.stdout)
 
         # Track detuning history
         self.det_hist.append(self.current_detuning)
