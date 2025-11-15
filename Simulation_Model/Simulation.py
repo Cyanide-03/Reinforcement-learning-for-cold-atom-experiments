@@ -5,56 +5,86 @@ from tensorflow.keras.models import load_model
 import os
 
 class Simulation:
+    """
+    A simulation model for a Magneto-Optical Trap (MOT) experiment.
+
+    This class uses pre-computed lookup tables (LUTs) from experimental data to
+    simulate the atom number and temperature of the MOT as a function of laser detuning.
+    It also uses a pre-trained Convolutional Neural Network (CNN) to generate
+    synthetic fluorescence images of the atom cloud.
+    """
     def __init__(self):
         # Use file-relative path so lookup files are found regardless of CWD
         BASE_DIR = os.path.dirname(__file__)
         exp_model_path = os.path.join(BASE_DIR, "lookup_table") + os.sep
 
+        # --- Load Atom Number Data ---
         self.N_exp = np.squeeze(np.load(os.path.join(exp_model_path, 'LUT_N.npy')))
         self.det_N = np.squeeze(np.load(os.path.join(exp_model_path, 'det_N.npy')))
         self.N_max = np.squeeze(np.load(os.path.join(exp_model_path, 'N_max.npy')))
 
+        # Normalize atom number for consistent scaling (0 to 1)
         self.N_exp = self.N_exp / self.N_max
-        self.det_N = -self.det_N
+        self.det_N = -self.det_N  # Detuning is typically negative
         
+        # Create an interpolation function to predict atom number for any detuning
         self.N_intrp = interp1d(self.det_N, self.N_exp, 'cubic', bounds_error=False, fill_value=0)
 
+        # --- Load Temperature Data ---
         self.T_exp = np.squeeze(np.load(os.path.join(exp_model_path, 'LUT_T.npy')))
         self.det_T = np.squeeze(np.load(os.path.join(exp_model_path, 'det_T.npy')))
 
+        # Normalize temperature for consistent scaling
         self.T_exp = 0.1 * self.T_exp / self.T_exp[-1]
-        self.det_T = -self.det_T 
+        self.det_T = -self.det_T  # Detuning is typically negative
         
+        # Create an interpolation function for the logarithm of temperature for better stability
         self.logT_intrp = interp1d(self.det_T, np.log10(self.T_exp))
 
         self.det_max = max(self.det_N[-1], self.det_T[-1])
 
+        # --- Load Image Generation Model ---
         self.MOT_img_gen = None
         try:
+            # Load the pre-trained Keras model for generating fluorescence images
             self.MOT_img_gen = load_model(os.path.join(BASE_DIR, "MOT_fluo_img_generator.h5"))
         except:
             print("Warning: Could not load CNN model for image generation")
 
     def predict_loading_rate(self, det):
         # ! multiplied by N max to return unnormalized atom number
-        return max(0.0, self.N_intrp(det) * random.gauss(1, 0.2))
+        # Use the interpolation function and add some stochasticity
+        return max(0.0, self.N_intrp(det) * random.gauss(1, 0.2)) # Ensure non-negative
         
     def predict_temperature(self, det):
+        """Predicts the normalized temperature for a given detuning."""
         # # ! multiplied by T[-1]/0.1 to get the original unnormalized temp in K
+        # Handle edge cases where detuning is outside the interpolation range
         if det >= max(self.det_T):
             return self.T_exp[0]
         elif det <= np.min(self.det_T):
             return self.T_exp[-1]
         else:
+            # Use log-interpolation and convert back to linear scale
             return (10**self.logT_intrp(det))
 
     def generate_image(self, norm_atom_number, norm_detuning):
+        """
+        Generates a synthetic fluorescence image using the pre-trained CNN.
+
+        Args:
+            norm_atom_number (float): Normalized atom number (0 to 1).
+            norm_detuning (float): Normalized detuning value.
+
+        Returns:
+            np.ndarray: A 50x50 grayscale image as a float32 array.
+        """
 
         if self.MOT_img_gen is None:
             # Return blank image if model not loaded
             return np.zeros((50, 50), dtype=np.float32)
         
-        
+        # Prepare input for the model (requires a batch dimension)
         input_data = np.expand_dims([norm_atom_number, norm_detuning], axis=0)
         img = self.MOT_img_gen.predict(input_data, verbose=0)
         
@@ -63,10 +93,11 @@ class Simulation:
         if len(img.shape) == 3:
             img = img[:, :, 0]
         
-        # Clip to valid range and handle very low atom numbers
+        # Post-process the generated image
+        # Clip pixel values to the valid range [0.0, 1.0]
         img = np.clip(img, 0.0, 1.0)
         if norm_atom_number < 0.02:
-            img = img * 0  # Zero out image for very low atom counts
+            img = img * 0  # If atom number is negligible, the image should be black
             
         return img.astype(np.float32)
     

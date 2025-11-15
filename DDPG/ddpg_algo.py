@@ -27,7 +27,11 @@ if len(physical_devices) > 0:
     tf.config.experimental.set_memory_growth(physical_devices[0], True)
 
 class ReplayBuffer:
-    """Experience replay buffer for DDPG"""
+    """
+    A fixed-size replay buffer to store experience tuples.
+    This is a key component of off-policy RL algorithms like DDPG, allowing the
+    agent to learn from a diverse set of past experiences.
+    """
     
     def __init__(self, capacity: int = 100000):
         self.buffer = collections.deque(maxlen=capacity)
@@ -35,11 +39,11 @@ class ReplayBuffer:
     def push(self, state: Dict, action: np.ndarray, reward: float, 
              next_state: Dict, done: bool):
         """Add experience to buffer"""
-        experience = (state, action, reward, next_state, done)
-        self.buffer.append(experience)
+        self.buffer.append((state, action, reward, next_state, done))
     
     def sample(self, batch_size: int) -> Tuple:
-        """Sample batch of experiences"""
+        """Randomly sample a batch of experiences from the buffer."""
+        # random.sample is efficient for sampling from a deque
         experiences = random.sample(self.buffer, batch_size)
         
         # Extract components
@@ -58,8 +62,13 @@ class ReplayBuffer:
         return len(self.buffer)
 
 class Actor(keras.Model): # !
-    """Actor network for DDPG - outputs continuous actions"""
-    
+    """
+    The Actor network for the DDPG agent.
+
+    It takes the current state (images and additional data) as input and outputs a
+    deterministic action. Its goal is to learn a policy that maximizes the
+    expected future reward.
+    """
     def __init__(self, action_dim: int = 1, max_action: float = 1.0):
         super(Actor, self).__init__()
         self.max_action = max_action
@@ -77,7 +86,13 @@ class Actor(keras.Model): # !
         self.output_layer = layers.Dense(action_dim, activation='tanh')
     
     def call(self, inputs, training=None):
-        """Forward pass"""
+        """
+        Defines the forward pass of the Actor network.
+
+        Args:
+            inputs: A tuple containing the image stack and additional state info.
+            training: Boolean flag indicating if the model is in training mode.
+        """
         images, additional = inputs
         
         # Process images through CNN
@@ -94,12 +109,18 @@ class Actor(keras.Model): # !
         x = self.fc2(x)
         action = self.output_layer(x)
         
-        # Scale to action space
+        # The 'tanh' activation squashes the output to the range [-1, 1],
+        # which matches the environment's expected action format.
         return action
 
 class Critic(keras.Model):
-    """Critic network for DDPG - estimates Q-values"""
-    
+    """
+    The Critic network for the DDPG agent.
+
+    It takes the current state and an action as input and outputs a Q-value,
+    which is an estimate of the expected future reward from taking that action
+    in that state. Its goal is to accurately predict the value of state-action pairs.
+    """
     def __init__(self):
         super(Critic, self).__init__()
         
@@ -116,7 +137,13 @@ class Critic(keras.Model):
         self.q_output = layers.Dense(1)
     
     def call(self, inputs, training=None):
-        """Forward pass"""
+        """
+        Defines the forward pass of the Critic network.
+
+        Args:
+            inputs: A tuple containing the image stack, additional state info, and an action.
+            training: Boolean flag indicating if the model is in training mode.
+        """
         images, additional, action = inputs
         
         # Process images through CNN
@@ -125,7 +152,7 @@ class Critic(keras.Model):
         x = self.conv3(x)
         x = self.flatten(x)
         
-        # Concatenate state and action
+        # Concatenate the processed state representation with the action
         x = tf.concat([x, additional, action], axis=1)
         
         # Estimate Q-value
@@ -136,7 +163,13 @@ class Critic(keras.Model):
         return q_value
 
 class OUNoise:
-    """Ornstein-Uhlenbeck noise for exploration"""
+    """
+    Ornstein-Uhlenbeck noise process.
+
+    This type of noise is temporally correlated, making it suitable for exploration
+    in physical systems with momentum. It helps the agent to explore the action space
+    more effectively than uncorrelated noise.
+    """
     
     def __init__(self, size: int, mu: float = 0.0, theta: float = 0.15, sigma: float = 0.2):
         self.mu = mu * np.ones(size)
@@ -145,9 +178,11 @@ class OUNoise:
         self.reset()
     
     def reset(self):
+        """Reset the internal state of the noise process."""
         self.state = self.mu.copy()
     
     def sample(self):
+        """Update and return a noise sample."""
         dx = self.theta * (self.mu - self.state) + self.sigma * np.random.standard_normal(self.state.shape)
         self.state += dx
         return self.state
@@ -155,7 +190,7 @@ class OUNoise:
 #For Plots
 def plot_training_rewards(episode_rewards: List[float], save_path: str = None):
     """
-    Plot reward vs episode graph
+    Generates and saves a plot of rewards per episode to visualize training progress.
     """
     plt.figure(figsize=(12, 6))
     
@@ -207,7 +242,7 @@ def plot_control_sequence(detuning_sequence: np.ndarray,
                           detuning_max: float = 8.25,
                           save_path: str = None):
     """
-    Plot actual detuning vs time steps for last episode
+    Plots the control sequence (detuning vs. time) for an episode.
     """
     n_steps = len(detuning_sequence)
     time_steps = np.arange(n_steps)
@@ -261,8 +296,13 @@ def plot_control_sequence(detuning_sequence: np.ndarray,
     plt.show()
 
 class DDPGAgent: # !
-    """DDPG Agent for MOT control using TensorFlow"""
-    
+    """
+    The Deep Deterministic Policy Gradient (DDPG) agent.
+
+    This class encapsulates the Actor and Critic networks, their target counterparts,
+    the optimizers, the replay buffer, and the training logic. It provides methods
+    to select actions, store experiences, and train the networks.
+    """
     def __init__(self, action_dim: int = 1, lr_actor: float = 1e-4, 
                  lr_critic: float = 1e-3, gamma: float = 0.99, tau: float = 0.001):
         
@@ -270,30 +310,32 @@ class DDPGAgent: # !
         self.gamma = gamma
         self.tau = tau
         
-        # Networks
+        # --- Initialize Networks ---
+        # Main networks that are trained
         self.actor = Actor(action_dim=action_dim)
         self.critic = Critic()
+        # Target networks are used to stabilize training
         self.actor_target = Actor(action_dim=action_dim)
         self.critic_target = Critic()
         
-        # Optimizers
+        # --- Initialize Optimizers ---
         self.actor_optimizer = keras.optimizers.Adam(learning_rate=lr_actor)
         self.critic_optimizer = keras.optimizers.Adam(learning_rate=lr_critic)
         
-        # Initialize networks with dummy data
+        # Build the networks by performing a dummy forward pass
         self._initialize_networks()
         
-        # Initialize target networks
+        # Copy weights from main networks to target networks
         self._update_target_networks(tau=1.0)
         
-        # Noise for exploration
+        # --- Exploration and Experience ---
         self.noise = OUNoise(action_dim)
         
         # Replay buffer
         self.replay_buffer = ReplayBuffer()
     
     def _initialize_networks(self):
-        """Initialize networks with dummy forward pass"""
+        """Initializes network weights by performing a dummy forward pass."""
         dummy_images = tf.random.normal((1, 50, 50, 4))
         dummy_additional = tf.random.normal((1, 2))
         dummy_action = tf.random.normal((1, 1))
@@ -307,7 +349,7 @@ class DDPGAgent: # !
         _ = self.critic_target([dummy_images, dummy_additional, dummy_action])
     
     def select_action(self, observation: Dict, add_noise: bool = True) -> np.ndarray:
-        """Select action given observation"""
+        """Selects an action based on the current observation (policy)."""
         # Add batch dimension
         images = np.expand_dims(observation['images'], axis=0)
         additional = np.expand_dims(observation['additional'], axis=0)
@@ -316,11 +358,11 @@ class DDPGAgent: # !
         images_tensor = tf.convert_to_tensor(images, dtype=tf.float32)
         additional_tensor = tf.convert_to_tensor(additional, dtype=tf.float32)
         
-        # Get action from actor
+        # Get the deterministic action from the actor network
         action = self.actor([images_tensor, additional_tensor], training=False)
         action = action.numpy()[0]
         
-        # OU Noise for perturbation
+        # Add noise for exploration during training
         if add_noise:
             action += self.noise.sample()
             action = np.clip(action, -1.0, 1.0)   # ! 
@@ -330,38 +372,49 @@ class DDPGAgent: # !
     @tf.function
     def _train_step(self, images, additional, actions, rewards, 
                    next_images, next_additional, dones):
-        """Single training step"""
+        """
+        Performs a single gradient update step for both Actor and Critic networks.
+        This function is decorated with @tf.function to compile it into a high-performance
+        TensorFlow graph.
+        """
         
-        # Critic update
+        # --- Critic Update ---
         with tf.GradientTape() as tape:
-            # Target Q-values
+            # Predict the next action using the target actor network
             next_actions = self.actor_target([next_images, next_additional], training=True)
+            # Predict the Q-value of the next state and action using the target critic
             target_q = self.critic_target([next_images, next_additional, next_actions], training=True)
+            # Calculate the Bellman target: y = r + γ * Q'(s', μ'(s'))
             target_q = rewards + self.gamma * target_q * (1.0 - dones)
             
-            # Current Q-values
+            # Get the Q-value of the current state and action from the main critic
             current_q = self.critic([images, additional, actions], training=True)
             
-            # Critic loss
+            # Critic loss is the Mean Squared Error between the Bellman target and the current Q-value
             critic_loss = tf.reduce_mean(tf.square(target_q - current_q))
         
+        # Compute and apply gradients for the critic
         critic_gradients = tape.gradient(critic_loss, self.critic.trainable_variables)
         self.critic_optimizer.apply_gradients(zip(critic_gradients, self.critic.trainable_variables))
         
-        # Actor update
+        # --- Actor Update ---
         with tf.GradientTape() as tape:
+            # Predict actions for the current states using the main actor
             predicted_actions = self.actor([images, additional], training=True)
+            # Actor loss is the negative mean of the Q-values from the critic.
+            # We want to update the actor in the direction that maximizes the Q-value.
             actor_loss = -tf.reduce_mean(self.critic([images, additional, predicted_actions], training=True))
         
+        # Compute and apply gradients for the actor
         actor_gradients = tape.gradient(actor_loss, self.actor.trainable_variables)
         self.actor_optimizer.apply_gradients(zip(actor_gradients, self.actor.trainable_variables))
         
         return critic_loss, actor_loss
     
     def train(self, batch_size: int = 64):
-        """Train the agent"""
+        """Samples a batch from the replay buffer and performs one training step."""
         if len(self.replay_buffer) < batch_size:
-            return
+            return # Don't train if the buffer doesn't have enough experiences
         
         # Sample batch
         (images, additional, actions, rewards, 
@@ -392,7 +445,11 @@ class DDPGAgent: # !
         return critic_loss.numpy(), actor_loss.numpy()
     
     def _update_target_networks(self, tau: Optional[float] = None):
-        """Update target networks using soft update"""
+        """
+        Performs a "soft" update of the target networks.
+        θ_target = τ * θ_local + (1 - τ) * θ_target
+        This makes the training more stable than directly copying the weights.
+        """
         if tau is None:
             tau = self.tau
         
@@ -413,25 +470,23 @@ class DDPGAgent: # !
     
     def save_model(self, filepath: str):
         """Save trained models"""
-        # Add required .weights.h5 extension
         self.actor.save_weights(f"{filepath}_actor.weights.h5")
         self.critic.save_weights(f"{filepath}_critic.weights.h5")
     
     def load_model(self, filepath: str):
         """Load trained models"""
-        # Add required .weights.h5 extension
         self.actor.load_weights(f"{filepath}_actor.weights.h5")
         self.critic.load_weights(f"{filepath}_critic.weights.h5")
         # Update target networks
         self._update_target_networks(tau=1.0)
 
 def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
-    """Main training loop with TensorBoard logging"""
+    """Main training loop"""
     
     # Initialize environment and agent
     # Replace 'your_simulation_model' with your actual simulation
     sim_model=Simulation()
-    env = MOTEnvironmentWrapper(Simulation_Model=sim_model)  # Replace None
+    env = MOTEnvironmentWrapper(Simulation_Model=sim_model) 
     agent = DDPGAgent()
     
     # TensorBoard logging
@@ -439,6 +494,7 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
     eval_summary_writer = tf.summary.create_file_writer(log_dir + '/eval')
     
     # Training parameters
+    # Start with random actions to populate the replay buffer before training
     warmup_episodes = 500
     evaluation_frequency = 200
     batch_size = 64
@@ -449,13 +505,14 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
     
     for episode in range(episodes):
         
+        # --- Warmup Phase ---
         if episode < warmup_episodes:
-            # Warmup phase with random exploration
+            # During warmup, take random actions to explore the environment
             observation = env.reset()
             episode_reward = 0
             episode_detuning = []
             total_reward = 0
-            
+            # Run a full episode
             for _ in range(env.episode_length):
                 action = np.random.uniform(-1, 1, size=(1,))
                 next_observation, reward, done, info = env.step(action)
@@ -473,14 +530,16 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
                 if episode == warmup_episodes - 1:
                     last_episode_detuning = episode_detuning
         else:
-            # Normal training episode
+            # --- Training Phase ---
             observation = env.reset()
             agent.noise.reset()
             total_reward = 0
             episode_reward = 0
             episode_detuning = []
             
+            # Run a full episode
             for _ in range(env.episode_length):
+                # Select action using the actor network + exploration noise
                 action = agent.select_action(observation, add_noise=True)
                 next_observation, reward, done, info = env.step(action)
 
@@ -495,10 +554,10 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
                     break
             
             last_episode_detuning = episode_detuning
-            # Train agent
+            # After the episode, train the agent on a batch from the replay buffer
             losses = agent.train(batch_size)
             
-            # Log training metrics
+            # Log training metrics to TensorBoard for monitoring
             with train_summary_writer.as_default():
                 tf.summary.scalar('episode_reward', total_reward, step=episode)
                 tf.summary.scalar('atom_number', info['atom_number'], step=episode)
@@ -509,12 +568,12 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
         
         episode_total_rewards.append(total_reward)
         episode_rewards.append(episode_reward)
-        
-        # Print every episode (new code)
+
         print(f"Episode {episode}: Train Reward: {total_reward:.4f}, "
               f"Atoms: {info['atom_number']:.2e}, "
               f"Temperature: {info['temperature']*1e6:.2f} μK")
-        
+
+        # --- Evaluation Phase ---
         # Periodic evaluation
         if episode > 0 and episode % evaluation_frequency == 0:
             perturbation_offsets = [-0.7, -0.2, 0.0, 0.2, 0.7]  # Test robustness
@@ -523,13 +582,14 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
             offset_atoms = []
             offset_temps = []
             
-            # Run multiple episodes per offset for statistics
-            # for eval_ep in range(env.NEv):
+            # Run evaluation episodes with different perturbation offsets
             for eval_ep in range(2):
                 obs = env.reset(perturbation_offset=perturbation_offsets[eval_ep])
                 eval_reward = 0  # Will only be set at the end
                 
+                # Run a full evaluation episode
                 for step in range(env.episode_length):
+                    # Select action without exploration noise for evaluation
                     action = agent.select_action(obs, add_noise=False)
                     obs, reward, done, info = env.step(action)
                     
@@ -540,7 +600,7 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
                         break
                 
                 offset_rewards.append(eval_reward)
-            # Log evaluation metrics
+            # Log average evaluation metrics to TensorBoard
             with eval_summary_writer.as_default():
                 tf.summary.scalar('episode_reward', np.mean(offset_rewards), step=episode)
                 tf.summary.scalar('atom_number', np.mean(offset_atoms), step=episode)
@@ -553,7 +613,7 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
             print(f"Avg Atoms: {np.mean(offset_atoms):.2e}")
             print(f"Avg Temperature: {np.mean(offset_temps)*1e6:.2f} μK\n")
         
-        # Save model periodically
+        # Save a model checkpoint periodically
         if episode > 0 and episode % 1000 == 0:
             agent.save_model(f"model_checkpoint_{episode}")
 
@@ -562,13 +622,13 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
     print("Training completed! Generating plots...")
     print("="*60)
 
-    # Plot 1: Reward vs Episode
+    # Plot final reward curves
     reward_plot_path = log_dir + '/reward_vs_episode.png'
     plot_training_rewards(episode_rewards, save_path=reward_plot_path)
     total_reward_plot_path = log_dir + '/total_reward_vs_episode.png'
     plot_training_rewards(episode_total_rewards, save_path=total_reward_plot_path)
 
-    # Plot 2: Control Sequence (Last Episode)
+    # Plot the control sequence from the very last episode
     if len(last_episode_detuning) > 0:
         control_plot_path = log_dir + '/last_episode_control_sequence.png'
         plot_control_sequence(
@@ -586,7 +646,7 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
 
 # Usage example
 if __name__ == "__main__":
-    # Set up TensorBoard logging
+    # Set up a timestamped directory for TensorBoard logs
     import datetime
     current_time = datetime.datetime.now().strftime("Date""%Y-%m-%d"+"_Time"+ "%H-%M-%S")
     log_dir = f"logs/mot_rl_{current_time}"
@@ -597,6 +657,7 @@ if __name__ == "__main__":
     print("Run 'tensorboard --logdir logs' to monitor training")
     
     # train_mot_agent(episodes=5000, log_dir=log_dir)
+    # Run a shorter training session for demonstration purposes
     trained_agent, rewards = train_mot_agent(episodes=100000, log_dir=log_dir)
     
     # Save final model

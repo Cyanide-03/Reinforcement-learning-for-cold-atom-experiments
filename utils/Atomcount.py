@@ -3,7 +3,7 @@ import numpy as np
 import os
 import pandas as pd
 
-# Function to calculate the number of atoms based on count, power, detuning, and exposure
+
 def atom_number(count, power=5, detuning=15, exposure=2):
     beam_radius = 0.4
     intensity = power / (np.pi * beam_radius ** 2)
@@ -17,8 +17,18 @@ def atom_number(count, power=5, detuning=15, exposure=2):
     atom_number_calc = count / (quantum * exposure * 0.001 * scattering_rate * solid_angle)
     return atom_number_calc
 
-# Function to process images and calculate atom numbers
 def process_image_and_get_N(image_path):
+    """
+    Processes a directory of experimental images to create a dataset.
+
+    For each image, it calculates the atom number, crops the image, and saves
+    the results into a CSV file and a new directory of processed images.
+    The directory structure is assumed to contain subdirectories named after the
+    detuning value used for those images.
+
+    Args:
+        image_path (str): The path to the root directory containing the raw image data.
+    """
     k = 1
     data = []
 
@@ -43,7 +53,7 @@ def process_image_and_get_N(image_path):
             # Crop the region of interest
             cropped = image_array[0:400, 90:400]
 
-            # Calculate atom count
+            # Calculate total counts and convert to atom number
             count = np.sum(cropped)
             N = atom_number(count, power=5, detuning=Δ, exposure=2)
 

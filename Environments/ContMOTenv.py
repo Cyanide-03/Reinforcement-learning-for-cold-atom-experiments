@@ -5,13 +5,19 @@ import tensorflow as tf
 import sys
 
 class MOTEnvironmentWrapper:
-    """Wrapper for your MOT simulation environment"""
+    """
+    A wrapper for the MOT simulation to create a reinforcement learning environment.
+
+    This class follows a structure similar to OpenAI Gym environments. It defines
+    the state and action spaces, the reward function, and the step/reset logic
+    for an episode-based interaction with an RL agent.
+    """
     
     def __init__(self, Simulation_Model, image_size: int = 50, 
                  detuning_range: Tuple[float, float] = (0.0, 50)): # ! issue in detuning range
         """
         Args:
-            Simulation_Model: Your trained simulation model
+            Simulation_Model: An instance of the Simulation class.
             image_size: Size of fluorescence images  
             detuning_range: Min and max detuning values in units of Γ
         """
@@ -20,7 +26,7 @@ class MOTEnvironmentWrapper:
         self.detuning_min, self.detuning_max = detuning_range
         self.detuning_range_size = self.detuning_max - self.detuning_min
         
-        # Episode parameters from paper
+        # Define episode parameters based on the reference paper
         self.episode_length = 25  # 25 time steps
         self.time_step_duration = 0.06  # 60ms per step
 
@@ -36,29 +42,34 @@ class MOTEnvironmentWrapper:
 
     def loading(self,det):
         """
-        simulate the loading of the MOT
-        Returns NORMALIZED atom loading rate
+        Simulate the loading of the MOT by calling the simulation model.
+        Returns:
+            float: NORMALIZED atom loading rate.
         """
         return self.sim_model.predict_loading_rate(det) # ! Returns normalized atom number
 
     def compute_temperature(self,det):
         """
-        simulate the temperature of the MOT
-        Returns NORMALIZED temperature
+        Simulate the temperature of the MOT by calling the simulation model.
+        Returns:
+            float: NORMALIZED temperature.
         """
         return self.sim_model.predict_temperature(det) # ! Returns normalized Temperature
 
     def draw_MOT_img(self, det): 
         """
-        generate the fluorescence image using the CNN model
+        Generate the fluorescence image using the CNN model from the simulation.
+        The inputs to the image generator (atom number and detuning) are normalized.
         """
+        # Normalize atom number over the episode length for stable input to the CNN
         norm_atoms = self.atom_number / self.episode_length
-        norm_det = -(det) / self.sim_model.det_max  # Normalize detuning to [0, 1]
+        # Normalize detuning to the range [-1, 0]
+        norm_det = -det / self.sim_model.det_max 
         return self.sim_model.generate_image(norm_atoms, norm_det)
 
     #!! changes made and evaluation mode added    
     def reset(self, perturbation_offset: Optional[float] = None, evaluation_mode: bool = False) -> Dict:
-        """Reset environment for new episode"""
+        """Resets the environment to an initial state for a new episode."""
         self.current_step = 0
         self.atom_number = 0  # Normalized initial atom number
         self.temperature = 1.0 # Normalized initial temperature 
@@ -69,7 +80,7 @@ class MOTEnvironmentWrapper:
         else:
             self.perturbation_offset = perturbation_offset
         
-        #Initialize current detuning
+        # Initialize current detuning to a standard starting value
         self.current_detuning = -20  # Initial value like reference
 
         # Track evaluation mode for mid-episode perturbation change
@@ -78,7 +89,7 @@ class MOTEnvironmentWrapper:
         # Clear detuning history
         self.det_hist = []
         
-        # Initialize image history (4 most recent images)
+        # Initialize image history with 4 blank images, as the agent expects a stack of 4
         self.image_history = collections.deque(maxlen=4)
         blank_image = np.zeros((self.image_size, self.image_size), dtype=np.float32)
         for _ in range(4):
@@ -87,22 +98,27 @@ class MOTEnvironmentWrapper:
         return self._get_observation()
     
     def step(self, action: np.ndarray) -> Tuple[Dict, float, bool, Dict]:
-        """Execute one time step"""
-        # Convert normalized action to actual detuning
+        """
+        Executes one time step in the environment.
+
+        Args:
+            action (np.ndarray): The action provided by the RL agent, in the range [-1, 1].
+
+        Returns:
+            A tuple containing (observation, reward, done, info).
+        """
+        # The agent outputs a normalized action in [-1, 1]
         detuning_control = action[0]  # Action from agent # [-1,1]
 
-        #!!
+        # Convert the normalized action to a physical detuning value
         actual_detuning = self._convert_action_to_detuning(detuning_control) # [min, max]
-        # tf.print(f"actual detuning: {actual_detuning}",output_stream=sys.stdout)
         self.current_detuning = -actual_detuning #[-max,-min]
         
-        # Apply perturbation (unknown to agent)
+        # Apply a perturbation offset, which is unknown to the agent, to simulate real-world drift
         physical_detuning = self.current_detuning + self.perturbation_offset # [-max+perturb, -min+perturb]
         # tf.print(f"perturbed physical detuning: {physical_detuning}",output_stream=sys.stdout)
         # physical_detuning = tf.clip_by_value(physical_detuning, self.detuning_min, self.detuning_max) # [min,max]
         # tf.print(f"clipped physical detuning: {physical_detuning}",output_stream=sys.stdout)
-        
-        
 
         tf.print(f"\ndetuning: {self.current_detuning}",output_stream=sys.stdout)
 
@@ -112,20 +128,19 @@ class MOTEnvironmentWrapper:
             self.perturbation_offset += np.random.choice([-1, 1]) * 5.0
             self.current_detuning = self.current_detuning + self.perturbation_offset
         
-        
-        # Update MOT state
-        if physical_detuning < -2.5:  # Match reference threshold
+        # --- Update MOT State based on the physical detuning ---
+        # If the detuning is far from resonance, atoms are loaded and cooled
+        if physical_detuning < -2.5:  # ! Match reference threshold
             new_atoms = self.loading(physical_detuning)
             self.atom_number += new_atoms
             self.temperature = self.compute_temperature(physical_detuning)
-
         else:
-            # Too close to resonance - atoms lost (match reference behavior)
-
+            # If too close to resonance, the atoms are heated out of the trap
             # ! We can add a decay rate here instead of total loss 
             self.atom_number = 0
             self.temperature = 5.0
 
+        # Increment the step counter
         self.current_step += 1
         tf.print(f"total atoms: {self.atom_number}, temperature: {self.temperature}",output_stream=sys.stdout)
 
@@ -134,15 +149,17 @@ class MOTEnvironmentWrapper:
         
         fluorescence_image = self.draw_MOT_img(physical_detuning)
 
-        # Update image history
+        # Add the new image to the history, pushing out the oldest one
         self.image_history.append(fluorescence_image)
         
-        # Calculate reward (only at end of episode as in paper)
+        # The episode is done if the maximum length is reached
         done = self.current_step>=self.episode_length
+        
+        # Reward is only given at the end of the episode, based on the final state
         reward = self._calculate_reward() if done else 0.0
         
-        # Prepare info
-        atoms = self.atom_number * self.sim_model.N_max   # Unnormalize atom number
+        # Prepare an info dictionary with unnormalized, human-readable values
+        atoms = self.atom_number * self.sim_model.N_max  # Unnormalize atom number
         temperature = self.temperature * (self.sim_model.T_exp[-1]/0.1)
         info = {
             'atom_number': atoms,
@@ -156,21 +173,20 @@ class MOTEnvironmentWrapper:
         return self._get_observation(), reward, done, info
     
     def _convert_action_to_detuning(self, action: float) -> float:
-        """Convert normalized action [-1, 1] to detuning value"""
-        # Convert action [-1, 1] to detuning [detuning_min, detuning_max]
-
-        # First convert [-1, 1] to [0, 1]
+        """Converts the agent's normalized action [-1, 1] to a physical detuning value."""
+        # Ensure the action is within the expected range
         detuning_control = np.clip(action, -1.0, 1.0)  # Ensure [-1, 1]
+        # Scale the action from [-1, 1] to [0, 1]
         detuning_control = (detuning_control + 1.0) / 2.0  # Convert to [0, 1]
         
-        # Then scale to [detuning_min, detuning_max]
+        # Scale from [0, 1] to the physical detuning range [detuning_min, detuning_max]
         return self.detuning_min + detuning_control* self.detuning_range_size
     
     def _get_observation(self) -> Dict:
-        """Get current observation for agent"""
-        # Stack 4 most recent images (as in paper)
+        """Constructs the observation dictionary for the agent."""
+        # The primary observation is a stack of the 4 most recent images
         stacked_images = np.stack(list(self.image_history), axis=0)  # Shape: (4, 50, 50)
-        # Add batch dimension and reorder to (height, width, channels) for TensorFlow
+        # Reorder dimensions to (height, width, channels) for compatibility with TensorFlow CNNs
         stacked_images = np.transpose(stacked_images, (1, 2, 0))  # Shape: (50, 50, 4)
         
         # Additional inputs: normalized time step and placeholder for current control
@@ -185,22 +201,15 @@ class MOTEnvironmentWrapper:
         }
     
     def _calculate_reward(self) -> float: # ! changes made problem here
-        """Calculate reward R ∝ N/T as in paper"""
+        """
+        Calculates the final reward for the episode.
+        The reward is proportional to N/T (atom number divided by temperature),
+        which represents the phase-space density, a key metric in cold atom experiments.
+        """
         if self.atom_number <= 0.1:
             return 0.0
 
-        # Normalize atom number (0–1)
-        # norm_N = self.atom_number / self.sim_model.N_max
-        
-        # # Normalize temperature relative to experimental range
-        # T_ref = np.mean(self.sim_model.T_exp)  # or self.sim_model.T_exp[-1]
-        # norm_T = self.temperature / T_ref
-        
-        # # Reward ∝ N/T
-        # reward = norm_N / (norm_T /1e6)
-        # # reward = (self.atom_number/self.sim_model.N_max) / (self.temperature * 1e6)  # Normalize temperature to μK
-
-        # return reward / 1e8  # Normalize reward scale
+        # The reward is the ratio of final (normalized) atom number to final (normalized) temperature
         reward = self.atom_number / self.temperature / self.episode_length
         
         return reward
