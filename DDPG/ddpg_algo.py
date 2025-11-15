@@ -570,7 +570,7 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
         episode_rewards.append(episode_reward)
 
         print(f"Episode {episode}: Train Reward: {total_reward:.4f}, "
-              f"Atoms: {info['atom_number']:.2e}, "
+              f"Atoms: {info['atom_number']:.2f}, "
               f"Temperature: {info['temperature']*1e6:.2f} μK")
 
         # --- Evaluation Phase ---
@@ -583,7 +583,7 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
             offset_temps = []
             
             # Run evaluation episodes with different perturbation offsets
-            for eval_ep in range(2):
+            for eval_ep in range(4):
                 obs = env.reset(perturbation_offset=perturbation_offsets[eval_ep])
                 eval_reward = 0  # Will only be set at the end
                 
@@ -610,7 +610,7 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
             print(f"Avg Train Reward (last 100): {np.mean(episode_rewards[-100:]):.4f}")
             print(f"  Offset {perturbation_offsets[eval_ep]:+.1f}Γ: ")
             print(f"Avg Eval Reward: {np.mean(offset_rewards):.4f}")
-            print(f"Avg Atoms: {np.mean(offset_atoms):.2e}")
+            print(f"Avg Atoms: {np.mean(offset_atoms):.2f}")
             print(f"Avg Temperature: {np.mean(offset_temps)*1e6:.2f} μK\n")
         
         # Save a model checkpoint periodically
@@ -658,7 +658,7 @@ if __name__ == "__main__":
     
     # train_mot_agent(episodes=5000, log_dir=log_dir)
     # Run a shorter training session for demonstration purposes
-    trained_agent, rewards = train_mot_agent(episodes=100000, log_dir=log_dir)
+    trained_agent, rewards = train_mot_agent(episodes=100, log_dir=log_dir)
     
     # Save final model
     # trained_agent.save_model("final_mot_rl_model")

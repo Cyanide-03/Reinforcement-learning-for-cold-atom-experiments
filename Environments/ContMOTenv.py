@@ -142,7 +142,6 @@ class MOTEnvironmentWrapper:
 
         # Increment the step counter
         self.current_step += 1
-        tf.print(f"total atoms: {self.atom_number}, temperature: {self.temperature}",output_stream=sys.stdout)
 
         # Track detuning history
         self.det_hist.append(self.current_detuning)
@@ -160,10 +159,11 @@ class MOTEnvironmentWrapper:
         
         # Prepare an info dictionary with unnormalized, human-readable values
         atoms = self.atom_number * self.sim_model.N_max  # Unnormalize atom number
-        temperature = self.temperature * (self.sim_model.T_exp[-1]/0.1)
+        temp = self.temperature * (self.sim_model.T_exp[-1]/0.1)
+        tf.print(f"total atoms: {atoms}, temperature: {temp*1e6} µK",output_stream=sys.stdout)
         info = {
             'atom_number': atoms,
-            'temperature': temperature,
+            'temperature': temp,
             'physical_detuning': physical_detuning,
             'detuning': self.current_detuning,
             'perturbation_offset': self.perturbation_offset,
