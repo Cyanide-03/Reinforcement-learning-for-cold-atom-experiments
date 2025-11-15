@@ -22,10 +22,31 @@ if PROJECT_ROOT not in sys.path:
 from Environments.ContMOTenv import MOTEnvironmentWrapper
 from Simulation_Model.Simulation import Simulation
 
-# Ensure TensorFlow uses GPU if available
-physical_devices = tf.config.experimental.list_physical_devices('GPU')
-if len(physical_devices) > 0:
-    tf.config.experimental.set_memory_growth(physical_devices[0], True)
+# # Ensure TensorFlow uses GPU if available
+# physical_devices = tf.config.experimental.list_physical_devices('GPU')
+# if len(physical_devices) > 0:
+#     tf.config.experimental.set_memory_growth(physical_devices[0], True)
+
+# ------------------------ GPU Configuration ------------------------
+print("TensorFlow version:", tf.__version__)
+
+gpus = tf.config.list_physical_devices('GPU')
+if gpus:
+    os.environ["TF_GPU_ALLOCATOR"] = "cuda_malloc_async"  # Efficient allocator
+
+    for gpu in gpus:
+        # Enable memory growth (prevents TF from grabbing all memory)
+        tf.config.experimental.set_memory_growth(gpu, True)
+        
+        # Optional: Limit GPU memory per process (e.g., 80% of 23 GB GPU ≈ 11500 MB)
+        tf.config.set_logical_device_configuration(
+            gpu,
+            [tf.config.LogicalDeviceConfiguration(memory_limit=11500)]
+        )
+
+    print("GPU configured successfully.")
+else:
+    print("⚠ No GPU found. Running on CPU.")
 
 class ReplayBuffer:
     """
@@ -235,7 +256,6 @@ def plot_training_rewards(episode_rewards: List[float], save_path: str = None):
         print(f"Reward plot saved to: {save_path}")
     
     plt.show()
-
 
 def plot_control_sequence(detuning_sequence: np.ndarray, 
                           time_step_duration: float = 0.06,
@@ -489,14 +509,14 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
     sim_model=Simulation()
     env = MOTEnvironmentWrapper(Simulation_Model=sim_model) 
     agent = DDPGAgent()
-    
+
     # TensorBoard logging
     train_summary_writer = tf.summary.create_file_writer(log_dir + '/train')
     eval_summary_writer = tf.summary.create_file_writer(log_dir + '/eval')
     
     # Training parameters
     # Start with random actions to populate the replay buffer before training
-    warmup_episodes = 500
+    warmup_episodes = 10
     evaluation_frequency = 200
     batch_size = 64
     
@@ -585,9 +605,9 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
         episode_total_rewards.append(total_reward)
         episode_rewards.append(episode_reward)
 
-        print(f"Episode {episode}: Train Reward: {total_reward:.4f}, "
-              f"Atoms: {info['atom_number']:.2f}, "
-              f"Temperature: {info['temperature']*1e6:.2f} μK")
+        # print(f"Episode {episode}: Train Reward: {total_reward:.4f}, "
+        #       f"Atoms: {info['atom_number']:.2f}, "
+        #       f"Temperature: {info['temperature']*1e6:.2f} μK")
 
         # --- Evaluation Phase ---
         # Periodic evaluation
@@ -630,8 +650,8 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
             print(f"Avg Temperature: {np.mean(offset_temps)*1e6:.2f} μK\n")
         
         # Save a model checkpoint periodically
-        if episode > 0 and episode % 1000 == 0:
-            agent.save_model(f"model_checkpoint_{episode}")
+        # if episode > 0 and episode % 1000 == 0:
+        #     agent.save_model(f"model_checkpoint_{episode}")
 
     #Plot results after training completes
     print("\n" + "="*60)
@@ -674,7 +694,7 @@ if __name__ == "__main__":
     
     # train_mot_agent(episodes=5000, log_dir=log_dir)
     # Run a shorter training session for demonstration purposes
-    trained_agent, rewards = train_mot_agent(episodes=100, log_dir=log_dir)
+    trained_agent, rewards = train_mot_agent(episodes=100000, log_dir=log_dir)
     
     # Save final model
     # trained_agent.save_model("final_mot_rl_model")

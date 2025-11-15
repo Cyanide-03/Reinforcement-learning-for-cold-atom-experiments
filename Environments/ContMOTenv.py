@@ -160,7 +160,7 @@ class MOTEnvironmentWrapper:
         # Prepare an info dictionary with unnormalized, human-readable values
         atoms = self.atom_number * self.sim_model.N_max  # Unnormalize atom number
         temp = self.temperature * (self.sim_model.T_exp[-1]/0.1)
-        tf.print(f"total atoms: {atoms}, temperature: {temp*1e6} µK",output_stream=sys.stdout)
+        # tf.print(f"total atoms: {atoms}, temperature: {temp*1e6} µK",output_stream=sys.stdout)
         info = {
             'atom_number': atoms,
             'temperature': temp,

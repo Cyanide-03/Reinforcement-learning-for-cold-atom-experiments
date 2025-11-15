@@ -4,6 +4,47 @@ import random
 from tensorflow.keras.models import load_model
 import os
 import tensorflow as tf
+import sys
+
+from tensorflow.keras.initializers import GlorotUniform as KerasGlorotUniform, Zeros as KerasZeros
+# Note: Keras 3 often exposes components directly under tf.keras or keras.initializers
+
+class FixedGlorotUniform(KerasGlorotUniform):
+    """
+    Workaround: Fixes the serialization conflict by removing 'dtype'
+    which newer Keras versions do not expect in the initializer's config.
+    """
+    def __init__(self, seed=None, **kwargs):
+        # Crucially remove 'dtype' from the config before passing to the parent
+        if 'dtype' in kwargs:
+            kwargs.pop('dtype')
+        super().__init__(seed=seed, **kwargs)
+
+    # *** NEW CRITICAL STEP: Override the from_config method ***
+    # This method is what Keras uses during deserialization.
+    @classmethod
+    def from_config(cls, config):
+        # The config dict contains the arguments that failed earlier.
+        # Use the class constructor to ensure 'dtype' is removed.
+        return cls(**config)
+
+class FixedZeros(KerasZeros):
+    """
+    Workaround: Fixes the serialization conflict for Zeros initializer.
+    """
+    def __init__(self, **kwargs):
+        # Remove 'dtype' just like we did for GlorotUniform
+        if 'dtype' in kwargs:
+            kwargs.pop('dtype')
+        # Zeros does not take 'seed', so we use a simple **kwargs pass
+        # The parent Zeros() constructor takes no arguments
+        super().__init__(**kwargs)
+
+    @classmethod
+    def from_config(cls, config):
+        # Pass config to the constructor to ensure 'dtype' is removed
+        return cls(**config)
+
 
 class Simulation:
     """
@@ -44,13 +85,21 @@ class Simulation:
 
         self.det_max = max(self.det_N[-1], self.det_T[-1])
 
+        model_filepath = os.path.join(BASE_DIR, "MOT_fluo_img_generator.h5")
+
         # --- Load Image Generation Model ---
         self.MOT_img_gen = None
         try:
             # Load the pre-trained Keras model for generating fluorescence images
-            self.MOT_img_gen = load_model(os.path.join(BASE_DIR, "MOT_fluo_img_generator.h5"))
-        except:
-            print("Warning: Could not load CNN model for image generation")
+            self.MOT_img_gen = load_model(model_filepath,
+                                          # Pass the custom object to fix the deserialization error
+                                          custom_objects={'GlorotUniform': FixedGlorotUniform,
+                                                          'Zeros': FixedZeros
+                                                        }
+                                        )
+            print("CNN model for image generation loaded successfully.")
+        except Exception as e:
+            print(f"Warning: Could not load CNN model for image generation. Detailed Error: {e}", file=sys.stderr)
 
     def predict_loading_rate(self, det):
         # ! multiplied by N max to return unnormalized atom number
