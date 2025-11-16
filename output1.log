@@ -1,0 +1,5006 @@
+Initial detuning -20.0
+episodes 20000
+
+TensorFlow version: 2.20.0
+GPU configured successfully.
+Starting MOT RL training with TensorFlow...
+Logging to: logs/mot_rl_Date2025-11-16_Time06-30-09
+Run 'tensorboard --logdir logs' to monitor training
+CNN model for image generation loaded successfully.
+
+Starting evaluation...
+
+=== Evaluation at Episode 40 ===
+Avg Train Reward (last 100): 0.2813
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.2524
+Avg Atoms: 365544066.34
+Avg Temperature: 280569.57 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 80 ===
+Avg Train Reward (last 100): 0.3218
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.2589
+Avg Atoms: 375027610.08
+Avg Temperature: 280570.39 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 120 ===
+Avg Train Reward (last 100): 0.3528
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.2987
+Avg Atoms: 302368093.16
+Avg Temperature: 196704.12 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 160 ===
+Avg Train Reward (last 100): 0.4127
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.2598
+Avg Atoms: 269524495.06
+Avg Temperature: 201662.14 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 200 ===
+Avg Train Reward (last 100): 0.5164
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.1615
+Avg Atoms: 138803443.74
+Avg Temperature: 167001.06 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 240 ===
+Avg Train Reward (last 100): 0.5448
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.2859
+Avg Atoms: 279678888.73
+Avg Temperature: 189940.46 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 280 ===
+Avg Train Reward (last 100): 0.5333
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.1626
+Avg Atoms: 138562244.15
+Avg Temperature: 165464.03 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 320 ===
+Avg Train Reward (last 100): 0.5613
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 10474960.90
+Avg Temperature: 112958.87 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 360 ===
+Avg Train Reward (last 100): 0.5522
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0713
+Avg Atoms: 43375470.71
+Avg Temperature: 118108.02 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 400 ===
+Avg Train Reward (last 100): 0.5026
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.1037
+Avg Atoms: 62979331.51
+Avg Temperature: 117994.65 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 440 ===
+Avg Train Reward (last 100): 0.4978
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.5971
+Avg Atoms: 372131434.06
+Avg Temperature: 121074.51 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 480 ===
+Avg Train Reward (last 100): 0.6030
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.2817
+Avg Atoms: 271216803.05
+Avg Temperature: 186999.48 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 520 ===
+Avg Train Reward (last 100): 0.6258
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.2842
+Avg Atoms: 281551076.56
+Avg Temperature: 192351.62 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 560 ===
+Avg Train Reward (last 100): 0.6360
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.3381
+Avg Atoms: 389504399.02
+Avg Temperature: 223603.24 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 600 ===
+Avg Train Reward (last 100): 0.6407
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.1531
+Avg Atoms: 94971271.35
+Avg Temperature: 120608.90 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 640 ===
+Avg Train Reward (last 100): 0.7305
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.4162
+Avg Atoms: 244617453.92
+Avg Temperature: 114120.88 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 680 ===
+Avg Train Reward (last 100): 0.8911
+  Offset +0.2Γ: 
+Avg Eval Reward: 1.0871
+Avg Atoms: 939889894.41
+Avg Temperature: 167921.52 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 720 ===
+Avg Train Reward (last 100): 1.1014
+  Offset +0.2Γ: 
+Avg Eval Reward: 1.0892
+Avg Atoms: 638646625.62
+Avg Temperature: 113911.16 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 760 ===
+Avg Train Reward (last 100): 1.1505
+  Offset +0.2Γ: 
+Avg Eval Reward: 1.4832
+Avg Atoms: 909296713.04
+Avg Temperature: 119135.56 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 800 ===
+Avg Train Reward (last 100): 1.1147
+  Offset +0.2Γ: 
+Avg Eval Reward: 1.6276
+Avg Atoms: 1278267034.38
+Avg Temperature: 152606.00 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 840 ===
+Avg Train Reward (last 100): 1.0291
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.8836
+Avg Atoms: 503097269.52
+Avg Temperature: 110595.13 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 880 ===
+Avg Train Reward (last 100): 0.9623
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.8957
+Avg Atoms: 495704383.32
+Avg Temperature: 107507.57 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 920 ===
+Avg Train Reward (last 100): 0.9850
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.6489
+Avg Atoms: 343100837.62
+Avg Temperature: 102730.21 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 960 ===
+Avg Train Reward (last 100): 1.0643
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.9592
+Avg Atoms: 500016169.56
+Avg Temperature: 101281.27 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 1000 ===
+Avg Train Reward (last 100): 0.9329
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.6171
+Avg Atoms: 318362942.52
+Avg Temperature: 100270.34 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 1040 ===
+Avg Train Reward (last 100): 0.7661
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.6222
+Avg Atoms: 320978011.44
+Avg Temperature: 100280.81 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 1080 ===
+Avg Train Reward (last 100): 0.6749
+  Offset +0.2Γ: 
+Avg Eval Reward: 1.0790
+Avg Atoms: 952483011.68
+Avg Temperature: 171472.91 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 1120 ===
+Avg Train Reward (last 100): 0.8581
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.9641
+Avg Atoms: 502166324.79
+Avg Temperature: 101243.05 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 1160 ===
+Avg Train Reward (last 100): 0.9264
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.7257
+Avg Atoms: 387954103.26
+Avg Temperature: 103892.21 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 1200 ===
+Avg Train Reward (last 100): 1.0870
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.8191
+Avg Atoms: 439022804.42
+Avg Temperature: 104133.76 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 1240 ===
+Avg Train Reward (last 100): 1.1764
+  Offset +0.2Γ: 
+Avg Eval Reward: 1.0695
+Avg Atoms: 781985553.11
+Avg Temperature: 141997.80 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 1280 ===
+Avg Train Reward (last 100): 1.0888
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.6330
+Avg Atoms: 574252633.72
+Avg Temperature: 176258.77 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 1320 ===
+Avg Train Reward (last 100): 1.0548
+  Offset +0.2Γ: 
+Avg Eval Reward: 1.7812
+Avg Atoms: 1088331314.22
+Avg Temperature: 118752.06 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 1360 ===
+Avg Train Reward (last 100): 1.1031
+  Offset +0.2Γ: 
+Avg Eval Reward: 1.3514
+Avg Atoms: 787296142.45
+Avg Temperature: 113201.59 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 1400 ===
+Avg Train Reward (last 100): 1.2238
+  Offset +0.2Γ: 
+Avg Eval Reward: 1.2531
+Avg Atoms: 668998692.23
+Avg Temperature: 103766.20 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 1440 ===
+Avg Train Reward (last 100): 1.2710
+  Offset +0.2Γ: 
+Avg Eval Reward: 1.8366
+Avg Atoms: 980625017.20
+Avg Temperature: 103755.41 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 1480 ===
+Avg Train Reward (last 100): 1.2638
+  Offset +0.2Γ: 
+Avg Eval Reward: 2.1693
+Avg Atoms: 1187911718.40
+Avg Temperature: 106374.07 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 1520 ===
+Avg Train Reward (last 100): 1.3151
+  Offset +0.2Γ: 
+Avg Eval Reward: 1.7354
+Avg Atoms: 976462640.14
+Avg Temperature: 109358.64 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 1560 ===
+Avg Train Reward (last 100): 1.3018
+  Offset +0.2Γ: 
+Avg Eval Reward: 1.2632
+Avg Atoms: 662345849.02
+Avg Temperature: 101886.50 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 1600 ===
+Avg Train Reward (last 100): 1.3691
+  Offset +0.2Γ: 
+Avg Eval Reward: 1.3246
+Avg Atoms: 685408918.61
+Avg Temperature: 100571.40 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 1640 ===
+Avg Train Reward (last 100): 1.4335
+  Offset +0.2Γ: 
+Avg Eval Reward: 1.6867
+Avg Atoms: 898741502.32
+Avg Temperature: 103555.86 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 1680 ===
+Avg Train Reward (last 100): 1.4182
+  Offset +0.2Γ: 
+Avg Eval Reward: 3.0192
+Avg Atoms: 1940562131.97
+Avg Temperature: 124920.63 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 1720 ===
+Avg Train Reward (last 100): 1.4337
+  Offset +0.2Γ: 
+Avg Eval Reward: 3.0877
+Avg Atoms: 1722603546.58
+Avg Temperature: 108554.31 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 1760 ===
+Avg Train Reward (last 100): 1.1601
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.3782
+Avg Atoms: 413779394.51
+Avg Temperature: 212491.36 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 1800 ===
+Avg Train Reward (last 100): 0.5794
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0143
+Avg Atoms: 119751219.87
+Avg Temperature: 1628750.04 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 1840 ===
+Avg Train Reward (last 100): 0.3891
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.5345
+Avg Atoms: 280816638.17
+Avg Temperature: 102240.67 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 1880 ===
+Avg Train Reward (last 100): 0.5641
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.4348
+Avg Atoms: 225529521.32
+Avg Temperature: 100907.28 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 1920 ===
+Avg Train Reward (last 100): 0.6837
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.3743
+Avg Atoms: 200130738.16
+Avg Temperature: 104107.14 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 1960 ===
+Avg Train Reward (last 100): 0.5685
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.2471
+Avg Atoms: 235466813.69
+Avg Temperature: 185285.48 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 2000 ===
+Avg Train Reward (last 100): 0.5073
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.4940
+Avg Atoms: 255615202.99
+Avg Temperature: 100640.20 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 2040 ===
+Avg Train Reward (last 100): 0.5536
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.4665
+Avg Atoms: 250329098.31
+Avg Temperature: 104294.62 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 2080 ===
+Avg Train Reward (last 100): 0.5929
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.4910
+Avg Atoms: 255815353.53
+Avg Temperature: 101278.51 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 2120 ===
+Avg Train Reward (last 100): 0.4761
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.4416
+Avg Atoms: 249289938.94
+Avg Temperature: 109670.36 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 2160 ===
+Avg Train Reward (last 100): 0.5905
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.4949
+Avg Atoms: 261864434.71
+Avg Temperature: 102807.22 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 2200 ===
+Avg Train Reward (last 100): 0.6673
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.4349
+Avg Atoms: 224133832.09
+Avg Temperature: 100188.88 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 2240 ===
+Avg Train Reward (last 100): 0.6518
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.4053
+Avg Atoms: 209646448.96
+Avg Temperature: 100577.00 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 2280 ===
+Avg Train Reward (last 100): 0.5672
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.4495
+Avg Atoms: 231506326.15
+Avg Temperature: 100134.88 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 2320 ===
+Avg Train Reward (last 100): 0.5012
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.3403
+Avg Atoms: 175427647.49
+Avg Temperature: 100178.83 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 2360 ===
+Avg Train Reward (last 100): 0.5221
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.4241
+Avg Atoms: 242477971.32
+Avg Temperature: 111107.78 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 2400 ===
+Avg Train Reward (last 100): 0.5346
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.4066
+Avg Atoms: 211802178.36
+Avg Temperature: 101297.05 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 2440 ===
+Avg Train Reward (last 100): 0.6710
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.3962
+Avg Atoms: 204678014.92
+Avg Temperature: 100441.04 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 2480 ===
+Avg Train Reward (last 100): 0.6469
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.2929
+Avg Atoms: 175445602.53
+Avg Temperature: 116532.36 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 2520 ===
+Avg Train Reward (last 100): 0.7506
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.4054
+Avg Atoms: 213262099.30
+Avg Temperature: 102293.99 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 2560 ===
+Avg Train Reward (last 100): 0.6629
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.3891
+Avg Atoms: 203363160.41
+Avg Temperature: 101596.73 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 2600 ===
+Avg Train Reward (last 100): 0.7140
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.5137
+Avg Atoms: 266790609.85
+Avg Temperature: 101073.71 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 2640 ===
+Avg Train Reward (last 100): 0.7433
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.4928
+Avg Atoms: 255159700.06
+Avg Temperature: 100683.92 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 2680 ===
+Avg Train Reward (last 100): 0.7048
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.5398
+Avg Atoms: 280357272.45
+Avg Temperature: 100895.46 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 2720 ===
+Avg Train Reward (last 100): 0.6244
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.5224
+Avg Atoms: 269502130.57
+Avg Temperature: 100308.39 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 2760 ===
+Avg Train Reward (last 100): 0.6358
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.4654
+Avg Atoms: 242145352.74
+Avg Temperature: 101143.23 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 2800 ===
+Avg Train Reward (last 100): 0.6433
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.4232
+Avg Atoms: 218793748.64
+Avg Temperature: 100507.49 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 2840 ===
+Avg Train Reward (last 100): 0.6821
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.4908
+Avg Atoms: 252885814.18
+Avg Temperature: 100181.42 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 2880 ===
+Avg Train Reward (last 100): 0.7013
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.5364
+Avg Atoms: 276301965.01
+Avg Temperature: 100163.85 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 2920 ===
+Avg Train Reward (last 100): 0.6998
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.5445
+Avg Atoms: 280565998.33
+Avg Temperature: 100155.86 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 2960 ===
+Avg Train Reward (last 100): 0.7064
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.6188
+Avg Atoms: 318737747.90
+Avg Temperature: 100123.64 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 3000 ===
+Avg Train Reward (last 100): 0.4952
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 3040 ===
+Avg Train Reward (last 100): 0.1735
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 3080 ===
+Avg Train Reward (last 100): 0.0320
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 3120 ===
+Avg Train Reward (last 100): 0.0246
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 3160 ===
+Avg Train Reward (last 100): 0.0146
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 3200 ===
+Avg Train Reward (last 100): 0.0182
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 3240 ===
+Avg Train Reward (last 100): 0.0217
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 3280 ===
+Avg Train Reward (last 100): 0.0197
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 3320 ===
+Avg Train Reward (last 100): 0.0174
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 3360 ===
+Avg Train Reward (last 100): 0.0239
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 3400 ===
+Avg Train Reward (last 100): 0.0315
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 3440 ===
+Avg Train Reward (last 100): 0.0200
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 3480 ===
+Avg Train Reward (last 100): 0.0225
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 3520 ===
+Avg Train Reward (last 100): 0.0262
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 3560 ===
+Avg Train Reward (last 100): 0.0189
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 3600 ===
+Avg Train Reward (last 100): 0.0194
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 3640 ===
+Avg Train Reward (last 100): 0.0264
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 3680 ===
+Avg Train Reward (last 100): 0.0290
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 3720 ===
+Avg Train Reward (last 100): 0.0296
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 3760 ===
+Avg Train Reward (last 100): 0.0210
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 3800 ===
+Avg Train Reward (last 100): 0.0226
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 3840 ===
+Avg Train Reward (last 100): 0.0228
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 3880 ===
+Avg Train Reward (last 100): 0.0212
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 3920 ===
+Avg Train Reward (last 100): 0.0147
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 3960 ===
+Avg Train Reward (last 100): 0.0154
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 4000 ===
+Avg Train Reward (last 100): 0.0190
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 4040 ===
+Avg Train Reward (last 100): 0.0254
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 4080 ===
+Avg Train Reward (last 100): 0.0265
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 4120 ===
+Avg Train Reward (last 100): 0.0280
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 4160 ===
+Avg Train Reward (last 100): 0.0183
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 4200 ===
+Avg Train Reward (last 100): 0.0231
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 4240 ===
+Avg Train Reward (last 100): 0.0259
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 4280 ===
+Avg Train Reward (last 100): 0.0208
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 4320 ===
+Avg Train Reward (last 100): 0.0200
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 4360 ===
+Avg Train Reward (last 100): 0.0211
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 4400 ===
+Avg Train Reward (last 100): 0.0235
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 4440 ===
+Avg Train Reward (last 100): 0.0241
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 4480 ===
+Avg Train Reward (last 100): 0.0179
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 4520 ===
+Avg Train Reward (last 100): 0.0167
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 4560 ===
+Avg Train Reward (last 100): 0.0257
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 4600 ===
+Avg Train Reward (last 100): 0.0231
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 4640 ===
+Avg Train Reward (last 100): 0.0193
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 4680 ===
+Avg Train Reward (last 100): 0.0226
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 4720 ===
+Avg Train Reward (last 100): 0.0255
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 4760 ===
+Avg Train Reward (last 100): 0.0146
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 4800 ===
+Avg Train Reward (last 100): 0.0164
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 4840 ===
+Avg Train Reward (last 100): 0.0195
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 4880 ===
+Avg Train Reward (last 100): 0.0326
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 4920 ===
+Avg Train Reward (last 100): 0.0459
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 4960 ===
+Avg Train Reward (last 100): 0.0345
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 5000 ===
+Avg Train Reward (last 100): 0.0366
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 5040 ===
+Avg Train Reward (last 100): 0.0297
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 5080 ===
+Avg Train Reward (last 100): 0.0191
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 5120 ===
+Avg Train Reward (last 100): 0.0183
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 5160 ===
+Avg Train Reward (last 100): 0.0233
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 5200 ===
+Avg Train Reward (last 100): 0.0263
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 5240 ===
+Avg Train Reward (last 100): 0.0254
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 5280 ===
+Avg Train Reward (last 100): 0.0237
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 5320 ===
+Avg Train Reward (last 100): 0.0376
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 5360 ===
+Avg Train Reward (last 100): 0.0405
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 5400 ===
+Avg Train Reward (last 100): 0.0195
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 5440 ===
+Avg Train Reward (last 100): 0.0191
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 5480 ===
+Avg Train Reward (last 100): 0.0188
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 5520 ===
+Avg Train Reward (last 100): 0.0261
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 5560 ===
+Avg Train Reward (last 100): 0.0262
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 5600 ===
+Avg Train Reward (last 100): 0.0367
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 5640 ===
+Avg Train Reward (last 100): 0.0422
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 5680 ===
+Avg Train Reward (last 100): 0.0436
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 5720 ===
+Avg Train Reward (last 100): 0.0212
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 5760 ===
+Avg Train Reward (last 100): 0.0241
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 5800 ===
+Avg Train Reward (last 100): 0.0213
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 5840 ===
+Avg Train Reward (last 100): 0.0205
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 5880 ===
+Avg Train Reward (last 100): 0.0285
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 5920 ===
+Avg Train Reward (last 100): 0.0332
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 5960 ===
+Avg Train Reward (last 100): 0.0299
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 6000 ===
+Avg Train Reward (last 100): 0.0233
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 6040 ===
+Avg Train Reward (last 100): 0.0226
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 6080 ===
+Avg Train Reward (last 100): 0.0223
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 6120 ===
+Avg Train Reward (last 100): 0.0238
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 6160 ===
+Avg Train Reward (last 100): 0.0230
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 6200 ===
+Avg Train Reward (last 100): 0.0271
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 6240 ===
+Avg Train Reward (last 100): 0.0225
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 6280 ===
+Avg Train Reward (last 100): 0.0152
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 6320 ===
+Avg Train Reward (last 100): 0.0216
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 6360 ===
+Avg Train Reward (last 100): 0.0258
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 6400 ===
+Avg Train Reward (last 100): 0.0244
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 6440 ===
+Avg Train Reward (last 100): 0.0176
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 6480 ===
+Avg Train Reward (last 100): 0.0308
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 6520 ===
+Avg Train Reward (last 100): 0.0411
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 6560 ===
+Avg Train Reward (last 100): 0.0372
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 6600 ===
+Avg Train Reward (last 100): 0.0352
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 6640 ===
+Avg Train Reward (last 100): 0.0199
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 6680 ===
+Avg Train Reward (last 100): 0.0207
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 6720 ===
+Avg Train Reward (last 100): 0.0203
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 6760 ===
+Avg Train Reward (last 100): 0.0256
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 6800 ===
+Avg Train Reward (last 100): 0.0218
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 6840 ===
+Avg Train Reward (last 100): 0.0204
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 6880 ===
+Avg Train Reward (last 100): 0.0232
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 6920 ===
+Avg Train Reward (last 100): 0.0192
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 6960 ===
+Avg Train Reward (last 100): 0.0219
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 7000 ===
+Avg Train Reward (last 100): 0.0242
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 7040 ===
+Avg Train Reward (last 100): 0.0225
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 7080 ===
+Avg Train Reward (last 100): 0.0230
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 7120 ===
+Avg Train Reward (last 100): 0.0228
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 7160 ===
+Avg Train Reward (last 100): 0.0218
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 7200 ===
+Avg Train Reward (last 100): 0.0212
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 7240 ===
+Avg Train Reward (last 100): 0.0274
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 7280 ===
+Avg Train Reward (last 100): 0.0263
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 7320 ===
+Avg Train Reward (last 100): 0.0193
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 7360 ===
+Avg Train Reward (last 100): 0.0132
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 7400 ===
+Avg Train Reward (last 100): 0.0130
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 7440 ===
+Avg Train Reward (last 100): 0.0209
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 7480 ===
+Avg Train Reward (last 100): 0.0206
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 7520 ===
+Avg Train Reward (last 100): 0.0242
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 7560 ===
+Avg Train Reward (last 100): 0.0343
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 7600 ===
+Avg Train Reward (last 100): 0.0448
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 7640 ===
+Avg Train Reward (last 100): 0.0430
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 7680 ===
+Avg Train Reward (last 100): 0.0272
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 7720 ===
+Avg Train Reward (last 100): 0.0317
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 7760 ===
+Avg Train Reward (last 100): 0.0292
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 7800 ===
+Avg Train Reward (last 100): 0.0214
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 7840 ===
+Avg Train Reward (last 100): 0.0162
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 7880 ===
+Avg Train Reward (last 100): 0.0158
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 7920 ===
+Avg Train Reward (last 100): 0.0165
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 7960 ===
+Avg Train Reward (last 100): 0.0234
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 8000 ===
+Avg Train Reward (last 100): 0.0285
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 8040 ===
+Avg Train Reward (last 100): 0.0226
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 8080 ===
+Avg Train Reward (last 100): 0.0147
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 8120 ===
+Avg Train Reward (last 100): 0.0193
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 8160 ===
+Avg Train Reward (last 100): 0.0197
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 8200 ===
+Avg Train Reward (last 100): 0.0209
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 8240 ===
+Avg Train Reward (last 100): 0.0190
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 8280 ===
+Avg Train Reward (last 100): 0.0230
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 8320 ===
+Avg Train Reward (last 100): 0.0106
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 8360 ===
+Avg Train Reward (last 100): 0.0362
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 8400 ===
+Avg Train Reward (last 100): 0.0380
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 8440 ===
+Avg Train Reward (last 100): 0.0298
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 8480 ===
+Avg Train Reward (last 100): 0.0216
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 8520 ===
+Avg Train Reward (last 100): 0.0196
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 8560 ===
+Avg Train Reward (last 100): 0.0225
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 8600 ===
+Avg Train Reward (last 100): 0.0202
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 8640 ===
+Avg Train Reward (last 100): 0.0243
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 8680 ===
+Avg Train Reward (last 100): 0.0160
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 8720 ===
+Avg Train Reward (last 100): 0.0142
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 8760 ===
+Avg Train Reward (last 100): 0.0214
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 8800 ===
+Avg Train Reward (last 100): 0.0299
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 8840 ===
+Avg Train Reward (last 100): 0.0258
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 8880 ===
+Avg Train Reward (last 100): 0.0186
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 8920 ===
+Avg Train Reward (last 100): 0.0220
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 8960 ===
+Avg Train Reward (last 100): 0.0319
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 9000 ===
+Avg Train Reward (last 100): 0.0305
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 9040 ===
+Avg Train Reward (last 100): 0.0475
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 9080 ===
+Avg Train Reward (last 100): 0.0363
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 9120 ===
+Avg Train Reward (last 100): 0.0291
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 9160 ===
+Avg Train Reward (last 100): 0.0231
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 9200 ===
+Avg Train Reward (last 100): 0.0170
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 9240 ===
+Avg Train Reward (last 100): 0.0130
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 9280 ===
+Avg Train Reward (last 100): 0.0239
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 9320 ===
+Avg Train Reward (last 100): 0.0257
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 9360 ===
+Avg Train Reward (last 100): 0.0330
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 9400 ===
+Avg Train Reward (last 100): 0.0273
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 9440 ===
+Avg Train Reward (last 100): 0.0374
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 9480 ===
+Avg Train Reward (last 100): 0.0439
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 9520 ===
+Avg Train Reward (last 100): 0.0417
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 9560 ===
+Avg Train Reward (last 100): 0.0323
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 9600 ===
+Avg Train Reward (last 100): 0.0171
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 9640 ===
+Avg Train Reward (last 100): 0.0123
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 9680 ===
+Avg Train Reward (last 100): 0.0124
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 9720 ===
+Avg Train Reward (last 100): 0.0142
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 9760 ===
+Avg Train Reward (last 100): 0.0185
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 9800 ===
+Avg Train Reward (last 100): 0.0241
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 9840 ===
+Avg Train Reward (last 100): 0.0307
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 9880 ===
+Avg Train Reward (last 100): 0.0326
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 9920 ===
+Avg Train Reward (last 100): 0.0281
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 9960 ===
+Avg Train Reward (last 100): 0.0196
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 10000 ===
+Avg Train Reward (last 100): 0.0190
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 10040 ===
+Avg Train Reward (last 100): 0.0317
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 10080 ===
+Avg Train Reward (last 100): 0.0343
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 10120 ===
+Avg Train Reward (last 100): 0.0249
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 10160 ===
+Avg Train Reward (last 100): 0.0304
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 10200 ===
+Avg Train Reward (last 100): 0.0242
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 10240 ===
+Avg Train Reward (last 100): 0.0392
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 10280 ===
+Avg Train Reward (last 100): 0.0356
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 10320 ===
+Avg Train Reward (last 100): 0.0325
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 10360 ===
+Avg Train Reward (last 100): 0.0229
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 10400 ===
+Avg Train Reward (last 100): 0.0296
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 10440 ===
+Avg Train Reward (last 100): 0.0303
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 10480 ===
+Avg Train Reward (last 100): 0.0167
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 10520 ===
+Avg Train Reward (last 100): 0.0190
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 10560 ===
+Avg Train Reward (last 100): 0.0246
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 10600 ===
+Avg Train Reward (last 100): 0.0350
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 10640 ===
+Avg Train Reward (last 100): 0.0387
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 10680 ===
+Avg Train Reward (last 100): 0.0420
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 10720 ===
+Avg Train Reward (last 100): 0.0314
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 10760 ===
+Avg Train Reward (last 100): 0.0324
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 10800 ===
+Avg Train Reward (last 100): 0.0300
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 10840 ===
+Avg Train Reward (last 100): 0.0252
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 10880 ===
+Avg Train Reward (last 100): 0.0263
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 10920 ===
+Avg Train Reward (last 100): 0.0262
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 10960 ===
+Avg Train Reward (last 100): 0.0265
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 11000 ===
+Avg Train Reward (last 100): 0.0197
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 11040 ===
+Avg Train Reward (last 100): 0.0252
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 11080 ===
+Avg Train Reward (last 100): 0.0290
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 11120 ===
+Avg Train Reward (last 100): 0.0316
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 11160 ===
+Avg Train Reward (last 100): 0.0215
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 11200 ===
+Avg Train Reward (last 100): 0.0296
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 11240 ===
+Avg Train Reward (last 100): 0.0197
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 11280 ===
+Avg Train Reward (last 100): 0.0179
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 11320 ===
+Avg Train Reward (last 100): 0.0216
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 11360 ===
+Avg Train Reward (last 100): 0.0318
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 11400 ===
+Avg Train Reward (last 100): 0.0182
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 11440 ===
+Avg Train Reward (last 100): 0.0164
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 11480 ===
+Avg Train Reward (last 100): 0.0122
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 11520 ===
+Avg Train Reward (last 100): 0.0115
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 11560 ===
+Avg Train Reward (last 100): 0.0171
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 11600 ===
+Avg Train Reward (last 100): 0.0365
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 11640 ===
+Avg Train Reward (last 100): 0.0404
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 11680 ===
+Avg Train Reward (last 100): 0.0299
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 11720 ===
+Avg Train Reward (last 100): 0.0238
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 11760 ===
+Avg Train Reward (last 100): 0.0199
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 11800 ===
+Avg Train Reward (last 100): 0.0210
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 11840 ===
+Avg Train Reward (last 100): 0.0236
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 11880 ===
+Avg Train Reward (last 100): 0.0201
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 11920 ===
+Avg Train Reward (last 100): 0.0207
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 11960 ===
+Avg Train Reward (last 100): 0.0243
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 12000 ===
+Avg Train Reward (last 100): 0.0279
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 12040 ===
+Avg Train Reward (last 100): 0.0295
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 12080 ===
+Avg Train Reward (last 100): 0.0237
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 12120 ===
+Avg Train Reward (last 100): 0.0223
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 12160 ===
+Avg Train Reward (last 100): 0.0179
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 12200 ===
+Avg Train Reward (last 100): 0.0266
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 12240 ===
+Avg Train Reward (last 100): 0.0347
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 12280 ===
+Avg Train Reward (last 100): 0.0257
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 12320 ===
+Avg Train Reward (last 100): 0.0387
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 12360 ===
+Avg Train Reward (last 100): 0.0392
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 12400 ===
+Avg Train Reward (last 100): 0.0358
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 12440 ===
+Avg Train Reward (last 100): 0.0257
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 12480 ===
+Avg Train Reward (last 100): 0.0263
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 12520 ===
+Avg Train Reward (last 100): 0.0168
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 12560 ===
+Avg Train Reward (last 100): 0.0253
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 12600 ===
+Avg Train Reward (last 100): 0.0216
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 12640 ===
+Avg Train Reward (last 100): 0.0216
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 12680 ===
+Avg Train Reward (last 100): 0.0200
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 12720 ===
+Avg Train Reward (last 100): 0.0271
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 12760 ===
+Avg Train Reward (last 100): 0.0261
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 12800 ===
+Avg Train Reward (last 100): 0.0285
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 12840 ===
+Avg Train Reward (last 100): 0.0237
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 12880 ===
+Avg Train Reward (last 100): 0.0155
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 12920 ===
+Avg Train Reward (last 100): 0.0140
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 12960 ===
+Avg Train Reward (last 100): 0.0241
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 13000 ===
+Avg Train Reward (last 100): 0.0311
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 13040 ===
+Avg Train Reward (last 100): 0.0339
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 13080 ===
+Avg Train Reward (last 100): 0.0334
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 13120 ===
+Avg Train Reward (last 100): 0.0315
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 13160 ===
+Avg Train Reward (last 100): 0.0276
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 13200 ===
+Avg Train Reward (last 100): 0.0124
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 13240 ===
+Avg Train Reward (last 100): 0.0121
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 13280 ===
+Avg Train Reward (last 100): 0.0153
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 13320 ===
+Avg Train Reward (last 100): 0.0197
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 13360 ===
+Avg Train Reward (last 100): 0.0322
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 13400 ===
+Avg Train Reward (last 100): 0.0462
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 13440 ===
+Avg Train Reward (last 100): 0.0368
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 13480 ===
+Avg Train Reward (last 100): 0.0413
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 13520 ===
+Avg Train Reward (last 100): 0.0313
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 13560 ===
+Avg Train Reward (last 100): 0.0265
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 13600 ===
+Avg Train Reward (last 100): 0.0203
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 13640 ===
+Avg Train Reward (last 100): 0.0149
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 13680 ===
+Avg Train Reward (last 100): 0.0155
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 13720 ===
+Avg Train Reward (last 100): 0.0250
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 13760 ===
+Avg Train Reward (last 100): 0.0236
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 13800 ===
+Avg Train Reward (last 100): 0.0164
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 13840 ===
+Avg Train Reward (last 100): 0.0183
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 13880 ===
+Avg Train Reward (last 100): 0.0277
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 13920 ===
+Avg Train Reward (last 100): 0.0286
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 13960 ===
+Avg Train Reward (last 100): 0.0157
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 14000 ===
+Avg Train Reward (last 100): 0.0202
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 14040 ===
+Avg Train Reward (last 100): 0.0276
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 14080 ===
+Avg Train Reward (last 100): 0.0377
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 14120 ===
+Avg Train Reward (last 100): 0.0290
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 14160 ===
+Avg Train Reward (last 100): 0.0220
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 14200 ===
+Avg Train Reward (last 100): 0.0132
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 14240 ===
+Avg Train Reward (last 100): 0.0119
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 14280 ===
+Avg Train Reward (last 100): 0.0145
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 14320 ===
+Avg Train Reward (last 100): 0.0195
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 14360 ===
+Avg Train Reward (last 100): 0.0299
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 14400 ===
+Avg Train Reward (last 100): 0.0294
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 14440 ===
+Avg Train Reward (last 100): 0.0252
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 14480 ===
+Avg Train Reward (last 100): 0.0290
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 14520 ===
+Avg Train Reward (last 100): 0.0319
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 14560 ===
+Avg Train Reward (last 100): 0.0336
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 14600 ===
+Avg Train Reward (last 100): 0.0248
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 14640 ===
+Avg Train Reward (last 100): 0.0173
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 14680 ===
+Avg Train Reward (last 100): 0.0172
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 14720 ===
+Avg Train Reward (last 100): 0.0296
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 14760 ===
+Avg Train Reward (last 100): 0.0294
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 14800 ===
+Avg Train Reward (last 100): 0.0336
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 14840 ===
+Avg Train Reward (last 100): 0.0305
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 14880 ===
+Avg Train Reward (last 100): 0.0314
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 14920 ===
+Avg Train Reward (last 100): 0.0294
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 14960 ===
+Avg Train Reward (last 100): 0.0273
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 15000 ===
+Avg Train Reward (last 100): 0.0288
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 15040 ===
+Avg Train Reward (last 100): 0.0397
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 15080 ===
+Avg Train Reward (last 100): 0.0341
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 15120 ===
+Avg Train Reward (last 100): 0.0371
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 15160 ===
+Avg Train Reward (last 100): 0.0265
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 15200 ===
+Avg Train Reward (last 100): 0.0324
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 15240 ===
+Avg Train Reward (last 100): 0.0245
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 15280 ===
+Avg Train Reward (last 100): 0.0196
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 15320 ===
+Avg Train Reward (last 100): 0.0258
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 15360 ===
+Avg Train Reward (last 100): 0.0333
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 15400 ===
+Avg Train Reward (last 100): 0.0302
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 15440 ===
+Avg Train Reward (last 100): 0.0249
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 15480 ===
+Avg Train Reward (last 100): 0.0221
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 15520 ===
+Avg Train Reward (last 100): 0.0158
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 15560 ===
+Avg Train Reward (last 100): 0.0123
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 15600 ===
+Avg Train Reward (last 100): 0.0148
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 15640 ===
+Avg Train Reward (last 100): 0.0287
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 15680 ===
+Avg Train Reward (last 100): 0.0398
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 15720 ===
+Avg Train Reward (last 100): 0.0365
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 15760 ===
+Avg Train Reward (last 100): 0.0202
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 15800 ===
+Avg Train Reward (last 100): 0.0210
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 15840 ===
+Avg Train Reward (last 100): 0.0328
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 15880 ===
+Avg Train Reward (last 100): 0.0324
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 15920 ===
+Avg Train Reward (last 100): 0.0369
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 15960 ===
+Avg Train Reward (last 100): 0.0325
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 16000 ===
+Avg Train Reward (last 100): 0.0287
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 16040 ===
+Avg Train Reward (last 100): 0.0306
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 16080 ===
+Avg Train Reward (last 100): 0.0163
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 16120 ===
+Avg Train Reward (last 100): 0.0207
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 16160 ===
+Avg Train Reward (last 100): 0.0232
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 16200 ===
+Avg Train Reward (last 100): 0.0248
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 16240 ===
+Avg Train Reward (last 100): 0.0197
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 16280 ===
+Avg Train Reward (last 100): 0.0225
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 16320 ===
+Avg Train Reward (last 100): 0.0214
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 16360 ===
+Avg Train Reward (last 100): 0.0255
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 16400 ===
+Avg Train Reward (last 100): 0.0328
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 16440 ===
+Avg Train Reward (last 100): 0.0346
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 16480 ===
+Avg Train Reward (last 100): 0.0334
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 16520 ===
+Avg Train Reward (last 100): 0.0341
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 16560 ===
+Avg Train Reward (last 100): 0.0256
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 16600 ===
+Avg Train Reward (last 100): 0.0361
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 16640 ===
+Avg Train Reward (last 100): 0.0374
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 16680 ===
+Avg Train Reward (last 100): 0.0440
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 16720 ===
+Avg Train Reward (last 100): 0.0504
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 16760 ===
+Avg Train Reward (last 100): 0.0532
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 16800 ===
+Avg Train Reward (last 100): 0.0527
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 16840 ===
+Avg Train Reward (last 100): 0.0388
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 16880 ===
+Avg Train Reward (last 100): 0.0206
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 16920 ===
+Avg Train Reward (last 100): 0.0186
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 16960 ===
+Avg Train Reward (last 100): 0.0181
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 17000 ===
+Avg Train Reward (last 100): 0.0130
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 17040 ===
+Avg Train Reward (last 100): 0.0123
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 17080 ===
+Avg Train Reward (last 100): 0.0300
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 17120 ===
+Avg Train Reward (last 100): 0.0380
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 17160 ===
+Avg Train Reward (last 100): 0.0396
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 17200 ===
+Avg Train Reward (last 100): 0.0215
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 17240 ===
+Avg Train Reward (last 100): 0.0172
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 17280 ===
+Avg Train Reward (last 100): 0.0298
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 17320 ===
+Avg Train Reward (last 100): 0.0246
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 17360 ===
+Avg Train Reward (last 100): 0.0363
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 17400 ===
+Avg Train Reward (last 100): 0.0341
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 17440 ===
+Avg Train Reward (last 100): 0.0324
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 17480 ===
+Avg Train Reward (last 100): 0.0241
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 17520 ===
+Avg Train Reward (last 100): 0.0258
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 17560 ===
+Avg Train Reward (last 100): 0.0198
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 17600 ===
+Avg Train Reward (last 100): 0.0169
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 17640 ===
+Avg Train Reward (last 100): 0.0214
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 17680 ===
+Avg Train Reward (last 100): 0.0277
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 17720 ===
+Avg Train Reward (last 100): 0.0207
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 17760 ===
+Avg Train Reward (last 100): 0.0195
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 17800 ===
+Avg Train Reward (last 100): 0.0171
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 17840 ===
+Avg Train Reward (last 100): 0.0276
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 17880 ===
+Avg Train Reward (last 100): 0.0253
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 17920 ===
+Avg Train Reward (last 100): 0.0211
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 17960 ===
+Avg Train Reward (last 100): 0.0241
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 18000 ===
+Avg Train Reward (last 100): 0.0213
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 18040 ===
+Avg Train Reward (last 100): 0.0270
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 18080 ===
+Avg Train Reward (last 100): 0.0262
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 18120 ===
+Avg Train Reward (last 100): 0.0261
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 18160 ===
+Avg Train Reward (last 100): 0.0234
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 18200 ===
+Avg Train Reward (last 100): 0.0201
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 18240 ===
+Avg Train Reward (last 100): 0.0215
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 18280 ===
+Avg Train Reward (last 100): 0.0177
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 18320 ===
+Avg Train Reward (last 100): 0.0222
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 18360 ===
+Avg Train Reward (last 100): 0.0174
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 18400 ===
+Avg Train Reward (last 100): 0.0143
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 18440 ===
+Avg Train Reward (last 100): 0.0155
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 18480 ===
+Avg Train Reward (last 100): 0.0181
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 18520 ===
+Avg Train Reward (last 100): 0.0114
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 18560 ===
+Avg Train Reward (last 100): 0.0198
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 18600 ===
+Avg Train Reward (last 100): 0.0481
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 18640 ===
+Avg Train Reward (last 100): 0.0474
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 18680 ===
+Avg Train Reward (last 100): 0.0312
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 18720 ===
+Avg Train Reward (last 100): 0.0294
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 18760 ===
+Avg Train Reward (last 100): 0.0256
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 18800 ===
+Avg Train Reward (last 100): 0.0230
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 18840 ===
+Avg Train Reward (last 100): 0.0305
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 18880 ===
+Avg Train Reward (last 100): 0.0326
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 18920 ===
+Avg Train Reward (last 100): 0.0341
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 18960 ===
+Avg Train Reward (last 100): 0.0198
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 19000 ===
+Avg Train Reward (last 100): 0.0174
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 19040 ===
+Avg Train Reward (last 100): 0.0212
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 19080 ===
+Avg Train Reward (last 100): 0.0234
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 19120 ===
+Avg Train Reward (last 100): 0.0203
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 19160 ===
+Avg Train Reward (last 100): 0.0216
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 19200 ===
+Avg Train Reward (last 100): 0.0149
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 19240 ===
+Avg Train Reward (last 100): 0.0088
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 19280 ===
+Avg Train Reward (last 100): 0.0193
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 19320 ===
+Avg Train Reward (last 100): 0.0241
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 19360 ===
+Avg Train Reward (last 100): 0.0392
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 19400 ===
+Avg Train Reward (last 100): 0.0303
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 19440 ===
+Avg Train Reward (last 100): 0.0298
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 19480 ===
+Avg Train Reward (last 100): 0.0210
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 19520 ===
+Avg Train Reward (last 100): 0.0168
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 19560 ===
+Avg Train Reward (last 100): 0.0163
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 19600 ===
+Avg Train Reward (last 100): 0.0299
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 19640 ===
+Avg Train Reward (last 100): 0.0348
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 19680 ===
+Avg Train Reward (last 100): 0.0290
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 19720 ===
+Avg Train Reward (last 100): 0.0273
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 19760 ===
+Avg Train Reward (last 100): 0.0274
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 19800 ===
+Avg Train Reward (last 100): 0.0250
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 19840 ===
+Avg Train Reward (last 100): 0.0191
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 19880 ===
+Avg Train Reward (last 100): 0.0148
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 19920 ===
+Avg Train Reward (last 100): 0.0159
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+Starting evaluation...
+
+=== Evaluation at Episode 19960 ===
+Avg Train Reward (last 100): 0.0146
+  Offset +0.2Γ: 
+Avg Eval Reward: 0.0000
+Avg Atoms: 0.00
+Avg Temperature: 100121.55 μK
+
+
+============================================================
+Training completed! Generating plots...
+============================================================
+Reward plot saved to: logs/mot_rl_Date2025-11-16_Time06-30-09/reward_vs_episode.png
+Reward plot saved to: logs/mot_rl_Date2025-11-16_Time06-30-09/total_reward_vs_episode.png
+Control sequence plot saved to: logs/mot_rl_Date2025-11-16_Time06-30-09/last_episode_control_sequence.png

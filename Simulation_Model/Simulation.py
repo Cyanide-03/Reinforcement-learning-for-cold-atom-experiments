@@ -27,7 +27,6 @@ class FixedGlorotUniform(KerasGlorotUniform):
         # The config dict contains the arguments that failed earlier.
         # Use the class constructor to ensure 'dtype' is removed.
         return cls(**config)
-
 class FixedZeros(KerasZeros):
     """
     Workaround: Fixes the serialization conflict for Zeros initializer.
@@ -44,7 +43,6 @@ class FixedZeros(KerasZeros):
     def from_config(cls, config):
         # Pass config to the constructor to ensure 'dtype' is removed
         return cls(**config)
-
 
 class Simulation:
     """

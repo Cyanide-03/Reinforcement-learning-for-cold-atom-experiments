@@ -277,8 +277,8 @@ def plot_control_sequence(detuning_sequence: np.ndarray,
              color='blue', label='Actual Detuning')
     
     # Mark optimal loading point
-    ax1.axhline(y=1.9, color='red', linestyle='--', 
-                linewidth=2, label='Optimal Loading (1.9Γ)', alpha=0.7)
+    ax1.axhline(y=20, color='red', linestyle='--', 
+                linewidth=2, label='Optimal Loading (20Γ)', alpha=0.7)
     
     # Highlight different phases
     mid_point = n_steps // 2
@@ -585,6 +585,16 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
             # After the episode, train the agent on a batch from the replay buffer
             losses = agent.train(batch_size)
             
+            if episode%200 == 0:
+                control_plot_path = log_dir + f'/{episode}_control_sequence.png'
+                plot_control_sequence(
+                    np.array(last_episode_detuning),
+                    time_step_duration=0.06,  
+                    detuning_min=0,
+                    detuning_max=50, 
+                    save_path=control_plot_path
+                )
+            
             # Log training metrics to TensorBoard for monitoring
             with train_summary_writer.as_default():
                 tf.summary.scalar('episode_total_reward', total_reward, step=episode)
@@ -600,8 +610,16 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
                 Rew=f"{total_reward:.2f}",
                 Atoms=f"{info['atom_number']:.1e}",
                 Temp=f"{info['temperature']*1e6:.1f}uK",
+                Det=f"{info['physical_detuning']:.1f}Γ",
                 L_C=f"{losses[0]:.3e}" if losses else "N/A"
             )
+
+            if episode % 100 == 0:
+                tf.print(f"Episode {episode}: Train Reward: {total_reward:.4f}, "
+                         f"Atoms: {info['atom_number']:.2f}, "
+                         f"Temperature: {info['temperature']*1e6:.2f} μK", 
+                         f"Detuning: {info['physical_detuning']:.1f}Γ",
+                         output_stream=sys.stdout)
         
         episode_total_rewards.append(total_reward)
         episode_rewards.append(episode_reward)
@@ -644,7 +662,7 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
                 tf.summary.scalar('atom_number', np.mean(offset_atoms), step=episode)
                 tf.summary.scalar('temperature', np.mean(offset_temps)*1e6, step=episode)
             
-            tf.print(f"\n=== Evaluation at Episode {episode} ===", output_stream=sys.stdout)
+            tf.print(f"=== Evaluation at Episode {episode} ===", output_stream=sys.stdout)
             tf.print(f"Avg Train Reward (last 100): {np.mean(episode_rewards[-100:]):.4f}", output_stream=sys.stdout)
             tf.print(f"  Offset {perturbation_offsets[eval_ep]:+.1f}Γ: ", output_stream=sys.stdout)
             tf.print(f"Avg Eval Reward: {np.mean(offset_rewards):.4f}", output_stream=sys.stdout)
@@ -696,7 +714,7 @@ if __name__ == "__main__":
     
     # train_mot_agent(episodes=5000, log_dir=log_dir)
     # Run a shorter training session for demonstration purposes
-    trained_agent, rewards = train_mot_agent(episodes=20000, log_dir=log_dir)
+    trained_agent, rewards = train_mot_agent(episodes=3000, log_dir=log_dir)
     
     # Save final model
     # trained_agent.save_model("final_mot_rl_model")

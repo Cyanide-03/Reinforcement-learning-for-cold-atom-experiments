@@ -81,7 +81,7 @@ class MOTEnvironmentWrapper:
             self.perturbation_offset = perturbation_offset
         
         # Initialize current detuning to a standard starting value
-        self.current_detuning = -20  # Initial value like reference
+        self.current_detuning = -5 # Initial value like reference
 
         # Track evaluation mode for mid-episode perturbation change
         self.evaluation_mode = evaluation_mode
@@ -124,9 +124,9 @@ class MOTEnvironmentWrapper:
 
         # Implement mid-episode perturbation change during evaluation
         # Reference: changes offset at timestep 15 for second half of eval episodes
-        if (self.evaluation_mode and self.evalshot_idx > self.NEv / 2 and self.current_step == int(np.round(self.episode_length * 3 / 5))):
-            self.perturbation_offset += np.random.choice([-1, 1]) * 5.0
-            self.current_detuning = self.current_detuning + self.perturbation_offset
+        # if (self.evaluation_mode and self.evalshot_idx > self.NEv / 2 and self.current_step == int(np.round(self.episode_length * 3 / 5))):
+        #     self.perturbation_offset += np.random.choice([-1, 1]) * 5.0
+        #     self.current_detuning = self.current_detuning + self.perturbation_offset
         
         # --- Update MOT State based on the physical detuning ---
         # If the detuning is far from resonance, atoms are loaded and cooled
