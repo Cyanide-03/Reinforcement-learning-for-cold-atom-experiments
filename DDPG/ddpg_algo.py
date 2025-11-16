@@ -587,9 +587,10 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
             
             # Log training metrics to TensorBoard for monitoring
             with train_summary_writer.as_default():
-                tf.summary.scalar('episode_reward', total_reward, step=episode)
+                tf.summary.scalar('episode_total_reward', total_reward, step=episode)
+                tf.summary.scalar('episode_reward', episode_reward, step=episode)
                 tf.summary.scalar('atom_number', info['atom_number'], step=episode)
-                tf.summary.scalar('temperature', info['temperature']*1e6, step=episode)  # in μK
+                tf.summary.scalar('temperature in μK', info['temperature']*1e6, step=episode)  # in μK
                 if losses:
                     tf.summary.scalar('critic_loss', losses[0], step=episode)
                     tf.summary.scalar('actor_loss', losses[1], step=episode)
