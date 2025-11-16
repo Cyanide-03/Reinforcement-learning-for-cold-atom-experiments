@@ -118,6 +118,11 @@ class Simulation:
             # Use log-interpolation and convert back to linear scale
             return (10**self.logT_intrp(det))
 
+    @tf.function(jit_compile=True)
+    def fast_predict(self,x):
+        return self.MOT_img_gen(x, training=False)
+
+
     def generate_image(self, norm_atom_number, norm_detuning):
         """
         Generates a synthetic fluorescence image using the pre-trained CNN.
@@ -139,7 +144,8 @@ class Simulation:
             tf.stack([norm_atom_number, norm_detuning]), 
             axis=0
         )
-        img = self.MOT_img_gen.predict(input_data, verbose=0)
+        # img = self.MOT_img_gen.predict(input_data, verbose=0)
+        img = self.fast_predict(input_data).numpy()
         
         # Squeeze and ensure proper shape
         img = img.squeeze()

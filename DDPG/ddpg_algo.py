@@ -516,8 +516,8 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
     
     # Training parameters
     # Start with random actions to populate the replay buffer before training
-    warmup_episodes = 10
-    evaluation_frequency = 200
+    warmup_episodes = 100
+    evaluation_frequency = 40
     batch_size = 64
     
     episode_rewards = []
@@ -613,6 +613,7 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
         # --- Evaluation Phase ---
         # Periodic evaluation
         if episode > 0 and episode % evaluation_frequency == 0:
+            print("\nStarting evaluation...")
             perturbation_offsets = [-0.7, -0.2, 0.0, 0.2, 0.7]  # Test robustness
             
             offset_rewards = []
@@ -643,12 +644,12 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
                 tf.summary.scalar('atom_number', np.mean(offset_atoms), step=episode)
                 tf.summary.scalar('temperature', np.mean(offset_temps)*1e6, step=episode)
             
-            print(f"\n=== Evaluation at Episode {episode} ===")
-            print(f"Avg Train Reward (last 100): {np.mean(episode_rewards[-100:]):.4f}")
-            print(f"  Offset {perturbation_offsets[eval_ep]:+.1f}Γ: ")
-            print(f"Avg Eval Reward: {np.mean(offset_rewards):.4f}")
-            print(f"Avg Atoms: {np.mean(offset_atoms):.2f}")
-            print(f"Avg Temperature: {np.mean(offset_temps)*1e6:.2f} μK\n")
+            tf.print(f"\n=== Evaluation at Episode {episode} ===", output_stream=sys.stdout)
+            tf.print(f"Avg Train Reward (last 100): {np.mean(episode_rewards[-100:]):.4f}", output_stream=sys.stdout)
+            tf.print(f"  Offset {perturbation_offsets[eval_ep]:+.1f}Γ: ", output_stream=sys.stdout)
+            tf.print(f"Avg Eval Reward: {np.mean(offset_rewards):.4f}", output_stream=sys.stdout)
+            tf.print(f"Avg Atoms: {np.mean(offset_atoms):.2f}", output_stream=sys.stdout)
+            tf.print(f"Avg Temperature: {np.mean(offset_temps)*1e6:.2f} μK\n", output_stream=sys.stdout)
         
         # Save a model checkpoint periodically
         # if episode > 0 and episode % 1000 == 0:
@@ -695,7 +696,7 @@ if __name__ == "__main__":
     
     # train_mot_agent(episodes=5000, log_dir=log_dir)
     # Run a shorter training session for demonstration purposes
-    trained_agent, rewards = train_mot_agent(episodes=100000, log_dir=log_dir)
+    trained_agent, rewards = train_mot_agent(episodes=20000, log_dir=log_dir)
     
     # Save final model
     # trained_agent.save_model("final_mot_rl_model")
