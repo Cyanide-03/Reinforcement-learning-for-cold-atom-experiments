@@ -20,6 +20,7 @@ if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
 from Environments.ContMOTenv import MOTEnvironmentWrapper
+from Environments.RealMOTenv import RealMOTEnvironment
 from Simulation_Model.Simulation import Simulation
 
 # # Ensure TensorFlow uses GPU if available
@@ -501,13 +502,24 @@ class DDPGAgent: # !
         # Update target networks
         self._update_target_networks(tau=1.0)
 
-def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/"):
+def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/", env_mode: str = "sim"):
     """Main training loop"""
     
     # Initialize environment and agent
-    # Replace 'your_simulation_model' with your actual simulation
-    sim_model=Simulation()
-    env = MOTEnvironmentWrapper(Simulation_Model=sim_model) 
+    if env_mode == "sim":
+        print("Initializing in SIMULATION mode...")
+        sim_model = Simulation()
+        env = MOTEnvironmentWrapper(Simulation_Model=sim_model) 
+    else:
+        print("Initializing in REAL environment mode (ARTIQ)...")
+        # You can customize these paths as needed
+        env = RealMOTEnvironment(
+            artiq_script="mot_experiment.py", 
+            image_dir="Dataset/real_time/",
+            detuning_range=(0.0, 50.0),
+            episode_length=25
+        )
+    
     agent = DDPGAgent()
 
     # TensorBoard logging
@@ -712,9 +724,12 @@ if __name__ == "__main__":
     print(f"Logging to: {log_dir}")
     print("Run 'tensorboard --logdir logs' to monitor training")
     
-    # train_mot_agent(episodes=5000, log_dir=log_dir)
+    # Choose environment mode: 'sim' or 'real'
+    ENV_MODE = "sim" # Change to "real" for ARTIQ training
+    
+    # train_mot_agent(episodes=5000, log_dir=log_dir, env_mode=ENV_MODE)
     # Run a shorter training session for demonstration purposes
-    trained_agent, rewards = train_mot_agent(episodes=3000, log_dir=log_dir)
+    trained_agent, rewards = train_mot_agent(episodes=3000, log_dir=log_dir, env_mode=ENV_MODE)
     
     # Save final model
     # trained_agent.save_model("final_mot_rl_model")
