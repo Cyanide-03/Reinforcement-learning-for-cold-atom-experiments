@@ -505,7 +505,7 @@ class DDPGAgent: # !
 def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/", env_mode: str = "sim"):
     """Main training loop"""
     
-    # Initialize environment and agent
+    # !! Initialize environment and agent
     if env_mode == "sim":
         print("Initializing in SIMULATION mode...")
         sim_model = Simulation()
