@@ -209,113 +209,6 @@ class OUNoise:
         dx = self.theta * (self.mu - self.state) + self.sigma * np.random.standard_normal(self.state.shape)
         self.state += dx
         return self.state
-    
-#For Plots
-def plot_training_rewards(episode_rewards: List[float], save_path: str = None):
-    """
-    Generates and saves a plot of rewards per episode to visualize training progress.
-    """
-    plt.figure(figsize=(12, 6))
-    
-    episodes = range(len(episode_rewards))
-    
-    # Plot raw rewards
-    plt.subplot(1, 2, 1)
-    plt.plot(episodes, episode_rewards, alpha=0.3, color='blue', label='Raw Reward')
-    
-    # Plot moving average (smoothed)
-    window_size = min(100, len(episode_rewards) // 10)
-    if len(episode_rewards) > window_size:
-        moving_avg = np.convolve(episode_rewards, 
-                                  np.ones(window_size)/window_size, 
-                                  mode='valid')
-        plt.plot(range(window_size-1, len(episode_rewards)), 
-                moving_avg, 
-                color='red', 
-                linewidth=2, 
-                label=f'Moving Avg (window={window_size})')
-    
-    plt.xlabel('Episode', fontsize=12)
-    plt.ylabel('Reward', fontsize=12)
-    plt.title('Training Progress: Reward vs Episode', fontsize=14)
-    plt.legend()
-    plt.grid(True, alpha=0.3)
-    
-    # Plot log scale (useful if rewards vary a lot)
-    plt.subplot(1, 2, 2)
-    plt.plot(episodes, episode_rewards, alpha=0.5, color='green')
-    plt.xlabel('Episode', fontsize=12)
-    plt.ylabel('Reward (log scale)', fontsize=12)
-    plt.title('Training Progress (Log Scale)', fontsize=14)
-    plt.yscale('log')
-    plt.grid(True, alpha=0.3, which='both')
-    
-    plt.tight_layout()
-    
-    if save_path:
-        plt.savefig(save_path, dpi=150, bbox_inches='tight')
-        print(f"Reward plot saved to: {save_path}")
-    
-    plt.show()
-
-def plot_control_sequence(detuning_sequence: np.ndarray, 
-                          time_step_duration: float = 0.06,
-                          detuning_min: float = 0.0,
-                          detuning_max: float = 8.25,
-                          save_path: str = None):
-    """
-    Plots the control sequence (detuning vs. time) for an episode.
-    """
-    n_steps = len(detuning_sequence)
-    time_steps = np.arange(n_steps)
-    time_seconds = time_steps * time_step_duration
-    
-    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 8))
-    
-    # Plot 1: Detuning vs Time Step
-    ax1.plot(time_steps, detuning_sequence, 
-             marker='o', markersize=4, linewidth=2, 
-             color='blue', label='Actual Detuning')
-    
-    # Mark optimal loading point
-    ax1.axhline(y=20, color='red', linestyle='--', 
-                linewidth=2, label='Optimal Loading (20Γ)', alpha=0.7)
-    
-    # Highlight different phases
-    mid_point = n_steps // 2
-    ax1.axvspan(0, mid_point, alpha=0.1, color='green', label='Loading Phase')
-    ax1.axvspan(mid_point, n_steps, alpha=0.1, color='orange', label='Cooling Phase')
-    
-    ax1.set_xlabel('Time Step', fontsize=12)
-    ax1.set_ylabel('Detuning (Γ)', fontsize=12)
-    ax1.set_title('Control Sequence: Detuning vs Time Steps', fontsize=14)
-    ax1.set_ylim([detuning_min - 0.5, detuning_max + 0.5])
-    ax1.legend(loc='best')
-    ax1.grid(True, alpha=0.3)
-    
-    # Plot 2: Detuning vs Real Time (seconds)
-    ax2.plot(time_seconds, detuning_sequence, 
-             marker='s', markersize=4, linewidth=2, 
-             color='purple', label='Actual Detuning')
-    
-    ax2.axhline(y=1.9, color='red', linestyle='--', 
-                linewidth=2, label='Optimal Loading (1.9Γ)', alpha=0.7)
-    
-    ax2.set_xlabel('Time (seconds)', fontsize=12)
-    ax2.set_ylabel('Detuning (Γ)', fontsize=12)
-    ax2.set_title(f'Control Sequence: Detuning vs Real Time (Total: {time_seconds[-1]:.2f}s)', 
-                  fontsize=14)
-    ax2.set_ylim([detuning_min - 0.5, detuning_max + 0.5])
-    ax2.legend(loc='best')
-    ax2.grid(True, alpha=0.3)
-    
-    plt.tight_layout()
-    
-    if save_path:
-        plt.savefig(save_path, dpi=150, bbox_inches='tight')
-        print(f"Control sequence plot saved to: {save_path}")
-    
-    plt.show()
 
 class DDPGAgent: # !
     """
@@ -333,9 +226,11 @@ class DDPGAgent: # !
         self.tau = tau
         
         # --- Initialize Networks ---
+
         # Main networks that are trained
         self.actor = Actor(action_dim=action_dim)
         self.critic = Critic()
+
         # Target networks are used to stabilize training
         self.actor_target = Actor(action_dim=action_dim)
         self.critic_target = Critic()
@@ -357,7 +252,10 @@ class DDPGAgent: # !
         self.replay_buffer = ReplayBuffer()
     
     def _initialize_networks(self):
-        """Initializes network weights by performing a dummy forward pass."""
+        """
+        Initializes network weights by performing a dummy forward pass.
+        """
+
         dummy_images = tf.random.normal((1, 50, 50, 4))
         dummy_additional = tf.random.normal((1, 2))
         dummy_action = tf.random.normal((1, 1))
@@ -371,7 +269,10 @@ class DDPGAgent: # !
         _ = self.critic_target([dummy_images, dummy_additional, dummy_action])
     
     def select_action(self, observation: Dict, add_noise: bool = True) -> np.ndarray:
-        """Selects an action based on the current observation (policy)."""
+        """
+        Selects an action based on the current observation (policy).
+        """
+
         # Add batch dimension
         images = np.expand_dims(observation['images'], axis=0)
         additional = np.expand_dims(observation['additional'], axis=0)
@@ -434,7 +335,10 @@ class DDPGAgent: # !
         return critic_loss, actor_loss
     
     def train(self, batch_size: int = 64):
-        """Samples a batch from the replay buffer and performs one training step."""
+        """
+        Samples a batch from the replay buffer and performs one training step.
+        """
+
         if len(self.replay_buffer) < batch_size:
             return # Don't train if the buffer doesn't have enough experiences
         
@@ -472,6 +376,7 @@ class DDPGAgent: # !
         θ_target = τ * θ_local + (1 - τ) * θ_target
         This makes the training more stable than directly copying the weights.
         """
+
         if tau is None:
             tau = self.tau
         
@@ -487,23 +392,35 @@ class DDPGAgent: # !
     
     def store_experience(self, state: Dict, action: np.ndarray, reward: float, 
                         next_state: Dict, done: bool):
-        """Store experience in replay buffer"""
+        """
+        Store experience in replay buffer
+        """
+
         self.replay_buffer.push(state, action, reward, next_state, done)
     
     def save_model(self, filepath: str):
-        """Save trained models"""
+        """
+        Save trained models
+        """
+
         self.actor.save_weights(f"{filepath}_actor.weights.h5")
         self.critic.save_weights(f"{filepath}_critic.weights.h5")
     
     def load_model(self, filepath: str):
-        """Load trained models"""
+        """
+        Load trained models
+        """
+
         self.actor.load_weights(f"{filepath}_actor.weights.h5")
         self.critic.load_weights(f"{filepath}_critic.weights.h5")
+
         # Update target networks
         self._update_target_networks(tau=1.0)
 
-def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/", env_mode: str = "sim"):
-    """Main training loop"""
+def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/", env_mode: str = "sim", eval_mode: bool = False):
+    """
+    Main training loop
+    """
     
     # !! Initialize environment and agent
     if env_mode == "sim":
@@ -514,10 +431,8 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/", env_mode: str
         print("Initializing in REAL environment mode (ARTIQ)...")
         # You can customize these paths as needed
         env = RealMOTEnvironment(
-            artiq_script="mot_experiment.py", 
-            image_dir="Dataset/real_time/",
-            detuning_range=(0.0, 50.0),
-            episode_length=25
+            detuning_range = (0.0, 50.0),
+            episode_length = 25
         )
     
     agent = DDPGAgent()
@@ -528,13 +443,9 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/", env_mode: str
     
     # Training parameters
     # Start with random actions to populate the replay buffer before training
-    warmup_episodes = 100
+    warmup_episodes = 10
     evaluation_frequency = 40
-    batch_size = 64
-    
-    episode_rewards = []
-    episode_total_rewards = []
-    last_episode_detuning = []  
+    batch_size = 8
     
     tqdm_loop = tqdm.trange(episodes, desc="DDPG Training")
     
@@ -542,6 +453,9 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/", env_mode: str
         
         # --- Warmup Phase ---
         if episode < warmup_episodes:
+            
+            tqdm_loop.set_description(f"Warmup Training")
+
             # During warmup, take random actions to explore the environment
             observation = env.reset()
             episode_reward = 0
@@ -554,7 +468,7 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/", env_mode: str
                 
                 agent.store_experience(observation, action, reward, next_observation, done)
                 observation = next_observation
-                episode_detuning.append(-info['detuning'])
+                episode_detuning.append(info['detuning'])
                 total_reward += reward
 
                 # tf.print(f"observation shape: {observation['images'].shape}, action: {action}, reward: {reward}",output_stream=sys.stdout)
@@ -563,49 +477,33 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/", env_mode: str
                     episode_reward = reward
                     break
 
-            # Update the progress bar description for the warmup phase
-            tqdm_loop.set_description(f"Warmup (Buffer: {len(agent.replay_buffer)})")
-
-            if episode == warmup_episodes - 1:
-                last_episode_detuning = episode_detuning
-
         else:
+
+            tqdm_loop.set_description(f"DDPG Training")
+
             # --- Training Phase ---
             observation = env.reset()
             agent.noise.reset()
-            total_reward = 0
             episode_reward = 0
             episode_detuning = []
             
             # Run a full episode
             for _ in range(env.episode_length):
                 # Select action using the actor network + exploration noise
-                action = agent.select_action(observation, add_noise=True)
+                action = agent.select_action(observation, add_noise = True)
                 next_observation, reward, done, info = env.step(action)
 
-                episode_detuning.append(-info['detuning']);
+                episode_detuning.append(info['detuning']);
                 
                 agent.store_experience(observation, action, reward, next_observation, done)
                 observation = next_observation
-                total_reward += reward
                 
                 if done:
                     episode_reward = reward
                     break
-            
-            last_episode_detuning = episode_detuning
+
             # After the episode, train the agent on a batch from the replay buffer
             losses = agent.train(batch_size)
-            
-            if episode%200 == 0:
-                control_plot_path = log_dir + f'/{episode}_control_sequence.png'
-                plot_control_sequence(
-                    np.array(last_episode_detuning),
-                    time_step_duration=0.06,  
-                    detuning_min=0,
-                    detuning_max=50, 
-                    save_path=control_plot_path
-                )
             
             # Log training metrics to TensorBoard for monitoring
             with train_summary_writer.as_default():
@@ -622,27 +520,24 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/", env_mode: str
                 Rew=f"{total_reward:.2f}",
                 Atoms=f"{info['atom_number']:.1e}",
                 Temp=f"{info['temperature']*1e6:.1f}uK",
-                Det=f"{info['physical_detuning']:.1f}Γ",
+                Det=f"{info['detuning']:.1f}Γ",
                 L_C=f"{losses[0]:.3e}" if losses else "N/A"
             )
 
-            if episode % 100 == 0:
-                tf.print(f"Episode {episode}: Train Reward: {total_reward:.4f}, "
-                         f"Atoms: {info['atom_number']:.2f}, "
-                         f"Temperature: {info['temperature']*1e6:.2f} μK", 
-                         f"Detuning: {info['physical_detuning']:.1f}Γ",
-                         output_stream=sys.stdout)
+        # Log detuning sequence and final reward in separate files
+        detuning_log_path = os.path.join(log_dir, "episode_detuning.txt")
+        reward_log_path = os.path.join(log_dir, "episode_reward.txt")
         
-        episode_total_rewards.append(total_reward)
-        episode_rewards.append(episode_reward)
-
-        # print(f"Episode {episode}: Train Reward: {total_reward:.4f}, "
-        #       f"Atoms: {info['atom_number']:.2f}, "
-        #       f"Temperature: {info['temperature']*1e6:.2f} μK")
+        with open(detuning_log_path, "a") as log_file:
+            detuning_str = " ".join(f"{float(d):.4f}" for d in episode_detuning)
+            log_file.write(f"{detuning_str}\n")
+            
+        with open(reward_log_path, "a") as log_file:
+            log_file.write(f"{float(episode_reward):.4f}\n")
 
         # --- Evaluation Phase ---
         # Periodic evaluation
-        if episode > 0 and episode % evaluation_frequency == 0:
+        if eval_mode and episode > 0 and episode % evaluation_frequency == 0:
             print("\nStarting evaluation...")
             perturbation_offsets = [-0.7, -0.2, 0.0, 0.2, 0.7]  # Test robustness
             
@@ -652,8 +547,8 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/", env_mode: str
             
             # Run evaluation episodes with different perturbation offsets
             for eval_ep in range(4):
-                obs = env.reset(perturbation_offset=perturbation_offsets[eval_ep])
-                eval_reward = 0  # Will only be set at the end
+                obs = env.reset(perturbation_offset = perturbation_offsets[eval_ep])
+                eval_reward = 0
                 
                 # Run a full evaluation episode
                 for step in range(env.episode_length):
@@ -668,49 +563,26 @@ def train_mot_agent(episodes: int = 10000, log_dir: str = "logs/", env_mode: str
                         break
                 
                 offset_rewards.append(eval_reward)
+
             # Log average evaluation metrics to TensorBoard
             with eval_summary_writer.as_default():
                 tf.summary.scalar('episode_reward', np.mean(offset_rewards), step=episode)
                 tf.summary.scalar('atom_number', np.mean(offset_atoms), step=episode)
                 tf.summary.scalar('temperature', np.mean(offset_temps)*1e6, step=episode)
             
-            tf.print(f"=== Evaluation at Episode {episode} ===", output_stream=sys.stdout)
-            tf.print(f"Avg Train Reward (last 100): {np.mean(episode_rewards[-100:]):.4f}", output_stream=sys.stdout)
-            tf.print(f"  Offset {perturbation_offsets[eval_ep]:+.1f}Γ: ", output_stream=sys.stdout)
-            tf.print(f"Avg Eval Reward: {np.mean(offset_rewards):.4f}", output_stream=sys.stdout)
-            tf.print(f"Avg Atoms: {np.mean(offset_atoms):.2f}", output_stream=sys.stdout)
-            tf.print(f"Avg Temperature: {np.mean(offset_temps)*1e6:.2f} μK\n", output_stream=sys.stdout)
+            # tf.print(f"=== Evaluation at Episode {episode} ===", output_stream=sys.stdout)
+            # tf.print(f"Avg Train Reward (last 100): {np.mean(episode_rewards[-100:]):.4f}", output_stream=sys.stdout)
+            # tf.print(f"  Offset {perturbation_offsets[eval_ep]:+.1f}Γ: ", output_stream=sys.stdout)
+            # tf.print(f"Avg Eval Reward: {np.mean(offset_rewards):.4f}", output_stream=sys.stdout)
+            # tf.print(f"Avg Atoms: {np.mean(offset_atoms):.2f}", output_stream=sys.stdout)
+            # tf.print(f"Avg Temperature: {np.mean(offset_temps)*1e6:.2f} μK\n", output_stream=sys.stdout)
         
         # Save a model checkpoint periodically
         # if episode > 0 and episode % 1000 == 0:
         #     agent.save_model(f"model_checkpoint_{episode}")
 
-    #Plot results after training completes
-    print("\n" + "="*60)
-    print("Training completed! Generating plots...")
-    print("="*60)
-
-    # Plot final reward curves
-    reward_plot_path = log_dir + '/reward_vs_episode.png'
-    plot_training_rewards(episode_rewards, save_path=reward_plot_path)
-    total_reward_plot_path = log_dir + '/total_reward_vs_episode.png'
-    plot_training_rewards(episode_total_rewards, save_path=total_reward_plot_path)
-
-    # Plot the control sequence from the very last episode
-    if len(last_episode_detuning) > 0:
-        control_plot_path = log_dir + '/last_episode_control_sequence.png'
-        plot_control_sequence(
-            np.array(last_episode_detuning),
-            time_step_duration=0.06,  
-            detuning_min=0,
-            detuning_max=50, 
-            save_path=control_plot_path
-        )
-    else:
-        print("No detuning data recorded for last episode")
-
     
-    return agent, episode_total_rewards
+    return agent, episode_reward
 
 # Usage example
 if __name__ == "__main__":
@@ -725,11 +597,11 @@ if __name__ == "__main__":
     print("Run 'tensorboard --logdir logs' to monitor training")
     
     # Choose environment mode: 'sim' or 'real'
-    ENV_MODE = "sim" # Change to "real" for ARTIQ training
+    ENV_MODE = "real" # Change to "real" for ARTIQ training
     
     # train_mot_agent(episodes=5000, log_dir=log_dir, env_mode=ENV_MODE)
     # Run a shorter training session for demonstration purposes
-    trained_agent, rewards = train_mot_agent(episodes=3000, log_dir=log_dir, env_mode=ENV_MODE)
+    trained_agent, rewards = train_mot_agent(episodes = 30, log_dir = log_dir, env_mode = ENV_MODE, eval_mode = False)
     
     # Save final model
     # trained_agent.save_model("final_mot_rl_model")
