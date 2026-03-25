@@ -29,6 +29,7 @@ def process_image_and_get_N(image_path):
     Args:
         image_path (str): The path to the root directory containing the raw image data.
     """
+    
     k = 1
     data = []
 
@@ -55,7 +56,7 @@ def process_image_and_get_N(image_path):
 
             # Calculate total counts and convert to atom number
             count = np.sum(cropped)
-            N = atom_number(count, power=5, detuning=Δ, exposure=2)
+            N = atom_number(count, power = 5, detuning = Δ, exposure = 2)
 
             # Prepare filename and save cropped image without changing colors
             sname = f"DT{k}.jpg"

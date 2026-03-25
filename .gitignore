@@ -2,3 +2,10 @@ venv/
 .vscode/
 Dataset/
 *.pyc
+realControl/__pycache__/
+Simulation_Model/__pycache__/
+DDPG/__pycache__/
+utils/__pycache__/
+Environments/__pycache__/
+realControl/dataset_db.mdb
+realControl/dataset_db.mdb-lock
